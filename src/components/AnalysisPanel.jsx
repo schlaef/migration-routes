@@ -35,6 +35,11 @@ export default function AnalysisPanel({
 
     return {
       ...analysis,
+      obstacles: analysis.obstacles.map((obstacle) =>
+        obstacle.perspectiveNote
+          ? { ...obstacle, perspectiveNote: getObstaclePerspective(obstacle) }
+          : obstacle
+      ),
       perspectiveFeedback: feedback
         ? {
             ...feedback,
@@ -53,6 +58,9 @@ export default function AnalysisPanel({
   const reflectionQuestions = (
     feedback?.reflectionQuestionKeys || feedback?.reflectionQuestions || []
   ).map((item) => (feedback?.reflectionQuestionKeys ? t(item) : item));
+
+  const getObstaclePerspective = (obstacle) =>
+    t(`obstaclePerspectives.${obstacle.id}`, { defaultValue: obstacle.perspectiveNote });
 
   const handleCopySummary = () => {
     if (!analysis) return;
@@ -361,7 +369,7 @@ export default function AnalysisPanel({
                             borderRadius: "4px"
                           }}
                         >
-                          <strong>{t("analysis.perspective")}</strong> {obs.perspectiveNote}
+                          <strong>{t("analysis.perspective")}</strong> {getObstaclePerspective(obs)}
                         </div>
                       )}
                     </calcite-card>

@@ -40,6 +40,27 @@
     "purpose": "Refugees fleeing persecution and war face information asymmetry: militarized border fences, pushbacks, maritime perils, and deportation camps are not clearly marked on ordinary maps. By simulating routes against unseen obstacles, students experience the daunting uncertainty faced by displaced persons.",
     "readGuide": "Read Educational Guide"
   },
+  "guideModal": {
+    "title": "Refugee Migration Routes — Educational Guide",
+    "perspectiveHeading": "Taking the Perspective of Refugees",
+    "perspectiveDescription": "The purpose of this educational simulation is to allow students to step into the perspective of refugees and displaced persons escaping war, violence, human rights violations, or climate catastrophe in the Middle East, North Africa, Sub-Saharan Africa, and Central Asia.",
+    "invisibleHeading": "Why Are Obstacles Invisible on the Map?",
+    "invisibleDescription": "In the real world, refugees do not possess perfect information. Militarized border fences, thermal surveillance cameras, violent pushback zones, and maritime interdiction zones are intentionally obscured or constantly shifting. Keeping the <code>route-obstacles</code> layer hidden in the map requires students to chart routes based on geography and assumption, just as displaced individuals must rely on informal networks, word-of-mouth, or human smugglers.",
+    "corridorsHeading": "Major Migration Corridors into Europe",
+    "centralMediterraneanTitle": "Central Mediterranean Route",
+    "centralMediterraneanDescription": "Departs from Libya or Tunisia toward Lampedusa, Sicily, or Malta. Documented by the UN IOM as the deadliest maritime migration corridor in the world, with thousands of drownings, engine failures, and interceptions by Libyan coast guard forces leading to arbitrary detention.",
+    "easternMediterraneanTitle": "Eastern Mediterranean Route",
+    "easternMediterraneanDescription": "Passes through Turkey into Greece via the Aegean Sea islands (Lesvos, Samos, Chios) or across the Evros river border. Characterized by overloaded dinghies, dangerous currents, and pushbacks at sea.",
+    "westernBalkanTitle": "Western Balkan Route",
+    "westernBalkanDescription": "Traverses North Macedonia, Serbia, Bosnia & Herzegovina, Hungary, and Croatia. Features double razor-wire border fences, police dog patrols, biometric surveillance, and extreme winter exposure in abandoned buildings.",
+    "westernMediterraneanTitle": "Western Mediterranean & Atlantic Route",
+    "westernMediterraneanDescription": "From Morocco or Algeria to mainland Spain, or from West Africa (Senegal, Mauritania) across open ocean to the Canary Islands. The Atlantic route involves open wooden pirogues facing weeks of treacherous currents.",
+    "discussionHeading": "Classroom Discussion Ideas",
+    "discussionQuestion1": "Why do refugees choose dangerous irregular routes instead of boarding a plane or taking a ferry? (Lack of legal visas and airline carrier sanctions).",
+    "discussionQuestion2": "When European nations fortify one border (e.g. Hungarian border fence in 2015), how does the migratory flow shift toward more hazardous mountain or maritime passages?",
+    "discussionQuestion3": "What responsibilities do states have under the 1951 Geneva Refugee Convention regarding non-refoulement (the principle of not forcing refugees to return to a country where they face persecution)?",
+    "close": "Close Guide"
+  },
   "risk": {
     "levels": {
       "minimal": "Minimal Risk",
@@ -62,6 +83,22 @@
     "terrain": "Harsh Environmental Reality: Crossing freezing mountain passes or blistering deserts on foot without adequate shoes, water, or shelter leads to frostbite, trench foot, severe dehydration, and exhaustion.",
     "detention": "Human Rights & Vulnerability Reality: Without safe, legal escape routes, refugees are vulnerable to human trafficking, arbitrary detention in squalid camps, and extortion by organized criminal networks.",
     "general": "Every journey across borders without legal documentation carries psychological stress, fear of apprehension, separation from family members, and reliance on unpredictable conditions."
+  },
+  "obstaclePerspectives": {
+    "obs-med-central": "Imagine being packed with 120 people on a deflating rubber raft in 3-meter waves at midnight, with engine fumes making passengers vomit and no rescue vessel in sight.",
+    "obs-med-libya-coast": "Being pulled back means losing all savings, returning to arbitrary captivity in detention centers, and starting the trauma all over again.",
+    "obs-sahara-desert": "Thousands die undocumented in the desert sands before ever seeing the sea. Water runs out in hours if a vehicle breaks down.",
+    "obs-aegean-crossing": "Fearing detection by thermal cameras, smugglers force passengers to jump into cold deep water meters away from rocky cliffs in darkness.",
+    "obs-evros-border": "Refugees report being stripped of phones, money, and warm clothes before being forced back across the frigid river.",
+    "obs-balkan-mountains": "Refugees sleep outdoors in makeshift tents with plastic tarps in freezing snow, suffering severe trench foot, frostbite, and animal attacks.",
+    "obs-hungary-fence": "Fences do not stop people fleeing war; they only force them into the hands of organized smugglers who charge thousands of euros for dangerous hidden compartments.",
+    "obs-drina-river": "Refugees must swim across fast-flowing winter water with all their belongings in plastic bags tied around their necks.",
+    "obs-smuggler-extortion": "Refugees are often trapped with no legal recourse, completely at the mercy of criminal networks because safe legal pathways do not exist.",
+    "obs-alps-winter": "Walking for 8 hours through waist-deep snow in worn-out sneakers to reach safety, risking amputation from severe frostbite.",
+    "obs-channel-straits": "Tiny inflatable boats dodge massive 400-meter container ships whose wash can overturn small craft in seconds.",
+    "obs-water-scarcity": "Diabetic children and elderly grandmothers must walk dozens of kilometers daily without basic medicines or clean water.",
+    "obs-western-balkans-camp": "Months spent in bureaucratic limbo, trapped in mud and cold, waiting for a chance to attempt 'The Game' (crossing borders) again.",
+    "obs-morocco-melilla": "Desperate collective attempts to scale the fences have resulted in dozens of deaths and severe crush injuries."
   },
   "reflectionQuestions": {
     "1": "Why might a family fleeing conflict feel they have no choice but to take this dangerous route?",

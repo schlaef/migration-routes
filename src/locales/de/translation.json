@@ -40,6 +40,27 @@
     "purpose": "Menschen, die vor Verfolgung und Krieg fliehen, fehlt oft entscheidende Information: Bewachte Grenzzäune, Zurückweisungen, Gefahren auf dem Meer und Abschiebelager sind auf gewöhnlichen Karten nicht klar erkennbar. Durch die Routenanalyse erleben Lernende die große Unsicherheit, mit der Vertriebene konfrontiert sind.",
     "readGuide": "Lernleitfaden lesen"
   },
+  "guideModal": {
+    "title": "Fluchtrouten — Pädagogischer Leitfaden",
+    "perspectiveHeading": "Die Perspektive Geflüchteter einnehmen",
+    "perspectiveDescription": "Diese pädagogische Simulation soll Lernenden ermöglichen, sich in die Lage von Geflüchteten und Vertriebenen zu versetzen, die vor Krieg, Gewalt, Menschenrechtsverletzungen oder den Folgen der Klimakrise im Nahen Osten, in Nordafrika, Subsahara-Afrika und Zentralasien fliehen.",
+    "invisibleHeading": "Warum sind Hindernisse auf der Karte unsichtbar?",
+    "invisibleDescription": "In der Realität verfügen Geflüchtete nicht über vollständige Informationen. Militarisierte Grenzzäune, Wärmebildkameras, gewaltsame Zurückweisungen und maritime Abfangzonen sind bewusst schwer erkennbar oder verändern sich ständig. Weil der Layer <code>route-obstacles</code> auf der Karte ausgeblendet ist, müssen Lernende Routen anhand der Geografie und eigener Annahmen planen – so wie Vertriebene auf informelle Netzwerke, mündliche Informationen oder Schleuser angewiesen sein können.",
+    "corridorsHeading": "Wichtige Fluchtrouten nach Europa",
+    "centralMediterraneanTitle": "Zentrale Mittelmeerroute",
+    "centralMediterraneanDescription": "Die Route führt von Libyen oder Tunesien in Richtung Lampedusa, Sizilien oder Malta. Die Internationale Organisation für Migration (IOM) dokumentiert sie als tödlichste maritime Migrationsroute der Welt. Tausende Menschen ertrinken; zudem kommt es zu Motorausfällen und Abfangaktionen der libyschen Küstenwache, die zu willkürlicher Inhaftierung führen können.",
+    "easternMediterraneanTitle": "Östliche Mittelmeerroute",
+    "easternMediterraneanDescription": "Die Route führt über die Ägäis von der Türkei nach Griechenland, etwa zu den Inseln Lesbos, Samos oder Chios, oder über die Grenze am Fluss Evros. Überladene Schlauchboote, gefährliche Strömungen und Zurückweisungen auf See prägen diese Route.",
+    "westernBalkanTitle": "Westbalkanroute",
+    "westernBalkanDescription": "Die Route verläuft durch Nordmazedonien, Serbien, Bosnien und Herzegowina, Ungarn und Kroatien. Zu den Gefahren zählen doppelte Grenzzäune mit Stacheldraht, Polizeipatrouillen mit Hunden, biometrische Überwachung und extreme Kälte in verlassenen Gebäuden.",
+    "westernMediterraneanTitle": "Westliche Mittelmeer- und Atlantikroute",
+    "westernMediterraneanDescription": "Die Route führt von Marokko oder Algerien zum spanischen Festland oder von Westafrika (Senegal, Mauretanien) über den offenen Atlantik zu den Kanarischen Inseln. Auf der Atlantikroute sind Menschen oft wochenlang in offenen Holzbooten gefährlichen Strömungen ausgesetzt.",
+    "discussionHeading": "Anregungen für das Unterrichtsgespräch",
+    "discussionQuestion1": "Warum wählen Geflüchtete gefährliche irreguläre Routen, statt ein Flugzeug oder eine Fähre zu nehmen? (Zum Beispiel wegen fehlender Visa und Sanktionen für Fluggesellschaften, die Menschen ohne gültige Einreisedokumente befördern.)",
+    "discussionQuestion2": "Wie verlagern sich Fluchtrouten in gefährlichere Gebirgsregionen oder auf See, wenn europäische Staaten eine Grenze stärker sichern (zum Beispiel durch den ungarischen Grenzzaun im Jahr 2015)?",
+    "discussionQuestion3": "Welche Verantwortung haben Staaten nach der Genfer Flüchtlingskonvention von 1951 hinsichtlich des Grundsatzes der Nichtzurückweisung (Menschen nicht in ein Land zurückzuschicken, in dem ihnen Verfolgung droht)?",
+    "close": "Leitfaden schließen"
+  },
   "risk": {
     "levels": {
       "minimal": "Minimales Risiko",
@@ -62,6 +83,22 @@
     "terrain": "Extreme Umweltbedingungen: Wer vereiste Gebirgspässe oder glühend heiße Wüsten ohne geeignete Schuhe, Wasser oder Unterkunft zu Fuß überquert, riskiert Erfrierungen, schwere Dehydrierung und Erschöpfung.",
     "detention": "Menschenrechte und Schutzlosigkeit: Ohne sichere und legale Fluchtwege sind Geflüchtete Menschenhandel, willkürlicher Inhaftierung in heruntergekommenen Lagern und Erpressung durch kriminelle Netzwerke ausgesetzt.",
     "general": "Jede Flucht über Grenzen ohne gültige Dokumente ist mit psychischer Belastung, Angst vor Festnahme, der Trennung von Familienmitgliedern und unvorhersehbaren Bedingungen verbunden."
+  },
+  "obstaclePerspectives": {
+    "obs-med-central": "Stell dir vor, du sitzt mit 120 Menschen auf einem undichten Schlauchboot, das bei drei Meter hohen Wellen um Mitternacht immer mehr Luft verliert. Die Abgase des Motors bringen Passagiere zum Erbrechen, und weit und breit ist kein Rettungsschiff zu sehen.",
+    "obs-med-libya-coast": "Zurückgebracht zu werden bedeutet, alle Ersparnisse zu verlieren, erneut willkürlicher Gefangenschaft in Haftzentren ausgesetzt zu sein und das Trauma von vorn zu durchleben.",
+    "obs-sahara-desert": "Tausende sterben unregistriert im Wüstensand, bevor sie jemals das Meer sehen. Wenn ein Fahrzeug liegen bleibt, ist das Wasser oft schon nach wenigen Stunden aufgebraucht.",
+    "obs-aegean-crossing": "Aus Angst, von Wärmebildkameras entdeckt zu werden, zwingen Schleuser Passagiere, im Dunkeln wenige Meter von steilen Felsen entfernt in kaltes, tiefes Wasser zu springen.",
+    "obs-evros-border": "Geflüchtete berichten, dass ihnen Telefone, Geld und warme Kleidung abgenommen werden, bevor man sie über den eisigen Fluss zurückdrängt.",
+    "obs-balkan-mountains": "Geflüchtete schlafen draußen in behelfsmäßigen Zelten mit Plastikplanen im eisigen Schnee. Dabei drohen ihnen schwere Fußverletzungen, Erfrierungen und Angriffe durch Tiere.",
+    "obs-hungary-fence": "Zäune halten Menschen, die vor Krieg fliehen, nicht auf. Sie treiben sie vielmehr in die Hände organisierter Schleuser, die für gefährliche, versteckte Transportmöglichkeiten Tausende Euro verlangen.",
+    "obs-drina-river": "Geflüchtete müssen durch schnell fließendes Winterwasser schwimmen und ihren gesamten Besitz in Plastiktüten um den Hals gebunden mit sich tragen.",
+    "obs-smuggler-extortion": "Geflüchtete sind oft gefangen und haben keine Möglichkeit, sich rechtlich zu wehren. Sie sind kriminellen Netzwerken schutzlos ausgeliefert, weil es keine sicheren legalen Fluchtwege gibt.",
+    "obs-alps-winter": "Acht Stunden lang in abgetragenen Turnschuhen durch hüfthohen Schnee zu gehen, um Sicherheit zu erreichen, bedeutet, wegen schwerer Erfrierungen eine Amputation zu riskieren.",
+    "obs-channel-straits": "Kleine Schlauchboote müssen riesigen, 400 Meter langen Containerschiffen ausweichen. Deren Sog kann kleine Boote innerhalb von Sekunden zum Kentern bringen.",
+    "obs-water-scarcity": "Kinder mit Diabetes und ältere Menschen müssen täglich viele Kilometer ohne wichtige Medikamente oder sauberes Wasser zurücklegen.",
+    "obs-western-balkans-camp": "Monatelang in behördlicher Ungewissheit festzusitzen, im Schlamm und in der Kälte auszuharren und auf eine weitere Gelegenheit zu warten, erneut die Grenze zu überqueren.",
+    "obs-morocco-melilla": "Verzweifelte gemeinsame Versuche, die Zäune zu überwinden, haben zu Dutzenden Todesfällen und schweren Verletzungen durch Gedränge geführt."
   },
   "reflectionQuestions": {
     "1": "Warum könnte sich eine Familie auf der Flucht vor einem Konflikt gezwungen sehen, diesen gefährlichen Weg zu nehmen?",
