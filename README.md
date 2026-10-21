@@ -67,7 +67,7 @@ https://example.com/?webmap=YOUR_WEBMAP_ID&buffer=40&unit=kilometers&layer=route
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js v18+ (tested on Node.js v22)
+- Node.js 22.12+ (or 20.19+), as required by Vite 8. Use `nvm use` to select the version in `.nvmrc`.
 
 ### Development Server
 ```bash
