@@ -21,9 +21,10 @@ This application challenges students to **take the perspective of refugees**:
 - **React 18 + Vite**: High-performance, modern React architecture with modular components.
 - **ArcGIS Map Components (`@arcgis/map-components`)**: Declarative ArcGIS web components including `<arcgis-map>`, `<arcgis-zoom>`, and `<arcgis-scale-bar>`.
 - **Esri Calcite UI (`@esri/calcite-components`)**: Beautiful, accessible, enterprise-grade design system following Esri best practices with `<calcite-shell>`, `<calcite-navigation>`, `<calcite-panel>`, `<calcite-dialog>`, `<calcite-card>`, `<calcite-chip>`, and `<calcite-notice>`.
-- **ArcGIS Maps SDK for JavaScript**: Deep integration with `WebMap`, `MapView`, `Sketch`, `GraphicsLayer`, and `geometryEngine`.
-- **Route Sketching & Editing**: Intuitive polyline sketching using the ArcGIS `Sketch` widget with custom line styling and route distance metrics.
+- **ArcGIS Maps SDK for JavaScript**: Deep integration with `WebMap`, `MapView`, `Draw`, `GraphicsLayer`, and `geometryEngine`.
+- **Route Drawing**: Draw noneditable polylines with custom line styling and route distance metrics.
 - **Geodesic Buffering**: Configurable corridor buffering (e.g. 30 km) using `geometryEngine.geodesicBuffer` to accurately model the route's sphere of interaction across continental distances.
+- **Countries Crossed**: Counts distinct countries intersected by the sketched routes using the hidden `Political Boundaries - Countries` WebMap layer, including the origin and destination countries. The report shows the count as unavailable if the layer is missing or cannot be queried.
 - **Invisible Obstacles Layer**: The `route-obstacles` layer is hidden on the map (`visible = false`, `listMode = "hide"`) to represent the unseen dangers that refugees cannot anticipate until they encounter them.
 - **Difficulty Weights & Descriptions**: Each obstacle has a severity weight (1–10) and description.
 - **Spatial Intersection & Aggregation**: Buffer polygons intersect with the obstacles layer to compute:

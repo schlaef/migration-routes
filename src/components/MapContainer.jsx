@@ -5,13 +5,15 @@ import Graphic from "@arcgis/core/Graphic.js";
 import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol.js";
 import SimpleFillSymbol from "@arcgis/core/symbols/SimpleFillSymbol.js";
 import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol.js";
-import Sketch from "@arcgis/core/widgets/Sketch.js";
+import Draw from "@arcgis/core/views/draw/Draw.js";
 import * as geometryEngine from "@arcgis/core/geometry/geometryEngine.js";
 import { sampleObstacles } from "../sample-obstacles.js";
+import { startRouteDrawing } from "../route-drawing.js";
 import {
   findObstacleLayer,
   ensureObstacleLayerHidden,
   buildObstacleIntersectionQuery,
+  countCountriesCrossed,
   bufferRouteGeometries,
   intersectBufferWithObstacles,
   summarizeRouteAnalysis
@@ -23,26 +25,66 @@ const MapContainer = forwardRef(function MapContainer(
 ) {
   const mapElementRef = useRef(null);
   const viewRef = useRef(null);
-  const sketchRef = useRef(null);
+  const drawRef = useRef(null);
   const routesLayerRef = useRef(null);
   const bufferLayerRef = useRef(null);
   const highlightLayerRef = useRef(null);
+  const hoverLayerRef = useRef(null);
   const obstacleLayerRef = useRef(null);
+
+  const startSketch = () => {
+    const draw = drawRef.current;
+    const view = viewRef.current;
+    const routesLayer = routesLayerRef.current;
+    if (!draw || !view || !routesLayer) return;
+    startRouteDrawing(draw, view, routesLayer, () => {
+      const count = routesLayer.graphics.filter(
+        (graphic) => graphic?.geometry?.type === "polyline"
+      ).length;
+      if (onRouteChange) onRouteChange(count);
+      if (onStatusUpdate) {
+        onStatusUpdate("Route polyline sketched. Click 'Analyze Route' to evaluate.");
+      }
+    });
+  };
 
   // Expose imperative methods to parent (App.jsx)
   useImperativeHandle(ref, () => ({
-    startSketch() {
-      if (sketchRef.current) {
-        sketchRef.current.create("polyline");
-      }
-    },
+    startSketch,
 
     clearAll() {
+      if (drawRef.current) drawRef.current.reset();
       if (routesLayerRef.current) routesLayerRef.current.removeAll();
       if (bufferLayerRef.current) bufferLayerRef.current.removeAll();
       if (highlightLayerRef.current) highlightLayerRef.current.removeAll();
-      if (sketchRef.current) sketchRef.current.cancel();
+      if (hoverLayerRef.current) hoverLayerRef.current.removeAll();
       if (onRouteChange) onRouteChange(0);
+    },
+
+    highlightObstacle(obstacle) {
+      const layer = hoverLayerRef.current;
+      if (!layer) return;
+      layer.removeAll();
+      const geometry = obstacle?.geometry;
+      if (!geometry) return;
+
+      let symbol;
+      if (geometry.type === "polygon" || geometry.type === "extent") {
+        symbol = new SimpleFillSymbol({
+          color: [255, 215, 0, 0.35],
+          outline: { color: [255, 190, 0, 1], width: 3 }
+        });
+      } else if (geometry.type === "polyline") {
+        symbol = new SimpleLineSymbol({ color: [255, 190, 0, 1], width: 5 });
+      } else {
+        symbol = new SimpleMarkerSymbol({
+          style: "diamond",
+          color: [255, 215, 0, 1],
+          size: 20,
+          outline: { color: [255, 255, 255, 1], width: 2 }
+        });
+      }
+      layer.add(new Graphic({ geometry, symbol }));
     },
 
     async analyze() {
@@ -186,10 +228,21 @@ const MapContainer = forwardRef(function MapContainer(
         }
       }
 
+      let countryCount = null;
+      const countryLayer = findObstacleLayer(viewRef.current.map, "Political Boundaries - Countries");
+      if (countryLayer) {
+        try {
+          countryCount = await countCountriesCrossed(countryLayer, routeGeometries);
+        } catch (error) {
+          console.warn("Could not count countries crossed:", error);
+        }
+      }
+
       // 7. Consolidate results
       const summary = summarizeRouteAnalysis(intersected, config, {
         routeCount: routeGraphics.length,
-        totalLengthKm
+        totalLengthKm,
+        countryCount
       });
 
       // 8. Adjust view extent to show buffer corridor if available
@@ -207,16 +260,24 @@ const MapContainer = forwardRef(function MapContainer(
     if (!mapEl) return;
 
     let destroyed = false;
+    let initializingMap = null;
+    let hoverLayer = null;
+    let hoverMap = null;
 
     async function initializeLayers(view) {
       if (destroyed || !view || !view.map) return;
+      const map = view.map;
+      if (initializingMap === map) return;
+      initializingMap = map;
       viewRef.current = view;
 
       try {
-        await view.map.loadAll();
+        await map.loadAll();
       } catch (loadErr) {
         console.warn("Could not load every WebMap layer before obstacle discovery:", loadErr);
       }
+
+      if (destroyed || view.map !== map) return;
 
       // Ensure view padding and UI elements
       view.ui.move("zoom", "top-left");
@@ -247,6 +308,16 @@ const MapContainer = forwardRef(function MapContainer(
       });
       view.map.add(highlightLayer);
       highlightLayerRef.current = highlightLayer;
+
+      if (hoverLayer && hoverMap) hoverMap.remove(hoverLayer);
+      hoverLayer = new GraphicsLayer({
+        id: "hovered-obstacle-highlight",
+        title: "Hovered Obstacle",
+        listMode: "hide"
+      });
+      view.map.add(hoverLayer);
+      hoverMap = view.map;
+      hoverLayerRef.current = hoverLayer;
 
       // 4. Look for existing route obstacles layer in WebMap
       let obstacleLayer = findObstacleLayer(view.map, config.obstacleLayerTitle);
@@ -283,68 +354,8 @@ const MapContainer = forwardRef(function MapContainer(
         }
       }
 
-      // 5. Initialize Sketch widget
-      const sketch = new Sketch({
-        view,
-        layer: routesLayer,
-        creationMode: "update",
-        availableCreateTools: ["polyline"],
-        defaultUpdateOptions: {
-          toggleToolOnClick: false
-        },
-        visibleElements: {
-          createTools: {
-            point: false,
-            polyline: true,
-            polygon: false,
-            rectangle: false,
-            circle: false
-          },
-          selectionTools: {
-            "lasso-selection": false,
-            "rectangle-selection": false
-          },
-          settingsMenu: false
-        },
-        polylineSymbol: new SimpleLineSymbol({
-          color: [255, 140, 0, 1], // Warm orange for migration paths
-          width: 3.5,
-          style: "solid"
-        })
-      });
+      drawRef.current = new Draw({ view });
 
-      view.ui.add(sketch, "top-right");
-      sketchRef.current = sketch;
-
-      // Listen to sketch events to update route count
-      const updateCount = () => {
-        if (!routesLayerRef.current) return;
-        const count = routesLayerRef.current.graphics.filter(
-          (g) => g && g.geometry && (g.geometry.type === "polyline" || g.geometry.type === "line")
-        ).length;
-        if (onRouteChange) {
-          onRouteChange(count);
-        }
-      };
-
-      sketch.on("create", (event) => {
-        if (event.state === "complete") {
-          updateCount();
-          if (onStatusUpdate) {
-            onStatusUpdate("Route polyline sketched. Click 'Analyze Route' to evaluate.");
-          }
-        }
-      });
-
-      sketch.on("delete", () => {
-        updateCount();
-      });
-
-      sketch.on("update", (event) => {
-        if (event.state === "complete") {
-          updateCount();
-        }
-      });
     }
 
     const handleViewReady = (event) => {
@@ -366,10 +377,12 @@ const MapContainer = forwardRef(function MapContainer(
       if (mapEl) {
         mapEl.removeEventListener("arcgisViewReadyChange", handleViewReady);
       }
-      if (sketchRef.current) {
-        sketchRef.current.destroy();
-        sketchRef.current = null;
+      if (drawRef.current) {
+        drawRef.current.destroy();
+        drawRef.current = null;
       }
+      if (hoverLayer && hoverMap) hoverMap.remove(hoverLayer);
+      if (hoverLayerRef.current === hoverLayer) hoverLayerRef.current = null;
     };
   }, [config.webmapId, config.obstacleLayerTitle]);
 
@@ -381,6 +394,7 @@ const MapContainer = forwardRef(function MapContainer(
         style={{ width: "100%", height: "100%", display: "block" }}
       >
         <arcgis-zoom position="top-left" />
+        <arcgis-basemap-toggle slot="bottom-right" next-basemap="satellite" />
         <arcgis-scale-bar position="bottom-left" />
       </arcgis-map>
 
@@ -406,14 +420,10 @@ const MapContainer = forwardRef(function MapContainer(
           kind="brand"
           scale="s"
           icon-start="pencil"
-          onClick={() => {
-            if (sketchRef.current) {
-              sketchRef.current.create("polyline");
-            }
-          }}
+          onClick={startSketch}
           title="Click to start drawing a migration route on the map"
         >
-          Draw Route Polyline
+          Draw a route 
         </calcite-button>
 
         <calcite-chip scale="s" value="buffer-info" icon="extent">

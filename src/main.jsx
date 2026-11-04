@@ -35,6 +35,7 @@ import "@esri/calcite-components/components/calcite-tooltip";
 
 // ArcGIS Map Components custom elements registration
 import "@arcgis/map-components/components/arcgis-map";
+import "@arcgis/map-components/components/arcgis-basemap-toggle";
 import "@arcgis/map-components/components/arcgis-zoom";
 import "@arcgis/map-components/components/arcgis-scale-bar";
 

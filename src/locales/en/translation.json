@@ -19,6 +19,8 @@
     "obstacles": "Obstacles",
     "cumulativeWeight": "Cumulative Weight",
     "routeLength": "Route Length",
+    "countriesCrossed": "Countries Crossed",
+    "countryCountUnavailable": "Unavailable",
     "corridorWidth": "Corridor Width",
     "perspectiveTab": "Refugee Perspective",
     "categoriesTab": "Categories",
@@ -30,6 +32,17 @@
     "perspective": "Perspective:",
     "categorySummary_one": "{{count}} obstacle",
     "categorySummary_other": "{{count}} obstacles"
+  },
+  "categoryDescriptions": {
+    "sea": "Crossing the sea is dangerous and expensive. Refugees may pay smugglers large sums for places on overcrowded, unseaworthy boats and can be abandoned at sea; many drown. While some coast guards rescue people, others have intercepted or pushed them back, exposing them to further danger or detention.",
+    "desert": "Long desert crossings expose refugees to extreme heat, cold, and dehydration. Vehicles can break down, and smugglers may abandon people far from water, medical care, or rescue.",
+    "mountain": "Mountain routes can mean steep, unfamiliar paths, freezing weather, and snow without suitable clothing or shelter. Exhaustion, falls, and exposure can cause serious injury or death.",
+    "border": "Fences, surveillance, and border patrols can force refugees onto longer, more dangerous routes. People may face detention, violence, or pushbacks, sometimes losing money, phones, and essential belongings.",
+    "detention": "Interception or confinement can interrupt a journey for months and expose refugees to overcrowding, poor living conditions, abuse, and uncertainty about their future.",
+    "exploitation": "Without safe and legal routes, refugees may depend on smugglers or traffickers who demand high payments, threaten families, confiscate documents, or subject people to abuse and exploitation.",
+    "health": "Limited access to clean water, food, medication, and medical care makes illness and injuries more dangerous, especially for children, older people, and those with chronic conditions.",
+    "terrain": "Difficult terrain and exposure to heat, cold, rivers, or remote areas can cause exhaustion and injury. Refugees may have little equipment, shelter, or access to rescue and medical care.",
+    "general": "This obstacle can delay a journey or expose refugees to additional danger, exhaustion, and uncertainty. Its effects depend on the conditions and the resources available to those crossing."
   },
   "guide": {
     "title": "How to Analyze a Migration Route",

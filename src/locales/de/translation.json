@@ -19,6 +19,8 @@
     "obstacles": "Hindernisse",
     "cumulativeWeight": "Gesamtschwierigkeit",
     "routeLength": "Routenlänge",
+    "countriesCrossed": "Durchquerte Länder",
+    "countryCountUnavailable": "Nicht verfügbar",
     "corridorWidth": "Korridorbreite",
     "perspectiveTab": "Perspektive Geflüchteter",
     "categoriesTab": "Kategorien",
@@ -30,6 +32,17 @@
     "perspective": "Perspektive:",
     "categorySummary_one": "{{count}} Hindernis",
     "categorySummary_other": "{{count}} Hindernisse"
+  },
+  "categoryDescriptions": {
+    "sea": "Eine Meeresüberquerung ist gefährlich und teuer. Geflüchtete zahlen Schleppern oft hohe Summen für Plätze auf überfüllten, seeuntüchtigen Booten und werden manchmal auf See zurückgelassen; viele ertrinken. Während manche Küstenwachen Menschen retten, haben andere sie abgefangen oder zurückgedrängt und damit weiterer Gefahr oder Haft ausgesetzt.",
+    "desert": "Lange Wüstenüberquerungen setzen Geflüchtete extremer Hitze, Kälte und Wassermangel aus. Fahrzeuge können ausfallen, und Schlepper lassen Menschen manchmal fern von Wasser, medizinischer Versorgung und Rettung zurück.",
+    "mountain": "Gebirgsrouten führen über steile, unbekannte Wege und durch Kälte und Schnee, oft ohne geeignete Kleidung oder Unterkunft. Erschöpfung, Stürze und Unterkühlung können schwere Verletzungen oder den Tod verursachen.",
+    "border": "Zäune, Überwachung und Grenzpatrouillen können Geflüchtete auf längere und gefährlichere Wege zwingen. Sie können Haft, Gewalt oder Zurückweisungen erleben und dabei Geld, Telefone und wichtige Gegenstände verlieren.",
+    "detention": "Abfangen oder Festhalten kann eine Reise monatelang unterbrechen. Geflüchtete können Überbelegung, schlechte Lebensbedingungen, Misshandlung und Ungewissheit über ihre Zukunft erleben.",
+    "exploitation": "Ohne sichere und legale Wege sind Geflüchtete möglicherweise auf Schlepper oder Menschenhändler angewiesen, die hohe Zahlungen verlangen, Familien bedrohen, Dokumente einziehen oder Menschen ausbeuten und misshandeln.",
+    "health": "Fehlender Zugang zu sauberem Wasser, Nahrung, Medikamenten und medizinischer Versorgung macht Krankheiten und Verletzungen gefährlicher, besonders für Kinder, ältere Menschen und chronisch Kranke.",
+    "terrain": "Schwieriges Gelände, Hitze, Kälte, Flüsse und abgelegene Gebiete können Erschöpfung und Verletzungen verursachen. Geflüchteten fehlen möglicherweise Ausrüstung, Unterkunft sowie Zugang zu Rettung und medizinischer Versorgung.",
+    "general": "Dieses Hindernis kann eine Reise verzögern oder Geflüchtete zusätzlicher Gefahr, Erschöpfung und Ungewissheit aussetzen. Die Auswirkungen hängen von den Bedingungen und den verfügbaren Mitteln ab."
   },
   "guide": {
     "title": "So analysierst du eine Migrationsroute",

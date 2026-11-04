@@ -29,6 +29,7 @@ export default function App() {
 
   const handleAnalyze = async () => {
     if (!mapContainerRef.current) return;
+    mapContainerRef.current.highlightObstacle(null);
     setAnalyzing(true);
     setErrorMessage(null);
     try {
@@ -60,6 +61,15 @@ export default function App() {
     setConfig(defaultConfig);
   };
 
+  const handleObstacleHover = (obstacle) => {
+    mapContainerRef.current?.highlightObstacle(obstacle);
+  };
+
+  const closePanel = () => {
+    handleObstacleHover(null);
+    setPanelOpen(false);
+  };
+
   return (
     <calcite-shell style={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "column" }}>
       <Header
@@ -72,7 +82,10 @@ export default function App() {
         onOpenSettings={() => setSettingsOpen(true)}
         onOpenGuide={() => setGuideOpen(true)}
         panelOpen={panelOpen}
-        onTogglePanel={() => setPanelOpen((prev) => !prev)}
+        onTogglePanel={() => {
+          handleObstacleHover(null);
+          setPanelOpen((prev) => !prev);
+        }}
       />
 
       <calcite-shell-panel
@@ -86,8 +99,9 @@ export default function App() {
           analysis={analysisResult}
           analyzing={analyzing}
           config={config}
-          onClose={() => setPanelOpen(false)}
+          onClose={closePanel}
           onOpenGuide={() => setGuideOpen(true)}
+          onObstacleHover={handleObstacleHover}
         />
       </calcite-shell-panel>
 

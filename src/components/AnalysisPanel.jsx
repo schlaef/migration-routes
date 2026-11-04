@@ -6,7 +6,8 @@ export default function AnalysisPanel({
   analyzing,
   config,
   onClose,
-  onOpenGuide
+  onOpenGuide,
+  onObstacleHover
 }) {
   const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState("perspective");
@@ -43,6 +44,10 @@ export default function AnalysisPanel({
       perspectiveFeedback: feedback
         ? {
             ...feedback,
+            categories: feedback.categories?.map((category) => ({
+              ...category,
+              description: t(category.descriptionKey)
+            })),
             narratives: feedback.narrativeKeys?.map((key) => t(key)) || feedback.narratives,
             reflectionQuestions:
               feedback.reflectionQuestionKeys?.map((key) => t(key)) || feedback.reflectionQuestions
@@ -61,6 +66,11 @@ export default function AnalysisPanel({
 
   const getObstaclePerspective = (obstacle) =>
     t(`obstaclePerspectives.${obstacle.id}`, { defaultValue: obstacle.perspectiveNote });
+
+  const changeTab = (tab) => {
+    onObstacleHover?.(null);
+    setActiveTab(tab);
+  };
 
   const handleCopySummary = () => {
     if (!analysis) return;
@@ -251,6 +261,21 @@ export default function AnalysisPanel({
                   {t("analysis.routeLength")}
                 </div>
               </div>
+
+              <div
+                style={{
+                  backgroundColor: "var(--calcite-color-foreground-2, #f3f3f3)",
+                  padding: "0.75rem",
+                  borderRadius: "6px"
+                }}
+              >
+                <div style={{ fontSize: "1.4rem", fontWeight: "bold", color: "var(--calcite-color-text-1)" }}>
+                  {analysis.routeMetrics?.countryCount ?? t("analysis.countryCountUnavailable")}
+                </div>
+                <div style={{ fontSize: "0.75rem", color: "var(--calcite-color-text-2)" }}>
+                  {t("analysis.countriesCrossed")}
+                </div>
+              </div>
             </div>
 
             {/* Navigation Tabs */}
@@ -259,7 +284,7 @@ export default function AnalysisPanel({
                 appearance={activeTab === "perspective" ? "solid" : "outline"}
                 kind={activeTab === "perspective" ? "brand" : "neutral"}
                 scale="s"
-                onClick={() => setActiveTab("perspective")}
+                onClick={() => changeTab("perspective")}
               >
                 {t("analysis.perspectiveTab")}
               </calcite-button>
@@ -267,7 +292,7 @@ export default function AnalysisPanel({
                 appearance={activeTab === "obstacles" ? "solid" : "outline"}
                 kind={activeTab === "obstacles" ? "brand" : "neutral"}
                 scale="s"
-                onClick={() => setActiveTab("obstacles")}
+                onClick={() => changeTab("obstacles")}
               >
                 {t("analysis.obstacles")} ({analysis.obstacleCount})
               </calcite-button>
@@ -275,7 +300,7 @@ export default function AnalysisPanel({
                 appearance={activeTab === "categories" ? "solid" : "outline"}
                 kind={activeTab === "categories" ? "brand" : "neutral"}
                 scale="s"
-                onClick={() => setActiveTab("categories")}
+                onClick={() => changeTab("categories")}
               >
                 {t("analysis.categoriesTab")}
               </calcite-button>
@@ -336,7 +361,15 @@ export default function AnalysisPanel({
                   </p>
                 ) : (
                   analysis.obstacles.map((obs, idx) => (
-                    <calcite-card key={obs.id || idx} style={{ width: "100%" }}>
+                    <calcite-card
+                      key={obs.id || idx}
+                      tabIndex={0}
+                      onMouseEnter={() => onObstacleHover?.(obs)}
+                      onMouseLeave={() => onObstacleHover?.(null)}
+                      onFocus={() => onObstacleHover?.(obs)}
+                      onBlur={() => onObstacleHover?.(null)}
+                      style={{ width: "100%" }}
+                    >
                       <div
                         slot="heading"
                         style={{
@@ -389,10 +422,18 @@ export default function AnalysisPanel({
                     <div slot="description">
                       {t("analysis.categorySummary", { count: cat.count })}
                     </div>
+                    <p style={{ fontSize: "0.85rem", lineHeight: "1.5", margin: "0.5rem 0" }}>
+                      {t(cat.descriptionKey)}
+                    </p>
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem", marginTop: "0.5rem" }}>
                       {cat.obstacles.map((o, oIdx) => (
                         <div
                           key={oIdx}
+                          tabIndex={0}
+                          onMouseEnter={() => onObstacleHover?.(o)}
+                          onMouseLeave={() => onObstacleHover?.(null)}
+                          onFocus={() => onObstacleHover?.(o)}
+                          onBlur={() => onObstacleHover?.(null)}
                           style={{
                             fontSize: "0.8rem",
                             display: "flex",

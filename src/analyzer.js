@@ -188,6 +188,33 @@ export function buildObstacleIntersectionQuery(layer, bufferGeometry) {
   return query;
 }
 
+export async function countCountriesCrossed(layer, routeGeometries) {
+  if (!layer) return null;
+  if (typeof layer.queryFeatures !== "function") {
+    throw new Error("Country layer does not support feature queries.");
+  }
+
+  const countries = new Set();
+  for (const geometry of routeGeometries) {
+    const query = typeof layer.createQuery === "function" ? layer.createQuery() : {};
+    query.geometry = geometry;
+    query.spatialRelationship = "intersects";
+    query.returnGeometry = false;
+    query.returnDistinctValues = true;
+    query.outFields = ["COUNTRY"];
+    const result = await layer.queryFeatures(query);
+    if (result.exceededTransferLimit) {
+      throw new Error("Country query returned incomplete results.");
+    }
+    for (const feature of result.features || []) {
+      const country = feature.attributes?.COUNTRY?.trim();
+      if (!country) throw new Error("Country query returned a feature without a country name.");
+      countries.add(country.toLowerCase());
+    }
+  }
+  return countries.size;
+}
+
 /**
  * Spatial intersection between route buffer polygon and obstacle features.
  * Works with ArcGIS geometryEngine.
@@ -297,6 +324,19 @@ export function evaluateJourneyRisk(totalWeight, thresholds = DEFAULT_CONFIG.ris
   }
 }
 
+export function getCategoryDescriptionKey(category = "") {
+  const name = String(category).toLowerCase();
+  if (/meer|maritime|sea|ocean/.test(name)) return "categoryDescriptions.sea";
+  if (/desert|wüste|wueste|sahara/.test(name)) return "categoryDescriptions.desert";
+  if (/gebirge|mountain|alps|berge/.test(name)) return "categoryDescriptions.mountain";
+  if (/detention|camp|haft|lager/.test(name)) return "categoryDescriptions.detention";
+  if (/border|fence|enforce|grenz/.test(name)) return "categoryDescriptions.border";
+  if (/exploitation|traffick|smuggl|ausbeutung|schlepper/.test(name)) return "categoryDescriptions.exploitation";
+  if (/health|survival|gesundheit/.test(name)) return "categoryDescriptions.health";
+  if (/terrain|environment|umwelt|gelände/.test(name)) return "categoryDescriptions.terrain";
+  return "categoryDescriptions.general";
+}
+
 /**
  * Generates educational perspective reflection prompts based on the specific obstacles encountered.
  * Encourages students to take the perspective of refugees and reflect on the reality of forced displacement.
@@ -310,6 +350,7 @@ export function generateRefugeePerspectiveFeedback(intersectedObstacles, totalWe
       categories[cat] = {
         name: cat,
         count: 0,
+        descriptionKey: getCategoryDescriptionKey(cat),
         obstacles: []
       };
     }
@@ -391,7 +432,8 @@ export function summarizeRouteAnalysis(intersectedObstacles, config = DEFAULT_CO
     timestamp: new Date().toISOString(),
     routeMetrics: {
       routeCount: routeMetrics.routeCount || 1,
-      totalLengthKm: routeMetrics.totalLengthKm != null ? Math.round(routeMetrics.totalLengthKm * 10) / 10 : null
+      totalLengthKm: routeMetrics.totalLengthKm != null ? Math.round(routeMetrics.totalLengthKm * 10) / 10 : null,
+      countryCount: routeMetrics.countryCount ?? null
     },
     buffer: {
       distance: config.bufferDistance,

@@ -6,8 +6,10 @@ import {
   extractObstacleAttributes,
   bufferRouteGeometries,
   buildObstacleIntersectionQuery,
+  countCountriesCrossed,
   intersectBufferWithObstacles,
   evaluateJourneyRisk,
+  getCategoryDescriptionKey,
   generateRefugeePerspectiveFeedback,
   summarizeRouteAnalysis
 } from "../src/analyzer.js";
@@ -122,6 +124,34 @@ test("buildObstacleIntersectionQuery requests intersecting features in buffer sp
   assert.equal(query.outSpatialReference, bufferGeometry.spatialReference);
 });
 
+test("countCountriesCrossed queries routes and counts unique countries", async () => {
+  const routes = [{ type: "polyline", id: 1 }, { type: "polyline", id: 2 }];
+  const queries = [];
+  const layer = {
+    createQuery: () => ({ where: "existing filter" }),
+    queryFeatures(query) {
+      queries.push(query);
+      return { features: (query.geometry.id === 1 ? ["Syria", "Turkey", "Turkey"] : ["turkey", "Greece"])
+        .map((country) => ({ attributes: { COUNTRY: country } })) };
+    }
+  };
+
+  assert.equal(await countCountriesCrossed(layer, routes), 3);
+  assert.deepEqual(queries.map((query) => query.geometry), routes);
+  assert.equal(queries[0].where, "existing filter");
+  assert.equal(queries[0].spatialRelationship, "intersects");
+  assert.equal(queries[0].returnGeometry, false);
+  assert.equal(queries[0].returnDistinctValues, true);
+  assert.deepEqual(queries[0].outFields, ["COUNTRY"]);
+});
+
+test("countCountriesCrossed distinguishes unavailable or incomplete data from zero", async () => {
+  assert.equal(await countCountriesCrossed(null, [{}]), null);
+  assert.equal(await countCountriesCrossed({ queryFeatures: async () => ({ features: [] }) }, [{}]), 0);
+  await assert.rejects(countCountriesCrossed({ queryFeatures: async () => ({ exceededTransferLimit: true }) }, [{}]));
+  await assert.rejects(countCountriesCrossed({ queryFeatures: async () => ({ features: [{ attributes: {} }] }) }, [{}]));
+});
+
 test("intersectBufferWithObstacles filters without ranking obstacles by weight", () => {
   const mockEngine = {
     intersects(buffer, geom) {
@@ -212,6 +242,26 @@ test("route feedback does not depend on obstacle weights or risk thresholds", ()
   assert.equal("totalWeight" in changedFeedback.categories[0], false);
 });
 
+test("category descriptions cover web map and fallback obstacle categories", () => {
+  const expected = {
+    Meer: "sea",
+    Desert: "desert",
+    Gebirge: "mountain",
+    "Maritime Hazard": "sea",
+    "Border Enforcement": "border",
+    "Enforcement & Detention": "detention",
+    "Environmental & Terrain": "terrain",
+    "Human Exploitation": "exploitation",
+    "Health & Survival": "health",
+    Unknown: "general"
+  };
+  for (const [category, description] of Object.entries(expected)) {
+    assert.equal(getCategoryDescriptionKey(category), `categoryDescriptions.${description}`);
+  }
+  const feedback = generateRefugeePerspectiveFeedback([{ category: "Meer" }]);
+  assert.equal(feedback.categories[0].descriptionKey, "categoryDescriptions.sea");
+});
+
 test("extractObstacleAttributes uses the configured titleField before fallback titles", () => {
   const obstacle = extractObstacleAttributes(
     { attributes: { ObstacleTitle: "Grenzuebergang", title: "Fallback", Description: "Beschreibung" } },
@@ -223,8 +273,10 @@ test("extractObstacleAttributes uses the configured titleField before fallback t
 });
 
 test("summarizeRouteAnalysis preserves a zero route length", () => {
-  const summary = summarizeRouteAnalysis([], DEFAULT_CONFIG, { totalLengthKm: 0 });
+  const summary = summarizeRouteAnalysis([], DEFAULT_CONFIG, { totalLengthKm: 0, countryCount: 0 });
   assert.equal(summary.routeMetrics.totalLengthKm, 0);
+  assert.equal(summary.routeMetrics.countryCount, 0);
+  assert.equal(summarizeRouteAnalysis([], DEFAULT_CONFIG).routeMetrics.countryCount, null);
 });
 
 test("extractObstacleAttributes handles missing or invalid values gracefully", () => {
