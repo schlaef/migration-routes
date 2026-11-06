@@ -19,7 +19,8 @@ export default function AnalysisPanel({
   onObstacleHover,
   referenceLayers,
   referenceLayerAvailability,
-  onReferenceLayerChange
+  onReferenceLayerChange,
+  onStartingPointChange
 }) {
   const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState("perspective");
@@ -171,6 +172,7 @@ export default function AnalysisPanel({
           visibility={referenceLayers}
           availability={referenceLayerAvailability}
           onVisibilityChange={onReferenceLayerChange}
+          onStartingPointChange={onStartingPointChange}
         />
 
         {!analysis && !analyzing && (

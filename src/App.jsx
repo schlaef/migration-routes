@@ -106,6 +106,7 @@ export default function App() {
           onObstacleHover={handleObstacleHover}
           referenceLayers={referenceLayers}
           referenceLayerAvailability={referenceLayerAvailability}
+          onStartingPointChange={(id) => mapContainerRef.current?.goToStartingPoint(id)}
           onReferenceLayerChange={(key, visible) =>
             setReferenceLayers((previous) => ({ ...previous, [key]: visible }))
           }

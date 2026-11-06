@@ -1,12 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { STARTING_POINTS } from "../starting-points.js";
 
 const layers = ["border", "eu"];
 
-export default function RouteHelp({ visibility, availability, onVisibilityChange }) {
+export default function RouteHelp({ visibility, availability, onVisibilityChange, onStartingPointChange }) {
   const { t } = useTranslation();
+  const [startingPoint, setStartingPoint] = useState("");
 
   return (
+    <>
+    <div style={{ marginBottom: "1rem", fontSize: "0.85rem", lineHeight: "1.5" }}>
+      <label htmlFor="route-starting-point" style={{ display: "block", fontWeight: "600", marginBottom: "0.3rem" }}>
+        {t("routeHelp.startingPoint")}
+      </label>
+      <p id="route-starting-point-description" style={{ margin: "0 0 0.5rem" }}>
+        {t("routeHelp.startingPointDescription")}
+      </p>
+      <div style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
+        <select
+          id="route-starting-point"
+          aria-describedby="route-starting-point-description"
+          value={startingPoint}
+          disabled={!availability}
+          onChange={(event) => {
+            setStartingPoint(event.target.value);
+            onStartingPointChange(event.target.value);
+          }}
+          style={{ flex: "1 1 auto", minWidth: 0, padding: "0.35rem", font: "inherit" }}
+        >
+          <option value="" disabled>{t("routeHelp.chooseStartingPoint")}</option>
+          {["africa", "east"].map((region) => (
+            <optgroup key={region} label={t(`startingPoints.${region}`)}>
+              {STARTING_POINTS.filter((point) => point.region === region).map((point) => (
+                <option key={point.id} value={point.id}>{t(`startingPoints.${point.id}`)}</option>
+              ))}
+            </optgroup>
+          ))}
+        </select>
+        <calcite-action
+          icon="locate"
+          text={t("routeHelp.recenter")}
+          title={t("routeHelp.recenter")}
+          disabled={!availability || !startingPoint ? true : undefined}
+          onClick={() => onStartingPointChange(startingPoint)}
+        />
+      </div>
+    </div>
     <details style={{ marginBottom: "1rem", borderBottom: "1px solid var(--calcite-color-border-3)", paddingBottom: "0.75rem" }}>
       <summary style={{ cursor: "pointer", fontWeight: "600", fontSize: "0.9rem" }}>
         {t("routeHelp.title")}
@@ -47,5 +87,6 @@ export default function RouteHelp({ visibility, availability, onVisibilityChange
         {!availability && <p style={{ margin: 0 }}>{t("routeHelp.loading")}</p>}
       </div>
     </details>
+    </>
   );
 }

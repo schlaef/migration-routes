@@ -52,6 +52,10 @@
   "routeHelp": {
     "title": "Need help imagining a route?",
     "introduction": "Show these layers to explore possible routes. A mapped crossing does not guarantee a safe or accessible journey.",
+    "startingPoint": "Starting point",
+    "startingPointDescription": "Choose a country to center the map on an approximate location, then choose where to begin your route.",
+    "chooseStartingPoint": "Choose a country",
+    "recenter": "Center map on starting point",
     "borderTitle": "Border crossing points",
     "borderDescription": "Crossing points show places where borders can be crossed, but access depends on documents, visas and border controls. People fleeing conflict may lack a passport or a visa and face closed or dangerous routes, even when seeking safety. A point on the map does not mean everyone can cross there.",
     "borderSource": "Read more from the International Rescue Committee",
@@ -60,6 +64,26 @@
     "euSource": "Read the EU asylum and migration management regulation",
     "loading": "Loading map layers...",
     "unavailable": "This layer is not available in the current map."
+  },
+  "startingPoints": {
+    "africa": "Africa",
+    "east": "Middle East and Central Asia",
+    "sudan": "Sudan",
+    "southSudan": "South Sudan",
+    "libya": "Libya",
+    "niger": "Niger",
+    "mali": "Mali",
+    "burkinaFaso": "Burkina Faso",
+    "chad": "Chad",
+    "somalia": "Somalia",
+    "ethiopia": "Ethiopia",
+    "eritrea": "Eritrea",
+    "democraticRepublicOfCongo": "Democratic Republic of the Congo",
+    "syria": "Syria",
+    "afghanistan": "Afghanistan",
+    "iran": "Iran",
+    "iraq": "Iraq",
+    "yemen": "Yemen"
   },
   "guide": {
     "title": "How to Analyze a Migration Route",

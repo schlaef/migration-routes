@@ -11,6 +11,7 @@ import * as geometryEngine from "@arcgis/core/geometry/geometryEngine.js";
 import { sampleObstacles } from "../sample-obstacles.js";
 import { startRouteDrawing } from "../route-drawing.js";
 import { syncReferenceLayers } from "../reference-layers.js";
+import { focusStartingPoint } from "../starting-points.js";
 import {
   findObstacleLayer,
   ensureObstacleLayerHidden,
@@ -63,6 +64,12 @@ const MapContainer = forwardRef(function MapContainer(
   // Expose imperative methods to parent (App.jsx)
   useImperativeHandle(ref, () => ({
     startSketch,
+
+    goToStartingPoint(id) {
+      focusStartingPoint(viewRef.current, id)?.catch((error) => {
+        if (error.name !== "AbortError") console.warn("Could not navigate to starting point:", error);
+      });
+    },
 
     clearAll() {
       if (drawRef.current) drawRef.current.reset();

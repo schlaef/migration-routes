@@ -52,6 +52,10 @@
   "routeHelp": {
     "title": "Fällt es dir schwer, dir eine Route vorzustellen?",
     "introduction": "Blende diese Kartenebenen ein, um mögliche Routen zu erkunden. Ein eingezeichneter Übergang garantiert keine sichere oder zugängliche Reise.",
+    "startingPoint": "Ausgangspunkt",
+    "startingPointDescription": "Wähle ein Land, um die Karte auf eine ungefähre Position zu zentrieren. Bestimme anschließend selbst, wo deine Route beginnt.",
+    "chooseStartingPoint": "Land auswählen",
+    "recenter": "Karte auf Ausgangspunkt zentrieren",
     "borderTitle": "Grenzübergänge",
     "borderDescription": "Grenzübergänge zeigen Orte, an denen Grenzen überquert werden können. Der Zugang hängt jedoch von Dokumenten, Visa und Grenzkontrollen ab. Menschen auf der Flucht fehlen möglicherweise Pass oder Visum; geschlossene oder gefährliche Wege können sie an der Suche nach Schutz hindern. Ein Punkt auf der Karte bedeutet nicht, dass alle dort passieren können.",
     "borderSource": "Mehr erfahren beim International Rescue Committee",
@@ -60,6 +64,26 @@
     "euSource": "EU-Verordnung zum Asyl- und Migrationsmanagement lesen",
     "loading": "Kartenebenen werden geladen ...",
     "unavailable": "Diese Ebene ist in der aktuellen Karte nicht verfügbar."
+  },
+  "startingPoints": {
+    "africa": "Afrika",
+    "east": "Naher Osten und Zentralasien",
+    "sudan": "Sudan",
+    "southSudan": "Südsudan",
+    "libya": "Libyen",
+    "niger": "Niger",
+    "mali": "Mali",
+    "burkinaFaso": "Burkina Faso",
+    "chad": "Tschad",
+    "somalia": "Somalia",
+    "ethiopia": "Äthiopien",
+    "eritrea": "Eritrea",
+    "democraticRepublicOfCongo": "Demokratische Republik Kongo",
+    "syria": "Syrien",
+    "afghanistan": "Afghanistan",
+    "iran": "Iran",
+    "iraq": "Irak",
+    "yemen": "Jemen"
   },
   "guide": {
     "title": "So analysierst du eine Migrationsroute",
