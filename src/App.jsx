@@ -17,6 +17,8 @@ export default function App() {
   const [panelOpen, setPanelOpen] = useState(true);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
+  const [referenceLayers, setReferenceLayers] = useState({ border: false, eu: false });
+  const [referenceLayerAvailability, setReferenceLayerAvailability] = useState(null);
 
   const mapContainerRef = useRef(null);
 
@@ -102,6 +104,11 @@ export default function App() {
           onClose={closePanel}
           onOpenGuide={() => setGuideOpen(true)}
           onObstacleHover={handleObstacleHover}
+          referenceLayers={referenceLayers}
+          referenceLayerAvailability={referenceLayerAvailability}
+          onReferenceLayerChange={(key, visible) =>
+            setReferenceLayers((previous) => ({ ...previous, [key]: visible }))
+          }
         />
       </calcite-shell-panel>
 
@@ -136,6 +143,8 @@ export default function App() {
           config={config}
           onRouteChange={handleRouteChange}
           onStatusUpdate={(msg) => setStatusMessage(msg)}
+          referenceLayers={referenceLayers}
+          onReferenceLayerAvailabilityChange={setReferenceLayerAvailability}
         />
       </div>
 

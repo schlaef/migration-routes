@@ -45,6 +45,22 @@
     "terrain": "Difficult terrain and exposure to heat, cold, rivers, or remote areas can cause exhaustion and injury. Refugees may have little equipment, shelter, or access to rescue and medical care.",
     "general": "This obstacle can delay a journey or expose refugees to additional danger, exhaustion, and uncertainty. Its effects depend on the conditions and the resources available to those crossing."
   },
+  "drawing": {
+    "instructions": "Hold and drag, or click to add points. Double-click or press Enter to finish.",
+    "cancel": "Cancel drawing"
+  },
+  "routeHelp": {
+    "title": "Need help imagining a route?",
+    "introduction": "Show these layers to explore possible routes. A mapped crossing does not guarantee a safe or accessible journey.",
+    "borderTitle": "Border crossing points",
+    "borderDescription": "Crossing points show places where borders can be crossed, but access depends on documents, visas and border controls. People fleeing conflict may lack a passport or a visa and face closed or dangerous routes, even when seeking safety. A point on the map does not mean everyone can cross there.",
+    "borderSource": "Read more from the International Rescue Committee",
+    "euTitle": "European Union",
+    "euDescription": "The EU layer shows where a route enters EU territory. Under EU rules applicable from July 2026, asylum applications are generally registered in the first country of entry, with exceptions such as a valid visa or residence permit. A different country may be responsible for examining the application, depending on family ties, visas and other criteria.",
+    "euSource": "Read the EU asylum and migration management regulation",
+    "loading": "Loading map layers...",
+    "unavailable": "This layer is not available in the current map."
+  },
   "guide": {
     "title": "How to Analyze a Migration Route",
     "sketch": "<strong>Sketch a Route:</strong> Click the <em>Draw Route Polyline</em> button on the map to trace a route from an origin (e.g., Syria, Afghanistan, Libya) toward a European destination.",

@@ -2,10 +2,16 @@ import Graphic from "@arcgis/core/Graphic.js";
 import Polyline from "@arcgis/core/geometry/Polyline.js";
 import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol.js";
 
-export function startRouteDrawing(draw, view, routesLayer, onComplete) {
+export function startRouteDrawing(draw, view, routesLayer, onComplete, onDrawingChange) {
   const action = draw.create("polyline", { mode: "hybrid" });
   const symbol = new SimpleLineSymbol({ color: [255, 140, 0, 1], width: 3.5, style: "solid" });
+  const surface = view.container?.querySelector?.(".esri-view-surface") || view.container;
+  const previousCursor = surface?.style?.cursor;
   let preview = null;
+  let cleanedUp = false;
+
+  if (surface?.style) surface.style.cursor = "crosshair";
+  onDrawingChange?.(true);
 
   const clearPreview = () => {
     if (preview) view.graphics.remove(preview);
@@ -20,8 +26,12 @@ export function startRouteDrawing(draw, view, routesLayer, onComplete) {
   });
 
   const cleanup = () => {
+    if (cleanedUp) return;
+    cleanedUp = true;
     clearPreview();
     cancelHandle.remove();
+    if (surface?.style) surface.style.cursor = previousCursor;
+    onDrawingChange?.(false);
   };
 
   const makeGeometry = (vertices) => new Polyline({

@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useImperativeHandle, forwardRef } from "react";
+import React, { useEffect, useRef, useState, useImperativeHandle, forwardRef } from "react";
+import { useTranslation } from "react-i18next";
 import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer.js";
 import GeoJSONLayer from "@arcgis/core/layers/GeoJSONLayer.js";
 import Graphic from "@arcgis/core/Graphic.js";
@@ -9,6 +10,7 @@ import Draw from "@arcgis/core/views/draw/Draw.js";
 import * as geometryEngine from "@arcgis/core/geometry/geometryEngine.js";
 import { sampleObstacles } from "../sample-obstacles.js";
 import { startRouteDrawing } from "../route-drawing.js";
+import { syncReferenceLayers } from "../reference-layers.js";
 import {
   findObstacleLayer,
   ensureObstacleLayerHidden,
@@ -20,9 +22,11 @@ import {
 } from "../analyzer.js";
 
 const MapContainer = forwardRef(function MapContainer(
-  { config, onRouteChange, onAnalysisComplete, onStatusUpdate },
+  { config, onRouteChange, onAnalysisComplete, onStatusUpdate, referenceLayers, onReferenceLayerAvailabilityChange },
   ref
 ) {
+  const { t } = useTranslation();
+  const [sketching, setSketching] = useState(false);
   const mapElementRef = useRef(null);
   const viewRef = useRef(null);
   const drawRef = useRef(null);
@@ -31,12 +35,20 @@ const MapContainer = forwardRef(function MapContainer(
   const highlightLayerRef = useRef(null);
   const hoverLayerRef = useRef(null);
   const obstacleLayerRef = useRef(null);
+  const referenceLayersRef = useRef(referenceLayers);
+
+  useEffect(() => {
+    referenceLayersRef.current = referenceLayers;
+    if (viewRef.current?.map) {
+      onReferenceLayerAvailabilityChange?.(syncReferenceLayers(viewRef.current.map, referenceLayers));
+    }
+  }, [referenceLayers, onReferenceLayerAvailabilityChange]);
 
   const startSketch = () => {
     const draw = drawRef.current;
     const view = viewRef.current;
     const routesLayer = routesLayerRef.current;
-    if (!draw || !view || !routesLayer) return;
+    if (!draw || !view || !routesLayer || sketching) return;
     startRouteDrawing(draw, view, routesLayer, () => {
       const count = routesLayer.graphics.filter(
         (graphic) => graphic?.geometry?.type === "polyline"
@@ -45,7 +57,7 @@ const MapContainer = forwardRef(function MapContainer(
       if (onStatusUpdate) {
         onStatusUpdate("Route polyline sketched. Click 'Analyze Route' to evaluate.");
       }
-    });
+    }, setSketching);
   };
 
   // Expose imperative methods to parent (App.jsx)
@@ -270,6 +282,7 @@ const MapContainer = forwardRef(function MapContainer(
       if (initializingMap === map) return;
       initializingMap = map;
       viewRef.current = view;
+      onReferenceLayerAvailabilityChange?.(null);
 
       try {
         await map.loadAll();
@@ -278,6 +291,8 @@ const MapContainer = forwardRef(function MapContainer(
       }
 
       if (destroyed || view.map !== map) return;
+
+      onReferenceLayerAvailabilityChange?.(syncReferenceLayers(map, referenceLayersRef.current));
 
       // Ensure view padding and UI elements
       view.ui.move("zoom", "top-left");
@@ -383,6 +398,7 @@ const MapContainer = forwardRef(function MapContainer(
       }
       if (hoverLayer && hoverMap) hoverMap.remove(hoverLayer);
       if (hoverLayerRef.current === hoverLayer) hoverLayerRef.current = null;
+      if (viewRef.current?.map === initializingMap) viewRef.current = null;
     };
   }, [config.webmapId, config.obstacleLayerTitle]);
 
@@ -420,6 +436,7 @@ const MapContainer = forwardRef(function MapContainer(
           kind="brand"
           scale="s"
           icon-start="pencil"
+          disabled={sketching ? true : undefined}
           onClick={startSketch}
           title="Click to start drawing a migration route on the map"
         >
@@ -430,6 +447,37 @@ const MapContainer = forwardRef(function MapContainer(
           Corridor: {config.bufferDistance} {config.bufferUnit}
         </calcite-chip>
       </div>
+
+      {sketching && (
+        <div
+          role="status"
+          style={{
+            position: "absolute",
+            top: "70px",
+            left: "16px",
+            zIndex: 10,
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            width: "max-content",
+            maxWidth: "min(360px, calc(100% - 32px))",
+            padding: "0.4rem 0.5rem 0.4rem 0.75rem",
+            backgroundColor: "var(--calcite-color-foreground-1, #fff)",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+            borderRadius: "4px",
+            fontSize: "0.85rem",
+            lineHeight: "1.4"
+          }}
+        >
+          <span>{t("drawing.instructions")}</span>
+          <calcite-action
+            icon="x"
+            text={t("drawing.cancel")}
+            title={t("drawing.cancel")}
+            onClick={() => drawRef.current?.reset()}
+          />
+        </div>
+      )}
     </div>
   );
 });

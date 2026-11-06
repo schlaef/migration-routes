@@ -22,9 +22,12 @@ function createDrawing() {
     }
   };
   const previews = [];
+  const surface = { style: { cursor: "grab" } };
+  const drawingStates = [];
   let keyHandler = null;
   const view = {
     spatialReference: { wkid: 3857 },
+    container: { querySelector: () => surface },
     on(name, handler) {
       assert.equal(name, "key-down");
       keyHandler = handler;
@@ -38,12 +41,14 @@ function createDrawing() {
   const routes = [];
   const routesLayer = { add(graphic) { routes.push(graphic); } };
   let completed = 0;
-  startRouteDrawing(draw, view, routesLayer, () => { completed += 1; });
-  return { handlers, previews, routes, completed: () => completed, keyHandler: () => keyHandler };
+  startRouteDrawing(draw, view, routesLayer, () => { completed += 1; }, (active) => drawingStates.push(active));
+  return { handlers, previews, routes, surface, drawingStates, completed: () => completed, keyHandler: () => keyHandler };
 }
 
 test("route drawing shows only a line preview and saves the completed route", () => {
   const drawing = createDrawing();
+  assert.equal(drawing.surface.style.cursor, "crosshair");
+  assert.deepEqual(drawing.drawingStates, [true]);
   const vertices = [[0, 0], [1, 1]];
   drawing.handlers.get("vertex-add")({ vertices });
   assert.equal(drawing.previews.length, 1);
@@ -57,6 +62,10 @@ test("route drawing shows only a line preview and saves the completed route", ()
   assert.deepEqual(drawing.routes[0].geometry.paths[0], vertices);
   assert.equal(drawing.completed(), 1);
   assert.equal(drawing.keyHandler(), null);
+  assert.equal(drawing.surface.style.cursor, "grab");
+  assert.deepEqual(drawing.drawingStates, [true, false]);
+  drawing.handlers.get("destroy")();
+  assert.deepEqual(drawing.drawingStates, [true, false]);
 });
 
 test("Escape cancels a drawing and removes its preview without saving a route", () => {
@@ -69,4 +78,27 @@ test("Escape cancels a drawing and removes its preview without saving a route", 
   assert.equal(drawing.completed(), 0);
   assert.equal(drawing.keyHandler(), null);
   assert.equal(stopped, true);
+  assert.equal(drawing.surface.style.cursor, "grab");
+  assert.deepEqual(drawing.drawingStates, [true, false]);
+});
+
+test("an incomplete drawing restores the cursor and ends the drawing state", () => {
+  const drawing = createDrawing();
+  drawing.handlers.get("draw-complete")({ vertices: [[0, 0]] });
+
+  assert.equal(drawing.surface.style.cursor, "grab");
+  assert.deepEqual(drawing.drawingStates, [true, false]);
+  assert.equal(drawing.routes.length, 0);
+  assert.equal(drawing.completed(), 0);
+});
+
+test("destroying an active drawing clears its preview and restores the cursor", () => {
+  const drawing = createDrawing();
+  drawing.handlers.get("cursor-update")({ vertices: [[0, 0], [1, 1]] });
+  drawing.handlers.get("destroy")();
+
+  assert.equal(drawing.previews.length, 0);
+  assert.equal(drawing.surface.style.cursor, "grab");
+  assert.deepEqual(drawing.drawingStates, [true, false]);
+  assert.equal(drawing.keyHandler(), null);
 });

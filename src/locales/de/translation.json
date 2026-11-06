@@ -45,6 +45,22 @@
     "terrain": "Schwieriges Gelände, Hitze, Kälte, Flüsse und abgelegene Gebiete können Erschöpfung und Verletzungen verursachen. Geflüchteten fehlen möglicherweise Ausrüstung, Unterkunft sowie Zugang zu Rettung und medizinischer Versorgung.",
     "general": "Dieses Hindernis kann eine Reise verzögern oder Geflüchtete zusätzlicher Gefahr, Erschöpfung und Ungewissheit aussetzen. Die Auswirkungen hängen von den Bedingungen und den verfügbaren Mitteln ab."
   },
+  "drawing": {
+    "instructions": "Maustaste gedrückt halten und ziehen oder Punkte anklicken. Mit Doppelklick oder Eingabetaste abschließen.",
+    "cancel": "Zeichnen abbrechen"
+  },
+  "routeHelp": {
+    "title": "Fällt es dir schwer, dir eine Route vorzustellen?",
+    "introduction": "Blende diese Kartenebenen ein, um mögliche Routen zu erkunden. Ein eingezeichneter Übergang garantiert keine sichere oder zugängliche Reise.",
+    "borderTitle": "Grenzübergänge",
+    "borderDescription": "Grenzübergänge zeigen Orte, an denen Grenzen überquert werden können. Der Zugang hängt jedoch von Dokumenten, Visa und Grenzkontrollen ab. Menschen auf der Flucht fehlen möglicherweise Pass oder Visum; geschlossene oder gefährliche Wege können sie an der Suche nach Schutz hindern. Ein Punkt auf der Karte bedeutet nicht, dass alle dort passieren können.",
+    "borderSource": "Mehr erfahren beim International Rescue Committee",
+    "euTitle": "Europäische Union",
+    "euDescription": "Die EU-Ebene zeigt, wo eine Route EU-Gebiet erreicht. Nach den seit Juli 2026 geltenden EU-Regeln werden Asylanträge grundsätzlich im ersten Einreiseland registriert; es gibt Ausnahmen, etwa bei einem gültigen Visum oder Aufenthaltstitel. Für die Prüfung kann ein anderes Land zuständig sein, je nach familiären Bindungen, Visa und weiteren Kriterien.",
+    "euSource": "EU-Verordnung zum Asyl- und Migrationsmanagement lesen",
+    "loading": "Kartenebenen werden geladen ...",
+    "unavailable": "Diese Ebene ist in der aktuellen Karte nicht verfügbar."
+  },
   "guide": {
     "title": "So analysierst du eine Migrationsroute",
     "sketch": "<strong>Route einzeichnen:</strong> Zeichne mit der Schaltfläche <em>Routenlinie zeichnen</em> auf der Karte einen Weg vom Herkunftsort (z. B. Syrien, Afghanistan oder Libyen) zu einem Ziel in Europa.",

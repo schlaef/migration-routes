@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import categoryImages from "../assets/categories/manifest.json";
 import { getCategoryImages } from "../category-images.js";
+import RouteHelp from "./RouteHelp.jsx";
 
 const categoryImageUrls = import.meta.glob("../assets/categories/*/*.{jpg,jpeg,png,webp,avif,gif}", {
   eager: true,
@@ -15,7 +16,10 @@ export default function AnalysisPanel({
   config,
   onClose,
   onOpenGuide,
-  onObstacleHover
+  onObstacleHover,
+  referenceLayers,
+  referenceLayerAvailability,
+  onReferenceLayerChange
 }) {
   const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState("perspective");
@@ -162,6 +166,12 @@ export default function AnalysisPanel({
             text={t("analysis.loading")}
           />
         )}
+
+        <RouteHelp
+          visibility={referenceLayers}
+          availability={referenceLayerAvailability}
+          onVisibilityChange={onReferenceLayerChange}
+        />
 
         {!analysis && !analyzing && (
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
