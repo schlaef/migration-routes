@@ -1,5 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import categoryImages from "../assets/categories/manifest.json";
+import { getCategoryImages } from "../category-images.js";
+
+const categoryImageUrls = import.meta.glob("../assets/categories/*/*.{jpg,jpeg,png,webp,avif,gif}", {
+  eager: true,
+  query: "?url",
+  import: "default"
+});
 
 export default function AnalysisPanel({
   analysis,
@@ -425,6 +433,24 @@ export default function AnalysisPanel({
                     <p style={{ fontSize: "0.85rem", lineHeight: "1.5", margin: "0.5rem 0" }}>
                       {t(cat.descriptionKey)}
                     </p>
+                    {getCategoryImages(cat.descriptionKey, categoryImages, categoryImageUrls).map((image) => (
+                        <figure key={image.filename} style={{ margin: "0.75rem 0" }}>
+                          <img
+                            src={image.url}
+                            alt=""
+                            loading="lazy"
+                            style={{ display: "block", width: "100%", maxHeight: "220px", objectFit: "contain" }}
+                          />
+                          <figcaption style={{ fontSize: "0.8rem", color: "var(--calcite-color-text-2)", marginTop: "0.25rem" }}>
+                            {image.caption}
+                            {image.sourceUrl && (
+                              <a href={image.sourceUrl} target="_blank" rel="noopener noreferrer" style={{ display: "block" }}>
+                                {t("analysis.linkToResource")}
+                              </a>
+                            )}
+                          </figcaption>
+                        </figure>
+                    ))}
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem", marginTop: "0.5rem" }}>
                       {cat.obstacles.map((o, oIdx) => (
                         <div

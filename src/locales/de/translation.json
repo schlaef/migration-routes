@@ -30,6 +30,7 @@
     "noObstacles": "Im {{distance}}-{{unit}}-Korridor wurden keine Hindernisse gefunden.",
     "weight": "Gewichtung: {{weight}}",
     "perspective": "Perspektive:",
+    "linkToResource": "Link zur Quelle",
     "categorySummary_one": "{{count}} Hindernis",
     "categorySummary_other": "{{count}} Hindernisse"
   },

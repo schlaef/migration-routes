@@ -1,0 +1,44 @@
+{
+    "sea": [
+        {
+            "filename": "overcrowded_boat.webp",
+            "sourceUrl": "https://www.srf.ch/news/international/international-die-schlepper-auf-den-schiffen-sind-nur-die-kleinen-fische",
+            "caption": "An overcrowded boat at sea, seen from above."
+        },
+        {
+            "filename": "refugee_boat.jpg",
+            "sourceUrl": "https://www.deutschlandfunk.de/fluechtlingswelle-schiffe-versenken-im-mittelmeer-100.html",
+            "caption": "People crowded aboard a boat."
+        }
+    ],
+    "desert": [
+        {
+            "filename": "pickups_agadez.jpg",
+            "sourceUrl": "https://www.deutschlandfunk.de/migranten-als-ware-wo-europas-und-afrikas-interessen-100.html",
+            "caption": "Pickup trucks in Agadez, Niger, used for transporting people across the desert."
+        }
+    ],
+    "mountain": [],
+    "detention": [],
+    "border": [
+        {
+            "filename": "croatia_slovenia.jpg",
+            "sourceUrl": "https://www.proasyl.de/news/eu-schaut-elendstrecks-durch-europa-zu/",
+            "caption": "Border between Croatia and Slovenia."
+        },
+        {
+            "filename": "Grenze_türkei_gr.webp",
+            "sourceUrl": "https://www.tagesschau.de/ausland/eu-griechenland-grenzschutz-103.html",
+            "caption": "Border between Turkey and Greece."
+        },
+        {
+            "filename": "greece_macedonia.webp",
+            "sourceUrl": "https://www.amnesty.de/2016/4/18/europa-muss-verantwortung-fuer-fluechtlinge-griechenland-uebernehmen",
+            "caption": "Border between Greece and Macedonia."
+        }
+    ],
+    "exploitation": [],
+    "health": [],
+    "terrain": [],
+    "general": []
+}

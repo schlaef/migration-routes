@@ -30,6 +30,7 @@
     "noObstacles": "No obstacles intersected within the {{distance}} {{unit}} corridor.",
     "weight": "Weight: {{weight}}",
     "perspective": "Perspective:",
+    "linkToResource": "Link to resource",
     "categorySummary_one": "{{count}} obstacle",
     "categorySummary_other": "{{count}} obstacles"
   },
