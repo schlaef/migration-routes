@@ -32,7 +32,10 @@
     "perspective": "Perspective:",
     "linkToResource": "Link to resource",
     "categorySummary_one": "{{count}} obstacle",
-    "categorySummary_other": "{{count}} obstacles"
+    "categorySummary_other": "{{count}} obstacles",
+    "helpUsed": "Help used:",
+    "noHelpUsed": "none",
+    "helpStage": "help stage {{stage}}"
   },
   "categoryDescriptions": {
     "sea": "Crossing the sea is dangerous and expensive. Refugees may pay smugglers large sums for places on overcrowded, unseaworthy boats and can be abandoned at sea; many drown. While some coast guards rescue people, others have intercepted or pushed them back, exposing them to further danger or detention.",
@@ -63,7 +66,25 @@
     "euDescription": "The EU layer shows where a route enters EU territory. Under EU rules applicable from July 2026, asylum applications are generally registered in the first country of entry, with exceptions such as a valid visa or residence permit. A different country may be responsible for examining the application, depending on family ties, visas and other criteria.",
     "euSource": "Read the EU asylum and migration management regulation",
     "loading": "Loading map layers...",
-    "unavailable": "This layer is not available in the current map."
+    "unavailable": "This layer is not available in the current map.",
+    "stage1": "Stage 1: Orientation",
+    "stage2": "Stage 2: Real refugee routes",
+    "locked": "First switch on a stage 1 layer. If you still need more input afterwards, you can show real routes here.",
+    "iomTitle": "Known refugee routes (IOM 2026)",
+    "iomDescription": "This layer shows land and sea routes around the Mediterranean documented by the International Organization for Migration (IOM). The lines are simplified: people on the move often deviate because borders close, smugglers decide the way or controls increase. Compare your route with these paths, but don't simply copy them.",
+    "iomSource": "Learn more about the IOM Displacement Tracking Matrix",
+    "iomRegion": "Region",
+    "iomRegions": {
+      "all": "All routes",
+      "central": "Central Mediterranean",
+      "eastern": "Eastern Mediterranean",
+      "western": "Western Mediterranean"
+    },
+    "iomRegionDescriptions": {
+      "central": "From West and East Africa across the Sahara (e.g. via Niger, Chad or Sudan) to Libya or Tunisia, then across the sea to Italy or Malta. The crossing is considered one of the deadliest sea routes in the world.",
+      "eastern": "From countries such as Syria, Afghanistan, Iraq or Iran via Türkiye to Greece, Bulgaria or Cyprus, on foot over land or by boat across the Aegean, often continuing through the Balkans.",
+      "western": "From West and North Africa via Morocco or Algeria to Spain, across the Strait of Gibraltar, the Alboran Sea or the border fences of Ceuta and Melilla."
+    }
   },
   "startingPoints": {
     "africa": "Africa",

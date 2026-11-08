@@ -290,6 +290,15 @@ const MapContainer = forwardRef(function MapContainer(
       initializingMap = map;
       viewRef.current = view;
       onReferenceLayerAvailabilityChange?.(null);
+      // As soon as the WebMap has created its layers, hide help layers (even if the
+      // WebMap saved them as visible) without waiting for slow external sources.
+      try {
+        await map.load();
+      } catch (loadErr) {
+        console.warn("Could not load the WebMap:", loadErr);
+      }
+      if (destroyed || view.map !== map) return;
+      onReferenceLayerAvailabilityChange?.(syncReferenceLayers(map, referenceLayersRef.current));
 
       try {
         await map.loadAll();
