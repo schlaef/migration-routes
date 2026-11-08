@@ -114,6 +114,34 @@ Then open `http://localhost:4173/migration-routes-analyzer/`.
 
 ---
 
+## 🧭 IOM Route Data (help stage 2)
+
+The help layer `IOM_routes_2026` shows known migration routes around the Mediterranean from the
+[IOM Displacement Tracking Matrix (DTM)](https://dtm.iom.int/). Instead of loading the six GeoJSON
+files directly from IOM's server (no CORS headers, can be slow or blocked by school networks), host
+them in your own ArcGIS Online organization:
+
+```bash
+python3 scripts/download_iom_routes.py --simplify 0.005 --precision 5
+```
+
+This downloads the six files (central/eastern/western Mediterranean × land/sea), merges them into
+`iom_routes_2026.geojson` and adds the fields `MedRegion` (`central`, `eastern`, `western`) and `Mode`
+(`land`, `sea`). `--simplify 0.005` (~500 m) reduces the file from ~12.5 MB to ~0.25 MB without a
+visible difference at classroom scale; omit it to keep all vertices. Only the Python standard library
+is required.
+
+Then in ArcGIS Online:
+1. **Content → New item**, upload the file and choose **Add and create a hosted feature layer**.
+2. Credit the source on the item (“IOM Displacement Tracking Matrix (DTM)”, download date) and check IOM's terms of use.
+3. Share the layer publicly, add it to the WebMap, title it **`IOM_routes_2026`** and set it to hidden. Remove the old GeoJSON group layer.
+4. Optional: style by `Mode` (e.g. dashed lines for sea routes).
+
+The app filters the region either by the `MedRegion` field (merged layer) or by sublayer titles
+starting with `cmr_`, `emr_`, `wmr_` (original group layer).
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -121,6 +149,8 @@ migration-routes-analyzer/
 ├── index.html                  # Vite + React HTML template
 ├── vite.config.js              # Vite configuration with React plugin
 ├── server.js                   # Production static asset server
+├── scripts/
+│   └── download_iom_routes.py  # Downloads and merges the IOM route GeoJSON files
 ├── package.json                # Project manifest, scripts, and dependencies
 ├── README.md                   # Documentation and pedagogical guide
 ├── src/

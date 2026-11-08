@@ -141,3 +141,6 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Output of scripts/download_iom_routes.py
+iom_routes_*.geojson

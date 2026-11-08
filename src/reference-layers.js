@@ -74,9 +74,22 @@ function getSublayers(layer) {
   return typeof sublayers.toArray === "function" ? sublayers.toArray() : Array.from(sublayers);
 }
 
+// Field added by scripts/download_iom_routes.py when the routes are merged into one layer.
+export const IOM_REGION_FIELD = "MedRegion";
+
 function syncIomRegion(layer, region) {
   const prefix = IOM_REGION_PREFIXES[region];
-  for (const sublayer of getSublayers(layer)) {
+  const sublayers = getSublayers(layer);
+
+  // Single merged layer (hosted feature layer): filter by the MedRegion field.
+  if (sublayers.length === 0 && "definitionExpression" in layer) {
+    const hasField = !layer.fields || layer.fields.some((field) => field.name === IOM_REGION_FIELD);
+    if (hasField) layer.definitionExpression = prefix ? `${IOM_REGION_FIELD} = '${region}'` : null;
+    return;
+  }
+
+  // Group layer with one sublayer per region (e.g. cmr_land_routes, emr_sea_routes).
+  for (const sublayer of sublayers) {
     const title = String(sublayer.title || sublayer.id || "").toLowerCase();
     sublayer.visible = !prefix || title.startsWith(prefix);
   }

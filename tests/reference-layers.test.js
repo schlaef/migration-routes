@@ -96,3 +96,25 @@ test("help level limits which layers are offered and is configurable by URL", ()
   assert.equal(parseUrlParams("?help=0").helpLevel, 0);
   assert.equal(parseUrlParams("?hilfen=5").helpLevel, undefined);
 });
+
+test("a single merged IOM layer is filtered by its MedRegion field", () => {
+  const merged = {
+    title: "IOM_routes_2026",
+    type: "feature",
+    visible: true,
+    definitionExpression: null,
+    fields: [{ name: "MedRegion" }, { name: "Mode" }]
+  };
+  const map = { allLayers: { toArray: () => [merged] } };
+
+  syncReferenceLayers(map, { iom: true, iomRegion: "western" });
+  assert.equal(merged.visible, true);
+  assert.equal(merged.definitionExpression, "MedRegion = 'western'");
+
+  syncReferenceLayers(map, { iom: true, iomRegion: "all" });
+  assert.equal(merged.definitionExpression, null);
+
+  const withoutField = { ...merged, fields: [{ name: "Mode" }], definitionExpression: "Mode = 'sea'" };
+  syncReferenceLayers({ allLayers: { toArray: () => [withoutField] } }, { iom: true, iomRegion: "western" });
+  assert.equal(withoutField.definitionExpression, "Mode = 'sea'");
+});
