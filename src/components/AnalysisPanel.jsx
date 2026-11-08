@@ -2,7 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import categoryImages from "../assets/categories/manifest.json";
 import { getCategoryImages } from "../category-images.js";
+import categoryVideos from "../assets/categories/videos.json";
+import { getCategoryVideos } from "../category-videos.js";
+import CategoryVideo from "./CategoryVideo.jsx";
 import RouteHelp from "./RouteHelp.jsx";
+import { HELP_STAGES, getHighestHelpStage } from "../reference-layers.js";
 
 const categoryImageUrls = import.meta.glob("../assets/categories/*/*.{jpg,jpeg,png,webp,avif,gif}", {
   eager: true,
@@ -19,6 +23,8 @@ export default function AnalysisPanel({
   onObstacleHover,
   referenceLayers,
   referenceLayerAvailability,
+  helpLevel,
+  usedHelp,
   onReferenceLayerChange,
   onStartingPointChange
 }) {
@@ -49,6 +55,8 @@ export default function AnalysisPanel({
 
     return {
       ...analysis,
+      helpUsed: getHelpUsedLabels(analysis.helpUsed),
+      highestHelpStage: getHighestHelpStage(analysis.helpUsed),
       obstacles: analysis.obstacles.map((obstacle) =>
         obstacle.perspectiveNote
           ? { ...obstacle, perspectiveNote: getObstaclePerspective(obstacle) }
@@ -79,6 +87,11 @@ export default function AnalysisPanel({
 
   const getObstaclePerspective = (obstacle) =>
     t(`obstaclePerspectives.${obstacle.id}`, { defaultValue: obstacle.perspectiveNote });
+
+  const getHelpUsedLabels = (help = {}) =>
+    Object.keys(HELP_STAGES)
+      .filter((key) => help?.[key])
+      .map((key) => t(`routeHelp.${key}Title`));
 
   const changeTab = (tab) => {
     onObstacleHover?.(null);
@@ -171,6 +184,8 @@ export default function AnalysisPanel({
         <RouteHelp
           visibility={referenceLayers}
           availability={referenceLayerAvailability}
+          helpLevel={helpLevel}
+          usedHelp={usedHelp}
           onVisibilityChange={onReferenceLayerChange}
           onStartingPointChange={onStartingPointChange}
         />
@@ -240,6 +255,14 @@ export default function AnalysisPanel({
               );
             })()}
             */}
+
+            {/* Scaffolding used while drawing */}
+            <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--calcite-color-text-2)" }}>
+              <strong>{t("analysis.helpUsed")}</strong>{" "}
+              {getHelpUsedLabels(analysis.helpUsed).join(", ") || t("analysis.noHelpUsed")}
+              {getHighestHelpStage(analysis.helpUsed) > 0 &&
+                ` (${t("analysis.helpStage", { stage: getHighestHelpStage(analysis.helpUsed) })})`}
+            </p>
 
             {/* Quick Metrics Grid */}
             <div
@@ -463,6 +486,10 @@ export default function AnalysisPanel({
                           </figcaption>
                         </figure>
                     ))}
+                    {config.showVideos !== false &&
+                      getCategoryVideos(cat.descriptionKey, categoryVideos).map((video, vIdx) => (
+                        <CategoryVideo key={`${video.videoId}-${video.start ?? 0}-${vIdx}`} video={video} />
+                      ))}
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem", marginTop: "0.5rem" }}>
                       {cat.obstacles.map((o, oIdx) => (
                         <div

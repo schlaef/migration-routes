@@ -1,10 +1,17 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import Header from "./components/Header.jsx";
 import MapContainer from "./components/MapContainer.jsx";
 import AnalysisPanel from "./components/AnalysisPanel.jsx";
 import SettingsModal from "./components/SettingsModal.jsx";
 import GuideModal from "./components/GuideModal.jsx";
 import { getConfig } from "./config.js";
+import {
+  INITIAL_REFERENCE_LAYERS,
+  HELP_STAGES,
+  getAllowedReferenceLayers,
+  isStageUnlocked,
+  recordHelpUse
+} from "./reference-layers.js";
 
 export default function App() {
   const [config, setConfig] = useState(() => getConfig());
@@ -17,8 +24,30 @@ export default function App() {
   const [panelOpen, setPanelOpen] = useState(true);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
-  const [referenceLayers, setReferenceLayers] = useState({ border: false, eu: false });
+  const [referenceLayers, setReferenceLayers] = useState(INITIAL_REFERENCE_LAYERS);
   const [referenceLayerAvailability, setReferenceLayerAvailability] = useState(null);
+  const [usedHelp, setUsedHelp] = useState({});
+  const helpLevel = config.helpLevel ?? 2;
+
+  // Switch off help layers that the configured help level no longer allows.
+  useEffect(() => {
+    const allowed = getAllowedReferenceLayers(helpLevel);
+    setReferenceLayers((previous) => {
+      const next = { ...previous };
+      for (const key of Object.keys(HELP_STAGES)) {
+        if (!allowed.includes(key)) next[key] = false;
+      }
+      return next;
+    });
+  }, [helpLevel]);
+
+  const handleReferenceLayerChange = (key, value) => {
+    if (Object.hasOwn(HELP_STAGES, key)) {
+      if (value && (!getAllowedReferenceLayers(helpLevel).includes(key) || !isStageUnlocked(key, usedHelp))) return;
+      setUsedHelp((previous) => recordHelpUse(previous, key, value));
+    }
+    setReferenceLayers((previous) => ({ ...previous, [key]: value }));
+  };
 
   const mapContainerRef = useRef(null);
 
@@ -36,7 +65,7 @@ export default function App() {
     setErrorMessage(null);
     try {
       const summary = await mapContainerRef.current.analyze();
-      setAnalysisResult(summary);
+      setAnalysisResult(summary ? { ...summary, helpUsed: usedHelp } : summary);
       setPanelOpen(true);
     } catch (err) {
       console.error("Analysis error:", err);
@@ -106,10 +135,10 @@ export default function App() {
           onObstacleHover={handleObstacleHover}
           referenceLayers={referenceLayers}
           referenceLayerAvailability={referenceLayerAvailability}
+          helpLevel={helpLevel}
+          usedHelp={usedHelp}
           onStartingPointChange={(id) => mapContainerRef.current?.goToStartingPoint(id)}
-          onReferenceLayerChange={(key, visible) =>
-            setReferenceLayers((previous) => ({ ...previous, [key]: visible }))
-          }
+          onReferenceLayerChange={handleReferenceLayerChange}
         />
       </calcite-shell-panel>
 

@@ -32,7 +32,10 @@
     "perspective": "Perspektive:",
     "linkToResource": "Link zur Quelle",
     "categorySummary_one": "{{count}} Hindernis",
-    "categorySummary_other": "{{count}} Hindernisse"
+    "categorySummary_other": "{{count}} Hindernisse",
+    "helpUsed": "Verwendete Hilfen:",
+    "noHelpUsed": "keine",
+    "helpStage": "Hilfsstufe {{stage}}"
   },
   "categoryDescriptions": {
     "sea": "Eine Meeresüberquerung ist gefährlich und teuer. Geflüchtete zahlen Schleppern oft hohe Summen für Plätze auf überfüllten, seeuntüchtigen Booten und werden manchmal auf See zurückgelassen; viele ertrinken. Während manche Küstenwachen Menschen retten, haben andere sie abgefangen oder zurückgedrängt und damit weiterer Gefahr oder Haft ausgesetzt.",
@@ -63,7 +66,25 @@
     "euDescription": "Die EU-Ebene zeigt, wo eine Route EU-Gebiet erreicht. Nach den seit Juli 2026 geltenden EU-Regeln werden Asylanträge grundsätzlich im ersten Einreiseland registriert; es gibt Ausnahmen, etwa bei einem gültigen Visum oder Aufenthaltstitel. Für die Prüfung kann ein anderes Land zuständig sein, je nach familiären Bindungen, Visa und weiteren Kriterien.",
     "euSource": "EU-Verordnung zum Asyl- und Migrationsmanagement lesen",
     "loading": "Kartenebenen werden geladen ...",
-    "unavailable": "Diese Ebene ist in der aktuellen Karte nicht verfügbar."
+    "unavailable": "Diese Ebene ist in der aktuellen Karte nicht verfügbar.",
+    "stage1": "Stufe 1: Orientierung",
+    "stage2": "Stufe 2: Reale Fluchtrouten",
+    "locked": "Blende zuerst eine Hilfe aus Stufe 1 ein. Wenn du danach noch mehr Input brauchst, kannst du hier reale Routen anzeigen.",
+    "iomTitle": "Bekannte Fluchtrouten (IOM 2026)",
+    "iomDescription": "Diese Ebene zeigt Land- und Seerouten rund um das Mittelmeer, die die Internationale Organisation für Migration (IOM) dokumentiert hat. Die Linien sind vereinfacht: Menschen auf der Flucht weichen oft ab, weil Grenzen geschlossen werden, Schlepper die Route bestimmen oder Kontrollen zunehmen. Vergleiche deine Route mit diesen Wegen, übernimm sie aber nicht einfach.",
+    "iomSource": "Mehr zur Displacement Tracking Matrix der IOM",
+    "iomRegion": "Region",
+    "iomRegions": {
+      "all": "Alle Routen",
+      "central": "Zentrales Mittelmeer",
+      "eastern": "Östliches Mittelmeer",
+      "western": "Westliches Mittelmeer"
+    },
+    "iomRegionDescriptions": {
+      "central": "Aus West- und Ostafrika durch die Sahara (z. B. über Niger, Tschad oder Sudan) nach Libyen oder Tunesien und von dort über das Meer nach Italien oder Malta. Die Überfahrt gilt als eine der tödlichsten Seerouten der Welt.",
+      "eastern": "Aus Ländern wie Syrien, Afghanistan, Irak oder Iran über die Türkei nach Griechenland, Bulgarien oder Zypern, zu Fuss über Land oder mit Booten über die Ägäis, oft weiter über den Balkan.",
+      "western": "Aus West- und Nordafrika über Marokko oder Algerien nach Spanien, über die Strasse von Gibraltar, das Alborán-Meer oder die Grenzzäune von Ceuta und Melilla."
+    }
   },
   "startingPoints": {
     "africa": "Afrika",
@@ -165,5 +186,21 @@
     "miles": "Meilen",
     "meters": "Metern",
     "nautical-miles": "Seemeilen"
+  },
+  "videos": {
+    "kinds": {
+      "documentary": "Dokumentation",
+      "report": "Reportage",
+      "film": "Spielfilm",
+      "literature": "Literaturverfilmung"
+    },
+    "guidingQuestion": "Leitfrage:",
+    "contentWarning": "Dieser Ausschnitt kann belastende Szenen enthalten (Gewalt, Tod, Leid). Schau ihn nur an, wenn du dich bereit fühlst, und sprich mit deiner Lehrperson, wenn dich etwas beschäftigt.",
+    "privacyNotice": "Das Video wird erst nach deinem Klick von YouTube geladen. Dabei erhält YouTube (Google) Daten wie deine IP-Adresse.",
+    "load": "Video von YouTube laden",
+    "loadClip": "Ausschnitt ({{range}}) von YouTube laden",
+    "iframeTitle": "Eingebettetes Video",
+    "source": "Quelle: {{source}}",
+    "openOnYoutube": "Auf YouTube öffnen"
   }
 }
