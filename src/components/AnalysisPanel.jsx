@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import categoryImages from "../assets/categories/manifest.json";
 import { getCategoryImages } from "../category-images.js";
+import categoryVideos from "../assets/categories/videos.json";
+import { getCategoryVideos } from "../category-videos.js";
+import CategoryVideo from "./CategoryVideo.jsx";
 import RouteHelp from "./RouteHelp.jsx";
 
 const categoryImageUrls = import.meta.glob("../assets/categories/*/*.{jpg,jpeg,png,webp,avif,gif}", {
@@ -463,6 +466,10 @@ export default function AnalysisPanel({
                           </figcaption>
                         </figure>
                     ))}
+                    {config.showVideos !== false &&
+                      getCategoryVideos(cat.descriptionKey, categoryVideos).map((video, vIdx) => (
+                        <CategoryVideo key={`${video.videoId}-${video.start ?? 0}-${vIdx}`} video={video} />
+                      ))}
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem", marginTop: "0.5rem" }}>
                       {cat.obstacles.map((o, oIdx) => (
                         <div

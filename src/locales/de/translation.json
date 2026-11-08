@@ -165,5 +165,21 @@
     "miles": "Meilen",
     "meters": "Metern",
     "nautical-miles": "Seemeilen"
+  },
+  "videos": {
+    "kinds": {
+      "documentary": "Dokumentation",
+      "report": "Reportage",
+      "film": "Spielfilm",
+      "literature": "Literaturverfilmung"
+    },
+    "guidingQuestion": "Leitfrage:",
+    "contentWarning": "Dieser Ausschnitt kann belastende Szenen enthalten (Gewalt, Tod, Leid). Schau ihn nur an, wenn du dich bereit fühlst, und sprich mit deiner Lehrperson, wenn dich etwas beschäftigt.",
+    "privacyNotice": "Das Video wird erst nach deinem Klick von YouTube geladen. Dabei erhält YouTube (Google) Daten wie deine IP-Adresse.",
+    "load": "Video von YouTube laden",
+    "loadClip": "Ausschnitt ({{range}}) von YouTube laden",
+    "iframeTitle": "Eingebettetes Video",
+    "source": "Quelle: {{source}}",
+    "openOnYoutube": "Auf YouTube öffnen"
   }
 }

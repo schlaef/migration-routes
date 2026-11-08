@@ -165,5 +165,21 @@
     "miles": "miles",
     "meters": "meters",
     "nautical-miles": "nautical miles"
+  },
+  "videos": {
+    "kinds": {
+      "documentary": "Documentary",
+      "report": "News report",
+      "film": "Feature film",
+      "literature": "Literature adaptation"
+    },
+    "guidingQuestion": "Guiding question:",
+    "contentWarning": "This clip may contain distressing scenes (violence, death, suffering). Watch it only if you feel ready, and talk to your teacher if anything weighs on you.",
+    "privacyNotice": "The video is only loaded from YouTube after you click. YouTube (Google) then receives data such as your IP address.",
+    "load": "Load video from YouTube",
+    "loadClip": "Load clip ({{range}}) from YouTube",
+    "iframeTitle": "Embedded video",
+    "source": "Source: {{source}}",
+    "openOnYoutube": "Open on YouTube"
   }
 }

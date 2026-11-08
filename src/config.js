@@ -31,6 +31,10 @@ export const DEFAULT_CONFIG = {
   titleField: "Title",
   categoryField: "ObstacleType",
 
+  // Show embedded videos (documentaries, film clips) in the category summary.
+  // Videos are only loaded from YouTube after a click (privacy-enhanced mode).
+  showVideos: true,
+
   // Initial map center [longitude, latitude] focusing on Mediterranean, Middle East, North Africa, Europe
   defaultCenter: [18.0, 34.0],
 
@@ -75,6 +79,7 @@ const STORAGE_KEY = "migration_routes_analyzer_config";
  * - categoryField
  * - portalUrl
  * - apiKey
+ * - videos (on/off, true/false, 1/0)
  */
 export function parseUrlParams(searchString = "") {
   const overrides = {};
@@ -114,6 +119,12 @@ export function parseUrlParams(searchString = "") {
   if (params.has("categoryField")) overrides.categoryField = params.get("categoryField");
   if (params.has("portalUrl")) overrides.portalUrl = params.get("portalUrl");
   if (params.has("apiKey")) overrides.apiKey = params.get("apiKey");
+
+  if (params.has("videos")) {
+    const value = params.get("videos").toLowerCase();
+    if (["off", "false", "0", "no", "nein", "aus"].includes(value)) overrides.showVideos = false;
+    if (["on", "true", "1", "yes", "ja", "ein"].includes(value)) overrides.showVideos = true;
+  }
 
   return overrides;
 }
