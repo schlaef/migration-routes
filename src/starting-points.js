@@ -3,6 +3,7 @@ export const STARTING_POINTS = [
   { id: "southSudan", region: "africa", coordinates: [30, 7] },
   { id: "libya", region: "africa", coordinates: [18, 27] },
   { id: "niger", region: "africa", coordinates: [9, 17] },
+  { id: "senegal", region: "africa", coordinates: [-14.5, 14.5] },
   { id: "mali", region: "africa", coordinates: [-4, 17] },
   { id: "burkinaFaso", region: "africa", coordinates: [-1.5, 12.5] },
   { id: "chad", region: "africa", coordinates: [19, 15] },

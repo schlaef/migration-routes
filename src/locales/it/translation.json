@@ -1,0 +1,327 @@
+{
+  "analysis": {
+    "title": "Analisi del percorso e riscontro",
+    "subtitle": "Prospettive sui percorsi di fuga",
+    "description_one": "{{count}} ostacolo analizzato (corridoio di {{distance}} {{unit}})",
+    "description_other": "{{count}} ostacoli analizzati (corridoio di {{distance}} {{unit}})",
+    "language": "Lingua",
+    "copyReport": "Copia rapporto",
+    "copied": "Copiato!",
+    "copyTooltip": "Copia il rapporto di analisi negli appunti",
+    "downloadJson": "Scarica JSON",
+    "downloadTooltip": "Scarica il rapporto di analisi come JSON",
+    "closePanel": "Chiudi pannello",
+    "collapsePanel": "Comprimi il pannello di analisi",
+    "loading": "Analisi del corridoio e degli ostacoli invisibili lungo il percorso in corso...",
+    "reportFilename": "analisi-percorso-migratorio-{{timestamp}}.json",
+    "complete": "Analisi completata",
+    "riskSummary": "{{level}} — Difficoltà complessiva: {{weight}}",
+    "obstacles": "Ostacoli",
+    "cumulativeWeight": "Difficoltà complessiva",
+    "routeLength": "Lunghezza del percorso",
+    "countriesCrossed": "Paesi attraversati",
+    "countryCountUnavailable": "Non disponibile",
+    "corridorWidth": "Larghezza del corridoio",
+    "perspectiveTab": "Prospettiva dei rifugiati",
+    "categoriesTab": "Categorie",
+    "realitiesHeading": "La realtà del viaggio",
+    "reflectionHeading": "Domande di riflessione",
+    "questionNumber": "Domanda {{number}}:",
+    "noObstacles": "Nessun ostacolo trovato nel corridoio di {{distance}} {{unit}}.",
+    "weight": "Peso: {{weight}}",
+    "perspective": "Prospettiva:",
+    "linkToResource": "Link alla fonte",
+    "categorySummary_one": "{{count}} ostacolo",
+    "categorySummary_other": "{{count}} ostacoli",
+    "helpUsed": "Aiuti utilizzati:",
+    "noHelpUsed": "nessuno",
+    "helpStage": "livello di aiuto {{stage}}"
+  },
+  "categoryDescriptions": {
+    "sea": "Attraversare il mare è pericoloso e costoso. I rifugiati possono pagare ai trafficanti somme elevate per un posto su imbarcazioni sovraffollate e inadatte alla navigazione e possono essere abbandonati in mare; molti annegano. Alcune guardie costiere salvano le persone, altre le hanno intercettate o respinte, esponendole a ulteriori pericoli o alla detenzione.",
+    "desert": "Le lunghe traversate del deserto espongono i rifugiati a caldo e freddo estremi e alla disidratazione. I veicoli possono guastarsi e i trafficanti possono abbandonare le persone lontano da acqua, cure mediche o soccorsi.",
+    "mountain": "I percorsi di montagna possono significare sentieri ripidi e sconosciuti, gelo e neve senza abiti o ripari adeguati. Sfinimento, cadute e assideramento possono causare gravi ferite o la morte.",
+    "border": "Recinzioni, sorveglianza e pattuglie di frontiera possono costringere i rifugiati a percorsi più lunghi e pericolosi. Le persone rischiano detenzione, violenza o respingimenti e a volte perdono denaro, telefoni e beni essenziali.",
+    "detention": "L'intercettazione o la detenzione possono interrompere un viaggio per mesi ed esporre i rifugiati a sovraffollamento, condizioni di vita precarie, abusi e incertezza sul proprio futuro.",
+    "exploitation": "In assenza di vie sicure e legali, i rifugiati possono dipendere da trafficanti che chiedono pagamenti elevati, minacciano le famiglie, sequestrano i documenti o sottopongono le persone ad abusi e sfruttamento.",
+    "health": "L'accesso limitato ad acqua potabile, cibo, medicinali e cure mediche rende malattie e ferite più pericolose, soprattutto per bambini, anziani e persone con malattie croniche.",
+    "terrain": "Terreni difficili e l'esposizione a caldo, freddo, fiumi o zone isolate possono causare sfinimento e ferite. I rifugiati hanno spesso poca attrezzatura, pochi ripari e scarso accesso a soccorsi e cure mediche.",
+    "general": "Questo ostacolo può ritardare il viaggio o esporre i rifugiati a ulteriori pericoli, sfinimento e incertezza. I suoi effetti dipendono dalle condizioni e dalle risorse di chi lo attraversa."
+  },
+  "drawing": {
+    "instructions": "Tieni premuto e trascina, oppure clicca per aggiungere punti. Fai doppio clic o premi Invio per terminare.",
+    "cancel": "Annulla il disegno"
+  },
+  "routeHelp": {
+    "title": "Hai difficoltà a immaginare un percorso?",
+    "introduction": "Mostra questi livelli per esplorare possibili percorsi. Un valico indicato sulla mappa non garantisce un viaggio sicuro o accessibile.",
+    "startingPoint": "Punto di partenza",
+    "startingPointDescription": "Scegli un paese per centrare la mappa su una posizione approssimativa. Poi decidi tu dove inizia il tuo percorso.",
+    "chooseStartingPoint": "Scegli un paese",
+    "recenter": "Centra la mappa sul punto di partenza",
+    "borderTitle": "Valichi di frontiera",
+    "borderDescription": "I valichi mostrano i luoghi in cui è possibile attraversare un confine, ma l'accesso dipende da documenti, visti e controlli di frontiera. Chi fugge può non avere passaporto o visto e trovarsi davanti vie chiuse o pericolose, anche quando cerca protezione. Un punto sulla mappa non significa che tutti possano passare di lì.",
+    "borderSource": "Approfondisci con l'International Rescue Committee",
+    "euTitle": "Unione europea",
+    "euDescription": "Il livello UE mostra dove un percorso entra nel territorio dell'Unione europea. Secondo le norme UE in vigore da luglio 2026, le domande d'asilo vengono di regola registrate nel primo paese d'ingresso, con eccezioni ad esempio in caso di visto o permesso di soggiorno validi. L'esame della domanda può spettare a un altro paese, a seconda di legami familiari, visti e altri criteri.",
+    "euSource": "Leggi il regolamento UE sulla gestione dell'asilo e della migrazione",
+    "loading": "Caricamento dei livelli della mappa...",
+    "unavailable": "Questo livello non è disponibile nella mappa attuale.",
+    "stage1": "Livello 1: Orientamento",
+    "stage2": "Livello 2: Percorsi reali",
+    "locked": "Attiva prima un aiuto del livello 1. Se poi ti serve ancora un input, qui puoi mostrare i percorsi reali.",
+    "iomTitle": "Percorsi migratori noti (OIM 2026)",
+    "iomDescription": "Questo livello mostra i percorsi terrestri e marittimi intorno al Mediterraneo documentati dall'Organizzazione internazionale per le migrazioni (OIM). Le linee sono semplificate: le persone in fuga spesso deviano perché i confini vengono chiusi, i trafficanti decidono la via o i controlli aumentano. Confronta il tuo percorso con queste vie, ma non limitarti a copiarle.",
+    "iomSource": "Scopri di più sulla Displacement Tracking Matrix dell'OIM",
+    "iomRegion": "Regione",
+    "iomRegions": {
+      "all": "Tutti i percorsi",
+      "central": "Mediterraneo centrale",
+      "eastern": "Mediterraneo orientale",
+      "western": "Mediterraneo occidentale"
+    },
+    "iomRegionDescriptions": {
+      "central": "Dall'Africa occidentale e orientale attraverso il Sahara (ad esempio via Niger, Ciad o Sudan) fino in Libia o Tunisia, e da lì via mare verso l'Italia o Malta. La traversata è considerata una delle rotte marittime più mortali al mondo.",
+      "eastern": "Da paesi come Siria, Afghanistan, Iraq o Iran attraverso la Turchia verso la Grecia, la Bulgaria o Cipro, a piedi via terra o in barca attraverso l'Egeo, spesso proseguendo lungo i Balcani.",
+      "western": "Dall'Africa occidentale e settentrionale attraverso il Marocco o l'Algeria verso la Spagna, passando per lo Stretto di Gibilterra, il Mare di Alborán o le recinzioni di Ceuta e Melilla."
+    }
+  },
+  "startingPoints": {
+    "africa": "Africa",
+    "east": "Medio Oriente e Asia centrale",
+    "sudan": "Sudan",
+    "southSudan": "Sud Sudan",
+    "libya": "Libia",
+    "niger": "Niger",
+    "senegal": "Senegal",
+    "mali": "Mali",
+    "burkinaFaso": "Burkina Faso",
+    "chad": "Ciad",
+    "somalia": "Somalia",
+    "ethiopia": "Etiopia",
+    "eritrea": "Eritrea",
+    "democraticRepublicOfCongo": "Repubblica Democratica del Congo",
+    "syria": "Siria",
+    "afghanistan": "Afghanistan",
+    "iran": "Iran",
+    "iraq": "Iraq",
+    "yemen": "Yemen"
+  },
+  "guide": {
+    "title": "Come analizzare un percorso migratorio",
+    "sketch": "<strong>Disegna un percorso:</strong> clicca sul pulsante <em>Draw a route</em> sulla mappa e traccia un percorso da un paese d'origine (ad esempio Siria, Afghanistan, Libia) verso una destinazione in Europa.",
+    "analyze": "<strong>Avvia l'analisi:</strong> clicca sul pulsante <em>Analyze Route</em> nell'intestazione.",
+    "perspective": "<strong>Assumi la prospettiva dei rifugiati:</strong> considera gli ostacoli documentati e le domande di riflessione per comprendere le difficoltà e le incertezze della fuga. Ogni viaggio verso la sicurezza comporta rischi, indipendentemente dagli ostacoli registrati qui.",
+    "purposeTitle": "Obiettivo didattico",
+    "purpose": "Chi fugge da persecuzioni e guerre non dispone delle stesse informazioni degli altri: recinzioni di frontiera militarizzate, respingimenti, pericoli in mare e campi di detenzione non sono indicati chiaramente sulle mappe comuni. Simulando percorsi con ostacoli invisibili, gli studenti sperimentano l'incertezza opprimente vissuta dalle persone in fuga.",
+    "readGuide": "Leggi la guida didattica"
+  },
+  "guideModal": {
+    "title": "Percorsi migratori dei rifugiati — Guida didattica",
+    "perspectiveHeading": "Assumere la prospettiva dei rifugiati",
+    "perspectiveDescription": "Questa simulazione didattica permette agli studenti di mettersi nei panni di rifugiati e sfollati in fuga da guerra, violenza, violazioni dei diritti umani o catastrofi climatiche in Medio Oriente, Nordafrica, Africa subsahariana e Asia centrale.",
+    "invisibleHeading": "Perché gli ostacoli sono invisibili sulla mappa?",
+    "invisibleDescription": "Nella realtà, i rifugiati non dispongono di informazioni complete. Recinzioni di frontiera militarizzate, telecamere termiche, zone di respingimento violento e zone di intercettazione in mare sono volutamente nascoste o cambiano continuamente. Tenere nascosto il livello <code>route-obstacles</code> costringe gli studenti a tracciare i percorsi sulla base della geografia e di supposizioni, proprio come le persone in fuga devono affidarsi a reti informali, al passaparola o ai trafficanti.",
+    "corridorsHeading": "Principali corridoi migratori verso l'Europa",
+    "centralMediterraneanTitle": "Rotta del Mediterraneo centrale",
+    "centralMediterraneanDescription": "Parte dalla Libia o dalla Tunisia verso Lampedusa, la Sicilia o Malta. Secondo l'OIM è il corridoio migratorio marittimo più mortale al mondo, con migliaia di annegamenti, guasti ai motori e intercettazioni da parte della guardia costiera libica che portano a detenzioni arbitrarie.",
+    "easternMediterraneanTitle": "Rotta del Mediterraneo orientale",
+    "easternMediterraneanDescription": "Passa dalla Turchia alla Grecia attraverso le isole dell'Egeo (Lesbo, Samo, Chio) o attraverso il confine del fiume Evros. È caratterizzata da gommoni sovraccarichi, correnti pericolose e respingimenti in mare.",
+    "westernBalkanTitle": "Rotta dei Balcani occidentali",
+    "westernBalkanDescription": "Attraversa Macedonia del Nord, Serbia, Bosnia ed Erzegovina, Ungheria e Croazia. Comprende doppie recinzioni di filo spinato, pattuglie di polizia con cani, sorveglianza biometrica ed esposizione al freddo invernale in edifici abbandonati.",
+    "westernMediterraneanTitle": "Rotta del Mediterraneo occidentale e dell'Atlantico",
+    "westernMediterraneanDescription": "Dal Marocco o dall'Algeria verso la Spagna continentale, oppure dall'Africa occidentale (Senegal, Mauritania) attraverso l'oceano aperto verso le Isole Canarie. La rotta atlantica si percorre su piroghe di legno aperte, esposte per settimane a correnti insidiose.",
+    "discussionHeading": "Spunti per la discussione in classe",
+    "discussionQuestion1": "Perché i rifugiati scelgono vie irregolari e pericolose invece di prendere un aereo o un traghetto? (Mancanza di visti legali e sanzioni per le compagnie aeree).",
+    "discussionQuestion2": "Quando un paese europeo fortifica un confine (ad esempio la recinzione ungherese nel 2015), come si spostano i flussi migratori verso passaggi montani o marittimi più pericolosi?",
+    "discussionQuestion3": "Quali responsabilità hanno gli Stati secondo la Convenzione di Ginevra sui rifugiati del 1951 in merito al non-refoulement (il principio di non rimandare i rifugiati in un paese in cui rischiano persecuzioni)?",
+    "close": "Chiudi la guida"
+  },
+  "risk": {
+    "levels": {
+      "minimal": "Rischio minimo",
+      "low": "Rischio basso",
+      "moderate": "Rischio moderato",
+      "high": "Rischio elevato",
+      "critical": "Pericolo critico"
+    },
+    "descriptions": {
+      "minimal": "Nel corridoio del percorso non sono stati trovati ostacoli documentati rilevanti. Possono comunque esserci posti di blocco imprevisti o controlli di frontiera che cambiano.",
+      "low": "Concentrazione relativamente bassa di ostacoli importanti documentati, anche se i rifugiati affrontano comunque sfinimento fisico, uno status giuridico precario e cambiamenti imprevisti alle frontiere.",
+      "moderate": "Ostacoli significativi. I viaggi lungo questo corridoio comportano terreni pericolosi, intercettazioni attive alle frontiere o condizioni di transito rischiose che richiedono deviazioni pericolose.",
+      "high": "Gravi pericoli. Diversi rischi mortali (mare aperto, confini militarizzati o corridoi desertici) con crisi umanitarie e violazioni dei diritti umani documentate.",
+      "critical": "Pericolo estremo su più livelli. Questo corridoio attraversa alcuni dei posti di controllo e dei passaggi più mortali dei percorsi migratori verso l'Europa, con rischi molto elevati di morte, violenza o detenzione prolungata."
+    }
+  },
+  "narratives": {
+    "maritime": "La realtà della traversata in mare: le traversate avvengono su imbarcazioni inadatte, senza giubbotti di salvataggio, con il rischio di ipotermia e la paura di ribaltarsi nel buio. I rifugiati pagano spesso tutti i loro risparmi per un posto su un gommone, senza sapere se le navi di soccorso potranno attraccare.",
+    "border": "La realtà dei muri e dei respingimenti: recinzioni militarizzate con filo spinato, telecamere termiche e pattuglie armate costringono i rifugiati a tentare più volte l'attraversamento («The Game»), subendo respingimenti violenti, la confisca dei telefoni e ferite.",
+    "terrain": "La realtà di un ambiente ostile: attraversare a piedi passi di montagna gelidi o deserti roventi senza scarpe, acqua o riparo adeguati provoca congelamenti, piede da trincea, grave disidratazione e sfinimento.",
+    "detention": "La realtà dei diritti umani e della vulnerabilità: senza vie di fuga sicure e legali, i rifugiati sono esposti alla tratta di esseri umani, alla detenzione arbitraria in campi miserabili e alle estorsioni di reti criminali organizzate.",
+    "general": "Ogni viaggio attraverso i confini senza documenti legali comporta stress psicologico, paura di essere fermati, separazione dai familiari e dipendenza da condizioni imprevedibili."
+  },
+  "obstaclePerspectives": {
+    "obs-med-central": "Immagina di essere stipato con 120 persone su un gommone che si sgonfia, tra onde di tre metri a mezzanotte, con i fumi del motore che fanno vomitare i passeggeri e nessuna nave di soccorso in vista.",
+    "obs-med-libya-coast": "Essere riportati indietro significa perdere tutti i risparmi, tornare in prigionia arbitraria nei centri di detenzione e rivivere il trauma da capo.",
+    "obs-sahara-desert": "Migliaia di persone muoiono nella sabbia del deserto senza essere registrate, prima ancora di vedere il mare. Se un veicolo si guasta, l'acqua finisce in poche ore.",
+    "obs-aegean-crossing": "Per paura di essere individuati dalle telecamere termiche, i trafficanti costringono i passeggeri a buttarsi nell'acqua fredda e profonda a pochi metri da scogliere rocciose, nel buio.",
+    "obs-evros-border": "I rifugiati raccontano di essere stati privati di telefoni, denaro e vestiti caldi prima di essere costretti a riattraversare il fiume gelido.",
+    "obs-balkan-mountains": "I rifugiati dormono all'aperto in tende improvvisate con teli di plastica nella neve gelida e soffrono di piede da trincea, congelamenti e attacchi di animali.",
+    "obs-hungary-fence": "Le recinzioni non fermano chi fugge dalla guerra: lo spingono soltanto nelle mani di trafficanti organizzati che chiedono migliaia di euro per nascondigli pericolosi.",
+    "obs-drina-river": "I rifugiati devono attraversare a nuoto acque invernali dalla corrente rapida, con tutti i loro averi in sacchetti di plastica legati al collo.",
+    "obs-smuggler-extortion": "I rifugiati restano spesso intrappolati senza tutela legale, completamente in balia di reti criminali, perché non esistono vie legali e sicure.",
+    "obs-alps-winter": "Camminare per otto ore nella neve alta fino alla vita con scarpe da ginnastica consumate per raggiungere la salvezza, rischiando amputazioni per gravi congelamenti.",
+    "obs-channel-straits": "Piccoli gommoni schivano enormi navi portacontainer lunghe 400 metri, la cui scia può capovolgere una piccola imbarcazione in pochi secondi.",
+    "obs-water-scarcity": "Bambini diabetici e nonne anziane devono camminare ogni giorno per decine di chilometri senza medicinali di base né acqua potabile.",
+    "obs-western-balkans-camp": "Mesi trascorsi in un limbo burocratico, intrappolati nel fango e nel freddo, in attesa di poter tentare di nuovo «The Game» (l'attraversamento dei confini).",
+    "obs-morocco-melilla": "I tentativi collettivi disperati di scavalcare le recinzioni hanno causato decine di morti e gravi ferite da schiacciamento."
+  },
+  "reflectionQuestions": {
+    "1": "Perché una famiglia in fuga da un conflitto potrebbe sentire di non avere altra scelta che prendere questo percorso pericoloso?",
+    "2": "In che modo la mancanza di vie d'asilo sicure e legali influisce sulle decisioni che i rifugiati devono prendere?",
+    "3": "Se un confine o un corridoio marittimo viene fortemente bloccato, dove pensi che si spostino i flussi di rifugiati?",
+    "4": "Quali conseguenze psicologiche e fisiche avrebbe l'incontro con questi ostacoli su una persona o su un bambino?"
+  },
+  "units": {
+    "kilometers": "chilometri",
+    "miles": "miglia",
+    "meters": "metri",
+    "nautical-miles": "miglia nautiche"
+  },
+  "videos": {
+    "kinds": {
+      "documentary": "Documentario",
+      "report": "Reportage",
+      "film": "Film",
+      "literature": "Adattamento letterario"
+    },
+    "guidingQuestion": "Domanda guida:",
+    "contentWarning": "Questo spezzone può contenere scene forti (violenza, morte, sofferenza). Guardalo solo se te la senti e parla con il tuo docente se qualcosa ti turba.",
+    "privacyNotice": "Il video viene caricato da YouTube solo dopo il tuo clic. YouTube (Google) riceve allora dati come il tuo indirizzo IP.",
+    "load": "Carica il video da YouTube",
+    "loadClip": "Carica lo spezzone ({{range}}) da YouTube",
+    "iframeTitle": "Video incorporato",
+    "source": "Fonte: {{source}}",
+    "openOnYoutube": "Apri su YouTube"
+  },
+  "workRoutes": {
+    "tab": "Film e letteratura",
+    "introduction": "Confronta il tuo percorso con viaggi di fuga tratti da film e letteratura. Mostra un percorso sulla mappa e leggi le tappe. Attenzione: i testi rivelano parti della trama.",
+    "show": "Mostra il percorso sulla mappa",
+    "hide": "Nascondi il percorso",
+    "stationsHeading": "Tappe: {{title}}",
+    "approximate": "Le tappe sono semplificate e la linea le collega direttamente. Non mostra il percorso esatto dell'opera.",
+    "comparisonHeading": "Confronto con il tuo percorso",
+    "shared": "Pericoli su entrambi i percorsi:",
+    "onlyWork": "Solo sul percorso dell'opera:",
+    "onlyOwn": "Solo sul tuo percorso:",
+    "none": "nessuno",
+    "generalQuestion": "Dove hai deciso diversamente dal personaggio? Quali informazioni avevi tu che lui non aveva?",
+    "categories": {
+      "sea": "Mare",
+      "desert": "Deserto",
+      "mountain": "Montagna",
+      "border": "Confine",
+      "detention": "Detenzione e campi",
+      "exploitation": "Sfruttamento e trafficanti",
+      "health": "Salute",
+      "terrain": "Terreno"
+    },
+    "ioCapitano": {
+      "title": "Io Capitano",
+      "meta": "Film di Matteo Garrone, 2023",
+      "summary": "I cugini Seydou e Moussa, due adolescenti di Dakar, partono di nascosto per l'Europa. Il loro viaggio attraversa il Mali e il Niger, il Sahara e la Libia, dove vengono separati. Alla fine è Seydou stesso a guidare una barca sovraffollata attraverso il Mediterraneo fino in Italia.",
+      "stations": {
+        "dakar": {
+          "name": "Dakar (Senegal)",
+          "text": "I due risparmiano di nascosto i soldi per il viaggio. La madre di Seydou è contraria, così partono senza che lei lo sappia."
+        },
+        "mali": {
+          "name": "Mali",
+          "text": "Viaggiano verso nord in autobus. Ai posti di controllo viene chiesto denaro e, senza documenti validi, i due sono alla mercé dei funzionari."
+        },
+        "agadez": {
+          "name": "Agadez (Niger)",
+          "text": "Punto di partenza per la traversata del Sahara. I trafficanti caricano le persone, strette l'una all'altra, su pick-up."
+        },
+        "sahara": {
+          "name": "Sahara",
+          "text": "Una parte del tragitto va percorsa a piedi. Chi non riesce a tenere il passo resta indietro."
+        },
+        "libya": {
+          "name": "Libia meridionale",
+          "text": "Gruppi armati catturano i viaggiatori ed estorcono un riscatto alle famiglie. La prigionia significa violenza e tortura."
+        },
+        "tripoli": {
+          "name": "Tripoli (Libia)",
+          "text": "Senza soldi, Seydou deve lavorare sotto costrizione finché la traversata diventa possibile."
+        },
+        "sea": {
+          "name": "Mar Mediterraneo",
+          "text": "Una barca sovraffollata e appena in grado di navigare. Seydou deve guidarla pur non avendo alcuna esperienza."
+        },
+        "italy": {
+          "name": "Al largo della Sicilia",
+          "text": "L'arrivo in Europa non mette fine all'incertezza."
+        }
+      },
+      "questions": [
+        "Perché Seydou e Moussa partono? In che cosa i loro motivi si distinguono da una fuga da guerra o persecuzione?",
+        "Chi guadagna dal viaggio? Trova le tappe in cui viene chiesto o estorto denaro.",
+        "Il film è finzione, ma si basa su testimonianze dirette. Che cosa può mostrare un film che una mappa non può mostrare, e viceversa?"
+      ]
+    },
+    "coccodrilli": {
+      "title": "Nel mare ci sono i coccodrilli",
+      "meta": "Romanzo di Fabio Geda, 2010, basato sulla storia vera di Enaiatollah Akbari",
+      "summary": "Enaiatollah è ancora un bambino quando sua madre lo lascia in Pakistan per proteggerlo dalla violenza in Afghanistan. Da solo viaggia per anni attraverso l'Iran, la Turchia e la Grecia fino in Italia, lavorando lungo la strada per pagare la tappa successiva.",
+      "stations": {
+        "ghazni": {
+          "name": "Provincia di Ghazni (Afghanistan)",
+          "text": "In quanto hazara, la famiglia di Enaiatollah è minacciata. La madre lo porta via per proteggerlo."
+        },
+        "quetta": {
+          "name": "Quetta (Pakistan)",
+          "text": "La madre lo lascia solo. Deve lavorare per sopravvivere."
+        },
+        "iran": {
+          "name": "Iran",
+          "text": "Lavoro nei cantieri, senza documenti e con la paura costante dei controlli di polizia e dell'espulsione."
+        },
+        "mountains": {
+          "name": "Montagne al confine con la Turchia",
+          "text": "Una marcia di giorni nella neve e nel freddo. Non tutti nel gruppo sopravvivono."
+        },
+        "istanbul": {
+          "name": "Istanbul (Turchia)",
+          "text": "Di nuovo lavorare e aspettare finché i soldi bastano per la tappa successiva."
+        },
+        "aegean": {
+          "name": "Mar Egeo, verso Lesbo",
+          "text": "La traversata del mare con altri ragazzi su un piccolo gommone."
+        },
+        "athens": {
+          "name": "Atene (Grecia)",
+          "text": "Senza permesso di soggiorno lavora e cerca un modo per raggiungere l'Italia."
+        },
+        "ferry": {
+          "name": "Porto nella Grecia occidentale",
+          "text": "Nascosto sotto un camion sul traghetto per l'Italia: una delle tappe più pericolose."
+        },
+        "italy": {
+          "name": "Venezia (Italia)",
+          "text": "Arrivo in Italia."
+        },
+        "turin": {
+          "name": "Torino",
+          "text": "Una famiglia lo accoglie e lui presenta una domanda d'asilo."
+        }
+      },
+      "questions": [
+        "Enaiatollah è un bambino che viaggia da solo. Quali pericoli sono più grandi per lui che per un adulto?",
+        "Perché il suo viaggio dura anni e non settimane?",
+        "Confronta il suo percorso con i percorsi OIM nel Mediterraneo orientale (livello di aiuto 2). Dove coincidono?"
+      ]
+    }
+  }
+}

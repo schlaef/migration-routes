@@ -13,7 +13,7 @@ test("starting points include the requested countries and valid map coordinates"
     assert.ok(["africa", "east"].includes(point.region));
     assert.ok(point.coordinates[0] >= -180 && point.coordinates[0] <= 180);
     assert.ok(point.coordinates[1] >= -90 && point.coordinates[1] <= 90);
-    for (const language of ["en", "de"]) {
+    for (const language of ["en", "de", "it", "fr"]) {
       const translations = JSON.parse(readFileSync(new URL(`../src/locales/${language}/translation.json`, import.meta.url), "utf8"));
       assert.ok(translations.startingPoints[point.id], `Missing ${language} name for ${point.id}`);
     }

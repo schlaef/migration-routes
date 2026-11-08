@@ -39,6 +39,9 @@ export const DEFAULT_CONFIG = {
   // 0 = no help layers, 1 = orientation (border crossings, EU), 2 = also real IOM routes
   helpLevel: 2,
 
+  // Offer the comparison with routes from film and literature after the analysis
+  showWorkRoutes: true,
+
   // Initial map center [longitude, latitude] focusing on Mediterranean, Middle East, North Africa, Europe
   defaultCenter: [18.0, 34.0],
 
@@ -85,6 +88,7 @@ const STORAGE_KEY = "migration_routes_analyzer_config";
  * - apiKey
  * - videos (on/off, true/false, 1/0)
  * - hilfen / help / helpLevel (0, 1 or 2)
+ * - werke / works (on/off)
  */
 export function parseUrlParams(searchString = "") {
   const overrides = {};
@@ -129,6 +133,10 @@ export function parseUrlParams(searchString = "") {
   if (helpValue !== null && /^[0-2]$/.test(helpValue.trim())) {
     overrides.helpLevel = Number(helpValue.trim());
   }
+
+  const worksValue = (params.get("werke") ?? params.get("works"))?.toLowerCase();
+  if (["off", "false", "0", "no", "nein", "aus"].includes(worksValue)) overrides.showWorkRoutes = false;
+  if (["on", "true", "1", "yes", "ja", "ein"].includes(worksValue)) overrides.showWorkRoutes = true;
 
   if (params.has("videos")) {
     const value = params.get("videos").toLowerCase();

@@ -93,6 +93,7 @@
     "southSudan": "Südsudan",
     "libya": "Libyen",
     "niger": "Niger",
+    "senegal": "Senegal",
     "mali": "Mali",
     "burkinaFaso": "Burkina Faso",
     "chad": "Tschad",
@@ -202,5 +203,125 @@
     "iframeTitle": "Eingebettetes Video",
     "source": "Quelle: {{source}}",
     "openOnYoutube": "Auf YouTube öffnen"
+  },
+  "workRoutes": {
+    "tab": "Film & Literatur",
+    "introduction": "Vergleiche deine Route mit Fluchtwegen aus Film und Literatur. Blende eine Route auf der Karte ein und lies die Stationen. Achtung: Die Texte verraten Teile der Handlung.",
+    "show": "Route auf Karte zeigen",
+    "hide": "Route ausblenden",
+    "stationsHeading": "Stationen: {{title}}",
+    "approximate": "Die Stationen sind vereinfacht, und die Linie verbindet sie direkt. Sie zeigt nicht den genauen Weg im Werk.",
+    "comparisonHeading": "Vergleich mit deiner Route",
+    "shared": "Gefahren auf beiden Routen:",
+    "onlyWork": "Nur auf der Route im Werk:",
+    "onlyOwn": "Nur auf deiner Route:",
+    "none": "keine",
+    "generalQuestion": "Wo hast du dich bei deiner Route anders entschieden als die Figur? Welche Informationen hattest du, welche hatte sie nicht?",
+    "categories": {
+      "sea": "Meer",
+      "desert": "Wüste",
+      "mountain": "Gebirge",
+      "border": "Grenze",
+      "detention": "Haft und Lager",
+      "exploitation": "Ausbeutung und Schlepper",
+      "health": "Gesundheit",
+      "terrain": "Gelände"
+    },
+    "ioCapitano": {
+      "title": "Io Capitano",
+      "meta": "Spielfilm von Matteo Garrone, 2023",
+      "summary": "Die Cousins Seydou und Moussa, zwei Jugendliche aus Dakar, brechen heimlich nach Europa auf. Ihre Reise führt durch Mali und Niger, durch die Sahara und nach Libyen, wo sie getrennt werden. Am Ende steuert Seydou selbst ein überfülltes Boot über das Mittelmeer nach Italien.",
+      "stations": {
+        "dakar": {
+          "name": "Dakar (Senegal)",
+          "text": "Die beiden sparen heimlich Geld für die Reise. Seydous Mutter ist dagegen, sie brechen ohne ihr Wissen auf."
+        },
+        "mali": {
+          "name": "Mali",
+          "text": "Mit Bussen geht es nach Norden. An Kontrollposten wird Geld verlangt, ohne gültige Papiere sind die beiden ausgeliefert."
+        },
+        "agadez": {
+          "name": "Agadez (Niger)",
+          "text": "Ausgangspunkt für die Durchquerung der Sahara. Schlepper laden die Menschen dicht gedrängt auf Pick-ups."
+        },
+        "sahara": {
+          "name": "Sahara",
+          "text": "Ein Teil der Strecke muss zu Fuss zurückgelegt werden. Wer nicht mithalten kann, bleibt zurück."
+        },
+        "libya": {
+          "name": "Südlibyen",
+          "text": "Bewaffnete Gruppen nehmen Reisende gefangen und erpressen Lösegeld von den Familien. In der Gefangenschaft herrschen Gewalt und Folter."
+        },
+        "tripoli": {
+          "name": "Tripolis (Libyen)",
+          "text": "Ohne Geld muss Seydou arbeiten, unter Zwang, bis die Überfahrt möglich wird."
+        },
+        "sea": {
+          "name": "Mittelmeer",
+          "text": "Ein überfülltes, kaum seetaugliches Boot. Seydou muss es steuern, obwohl er keine Erfahrung hat."
+        },
+        "italy": {
+          "name": "Vor der Küste Siziliens",
+          "text": "Die Ankunft in Europa ist nicht das Ende der Unsicherheit."
+        }
+      },
+      "questions": [
+        "Warum brechen Seydou und Moussa auf? Wie unterscheiden sich ihre Gründe von einer Flucht vor Krieg oder Verfolgung?",
+        "Wer verdient an der Reise? Suche die Stationen, an denen Geld verlangt oder erpresst wird.",
+        "Der Film ist Fiktion, beruht aber auf Erfahrungsberichten. Was kann ein Spielfilm zeigen, was eine Karte nicht zeigen kann, und umgekehrt?"
+      ]
+    },
+    "coccodrilli": {
+      "title": "Nel mare ci sono i coccodrilli",
+      "meta": "Roman von Fabio Geda, 2010 (deutsch: «Im Meer schwimmen Krokodile»), nach der wahren Geschichte von Enaiatollah Akbari",
+      "summary": "Enaiatollah ist noch ein Kind, als seine Mutter ihn in Pakistan zurücklässt, um ihn vor der Gewalt in Afghanistan zu schützen. Allein reist er über Jahre durch Iran, die Türkei und Griechenland bis nach Italien. Unterwegs arbeitet er, um die nächste Etappe bezahlen zu können.",
+      "stations": {
+        "ghazni": {
+          "name": "Provinz Ghazni (Afghanistan)",
+          "text": "Als Hazara ist Enaiatollahs Familie bedroht. Die Mutter bringt ihn fort, um ihn zu schützen."
+        },
+        "quetta": {
+          "name": "Quetta (Pakistan)",
+          "text": "Die Mutter lässt ihn allein zurück. Er muss arbeiten, um zu überleben."
+        },
+        "iran": {
+          "name": "Iran",
+          "text": "Arbeit auf Baustellen, ohne Papiere und in ständiger Angst vor Polizeikontrollen und Abschiebung."
+        },
+        "mountains": {
+          "name": "Berge an der Grenze zur Türkei",
+          "text": "Ein tagelanger Fussmarsch durch Schnee und Kälte. Nicht alle in der Gruppe überleben."
+        },
+        "istanbul": {
+          "name": "Istanbul (Türkei)",
+          "text": "Wieder arbeiten und warten, bis das Geld für die nächste Etappe reicht."
+        },
+        "aegean": {
+          "name": "Ägäis, nach Lesbos",
+          "text": "Mit anderen Jungen in einem kleinen Schlauchboot über das Meer."
+        },
+        "athens": {
+          "name": "Athen (Griechenland)",
+          "text": "Ohne Aufenthaltsrecht arbeitet er und sucht einen Weg nach Italien."
+        },
+        "ferry": {
+          "name": "Hafen in Westgriechenland",
+          "text": "Versteckt unter einem Lastwagen auf der Fähre nach Italien, eine der gefährlichsten Etappen."
+        },
+        "italy": {
+          "name": "Venedig (Italien)",
+          "text": "Ankunft in Italien."
+        },
+        "turin": {
+          "name": "Turin",
+          "text": "Eine Familie nimmt ihn auf, und er stellt einen Asylantrag."
+        }
+      },
+      "questions": [
+        "Enaiatollah ist ein Kind, als er allein unterwegs ist. Welche Gefahren sind für ihn grösser als für Erwachsene?",
+        "Warum dauert seine Reise Jahre und nicht Wochen?",
+        "Vergleiche seine Route mit den IOM-Routen im östlichen Mittelmeer (Hilfsstufe 2). Wo stimmen sie überein?"
+      ]
+    }
   }
 }

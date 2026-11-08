@@ -1,0 +1,327 @@
+{
+  "analysis": {
+    "title": "Analyse de l'itinéraire et retour",
+    "subtitle": "Regards sur les routes de l'exil",
+    "description_one": "{{count}} obstacle analysé (corridor de {{distance}} {{unit}})",
+    "description_other": "{{count}} obstacles analysés (corridor de {{distance}} {{unit}})",
+    "language": "Langue",
+    "copyReport": "Copier le rapport",
+    "copied": "Copié !",
+    "copyTooltip": "Copier le rapport d'analyse dans le presse-papiers",
+    "downloadJson": "Télécharger en JSON",
+    "downloadTooltip": "Télécharger le rapport d'analyse au format JSON",
+    "closePanel": "Fermer le panneau",
+    "collapsePanel": "Réduire le panneau d'analyse",
+    "loading": "Analyse du corridor et des obstacles invisibles le long de l'itinéraire en cours...",
+    "reportFilename": "analyse-itineraire-migratoire-{{timestamp}}.json",
+    "complete": "Analyse terminée",
+    "riskSummary": "{{level}} — Difficulté totale : {{weight}}",
+    "obstacles": "Obstacles",
+    "cumulativeWeight": "Difficulté totale",
+    "routeLength": "Longueur de l'itinéraire",
+    "countriesCrossed": "Pays traversés",
+    "countryCountUnavailable": "Non disponible",
+    "corridorWidth": "Largeur du corridor",
+    "perspectiveTab": "Point de vue des personnes réfugiées",
+    "categoriesTab": "Catégories",
+    "realitiesHeading": "La réalité du voyage",
+    "reflectionHeading": "Questions de réflexion",
+    "questionNumber": "Question {{number}} :",
+    "noObstacles": "Aucun obstacle trouvé dans le corridor de {{distance}} {{unit}}.",
+    "weight": "Poids : {{weight}}",
+    "perspective": "Point de vue :",
+    "linkToResource": "Lien vers la source",
+    "categorySummary_one": "{{count}} obstacle",
+    "categorySummary_other": "{{count}} obstacles",
+    "helpUsed": "Aides utilisées :",
+    "noHelpUsed": "aucune",
+    "helpStage": "niveau d'aide {{stage}}"
+  },
+  "categoryDescriptions": {
+    "sea": "Traverser la mer est dangereux et coûteux. Les personnes réfugiées paient parfois de grosses sommes à des passeurs pour une place sur des embarcations surchargées et en mauvais état, et peuvent être abandonnées en mer ; beaucoup se noient. Certains garde-côtes portent secours, d'autres interceptent ou refoulent les embarcations, exposant les personnes à d'autres dangers ou à la détention.",
+    "desert": "Les longues traversées du désert exposent les personnes réfugiées à une chaleur et à un froid extrêmes ainsi qu'à la déshydratation. Les véhicules peuvent tomber en panne et les passeurs peuvent abandonner les gens loin de l'eau, des soins ou des secours.",
+    "mountain": "Les routes de montagne signifient des sentiers raides et inconnus, du gel et de la neige sans vêtements ni abri adaptés. L'épuisement, les chutes et le froid peuvent provoquer des blessures graves ou la mort.",
+    "border": "Les clôtures, la surveillance et les patrouilles frontalières peuvent contraindre les personnes réfugiées à emprunter des routes plus longues et plus dangereuses. Elles risquent la détention, la violence ou le refoulement, et perdent parfois argent, téléphone et affaires essentielles.",
+    "detention": "Une interception ou un enfermement peut interrompre un voyage pendant des mois et exposer les personnes réfugiées à la surpopulation, à de mauvaises conditions de vie, à des abus et à l'incertitude quant à leur avenir.",
+    "exploitation": "Faute de voies sûres et légales, les personnes réfugiées dépendent parfois de passeurs ou de trafiquants qui exigent des paiements élevés, menacent les familles, confisquent les papiers ou leur font subir abus et exploitation.",
+    "health": "Un accès limité à l'eau potable, à la nourriture, aux médicaments et aux soins rend les maladies et les blessures plus dangereuses, en particulier pour les enfants, les personnes âgées et celles atteintes de maladies chroniques.",
+    "terrain": "Un terrain difficile et l'exposition à la chaleur, au froid, aux rivières ou à des zones isolées peuvent provoquer épuisement et blessures. Les personnes réfugiées ont souvent peu d'équipement, peu d'abris et un accès limité aux secours et aux soins.",
+    "general": "Cet obstacle peut retarder le voyage ou exposer les personnes réfugiées à des dangers supplémentaires, à l'épuisement et à l'incertitude. Ses effets dépendent des conditions et des ressources de celles et ceux qui le franchissent."
+  },
+  "drawing": {
+    "instructions": "Maintenez le bouton enfoncé et faites glisser, ou cliquez pour ajouter des points. Double-cliquez ou appuyez sur Entrée pour terminer.",
+    "cancel": "Annuler le dessin"
+  },
+  "routeHelp": {
+    "title": "Tu as du mal à imaginer un itinéraire ?",
+    "introduction": "Affiche ces couches pour explorer des itinéraires possibles. Un point de passage indiqué sur la carte ne garantit pas un voyage sûr ou accessible.",
+    "startingPoint": "Point de départ",
+    "startingPointDescription": "Choisis un pays pour centrer la carte sur une position approximative. Décide ensuite toi-même où commence ton itinéraire.",
+    "chooseStartingPoint": "Choisir un pays",
+    "recenter": "Centrer la carte sur le point de départ",
+    "borderTitle": "Points de passage frontaliers",
+    "borderDescription": "Les points de passage montrent les endroits où une frontière peut être franchie, mais l'accès dépend des papiers, des visas et des contrôles. Les personnes en fuite n'ont parfois ni passeport ni visa et se heurtent à des routes fermées ou dangereuses, même lorsqu'elles cherchent protection. Un point sur la carte ne signifie pas que tout le monde peut y passer.",
+    "borderSource": "En savoir plus auprès de l'International Rescue Committee",
+    "euTitle": "Union européenne",
+    "euDescription": "La couche UE montre où un itinéraire entre sur le territoire de l'Union européenne. Selon les règles de l'UE applicables depuis juillet 2026, les demandes d'asile sont en principe enregistrées dans le premier pays d'entrée, avec des exceptions, par exemple en cas de visa ou de titre de séjour valable. L'examen de la demande peut relever d'un autre pays, selon les liens familiaux, les visas et d'autres critères.",
+    "euSource": "Lire le règlement de l'UE relatif à la gestion de l'asile et de la migration",
+    "loading": "Chargement des couches de la carte...",
+    "unavailable": "Cette couche n'est pas disponible dans la carte actuelle.",
+    "stage1": "Niveau 1 : Orientation",
+    "stage2": "Niveau 2 : Routes réelles",
+    "locked": "Active d'abord une aide du niveau 1. Si tu as encore besoin d'idées ensuite, tu peux afficher ici des routes réelles.",
+    "iomTitle": "Routes migratoires connues (OIM 2026)",
+    "iomDescription": "Cette couche montre les routes terrestres et maritimes autour de la Méditerranée documentées par l'Organisation internationale pour les migrations (OIM). Les lignes sont simplifiées : les personnes en fuite s'en écartent souvent parce que des frontières ferment, que des passeurs décident du chemin ou que les contrôles se renforcent. Compare ton itinéraire avec ces routes, mais ne te contente pas de les recopier.",
+    "iomSource": "En savoir plus sur la Displacement Tracking Matrix de l'OIM",
+    "iomRegion": "Région",
+    "iomRegions": {
+      "all": "Toutes les routes",
+      "central": "Méditerranée centrale",
+      "eastern": "Méditerranée orientale",
+      "western": "Méditerranée occidentale"
+    },
+    "iomRegionDescriptions": {
+      "central": "De l'Afrique de l'Ouest et de l'Est à travers le Sahara (par exemple via le Niger, le Tchad ou le Soudan) jusqu'en Libye ou en Tunisie, puis par la mer vers l'Italie ou Malte. Cette traversée est considérée comme l'une des routes maritimes les plus meurtrières au monde.",
+      "eastern": "De pays comme la Syrie, l'Afghanistan, l'Irak ou l'Iran, via la Turquie, vers la Grèce, la Bulgarie ou Chypre, à pied par voie terrestre ou en bateau à travers la mer Égée, souvent avec une suite par les Balkans.",
+      "western": "De l'Afrique de l'Ouest et du Nord via le Maroc ou l'Algérie vers l'Espagne, par le détroit de Gibraltar, la mer d'Alboran ou les clôtures frontalières de Ceuta et Melilla."
+    }
+  },
+  "startingPoints": {
+    "africa": "Afrique",
+    "east": "Moyen-Orient et Asie centrale",
+    "sudan": "Soudan",
+    "southSudan": "Soudan du Sud",
+    "libya": "Libye",
+    "niger": "Niger",
+    "senegal": "Sénégal",
+    "mali": "Mali",
+    "burkinaFaso": "Burkina Faso",
+    "chad": "Tchad",
+    "somalia": "Somalie",
+    "ethiopia": "Éthiopie",
+    "eritrea": "Érythrée",
+    "democraticRepublicOfCongo": "République démocratique du Congo",
+    "syria": "Syrie",
+    "afghanistan": "Afghanistan",
+    "iran": "Iran",
+    "iraq": "Irak",
+    "yemen": "Yémen"
+  },
+  "guide": {
+    "title": "Comment analyser un itinéraire migratoire",
+    "sketch": "<strong>Dessine un itinéraire :</strong> clique sur le bouton <em>Draw a route</em> sur la carte et trace un itinéraire depuis un pays d'origine (par exemple la Syrie, l'Afghanistan, la Libye) vers une destination en Europe.",
+    "analyze": "<strong>Lance l'analyse :</strong> clique sur le bouton <em>Analyze Route</em> dans l'en-tête.",
+    "perspective": "<strong>Adopte le point de vue des personnes réfugiées :</strong> examine les obstacles documentés et les questions de réflexion pour comprendre les difficultés et les incertitudes de l'exil. Chaque voyage vers la sécurité comporte des risques, indépendamment des obstacles enregistrés ici.",
+    "purposeTitle": "Objectif pédagogique",
+    "purpose": "Les personnes qui fuient les persécutions et la guerre ne disposent pas des mêmes informations que les autres : clôtures frontalières militarisées, refoulements, dangers en mer et camps de détention ne figurent pas clairement sur les cartes ordinaires. En simulant des itinéraires face à des obstacles invisibles, les élèves font l'expérience de l'incertitude pesante que vivent les personnes déplacées.",
+    "readGuide": "Lire le guide pédagogique"
+  },
+  "guideModal": {
+    "title": "Routes migratoires des personnes réfugiées — Guide pédagogique",
+    "perspectiveHeading": "Adopter le point de vue des personnes réfugiées",
+    "perspectiveDescription": "Cette simulation pédagogique permet aux élèves de se mettre à la place de personnes réfugiées et déplacées qui fuient la guerre, la violence, les violations des droits humains ou des catastrophes climatiques au Moyen-Orient, en Afrique du Nord, en Afrique subsaharienne et en Asie centrale.",
+    "invisibleHeading": "Pourquoi les obstacles sont-ils invisibles sur la carte ?",
+    "invisibleDescription": "Dans la réalité, les personnes réfugiées ne disposent pas d'informations complètes. Les clôtures frontalières militarisées, les caméras thermiques, les zones de refoulement violent et les zones d'interception en mer sont volontairement dissimulées ou changent sans cesse. En gardant la couche <code>route-obstacles</code> masquée, l'application oblige les élèves à tracer leurs itinéraires à partir de la géographie et de suppositions, tout comme les personnes déplacées doivent se fier à des réseaux informels, au bouche-à-oreille ou à des passeurs.",
+    "corridorsHeading": "Principaux corridors migratoires vers l'Europe",
+    "centralMediterraneanTitle": "Route de la Méditerranée centrale",
+    "centralMediterraneanDescription": "Part de Libye ou de Tunisie vers Lampedusa, la Sicile ou Malte. Selon l'OIM, c'est le corridor migratoire maritime le plus meurtrier au monde, avec des milliers de noyades, de pannes de moteur et d'interceptions par les garde-côtes libyens menant à des détentions arbitraires.",
+    "easternMediterraneanTitle": "Route de la Méditerranée orientale",
+    "easternMediterraneanDescription": "Passe de la Turquie à la Grèce par les îles de la mer Égée (Lesbos, Samos, Chios) ou par la frontière du fleuve Évros. Elle est marquée par des canots pneumatiques surchargés, des courants dangereux et des refoulements en mer.",
+    "westernBalkanTitle": "Route des Balkans occidentaux",
+    "westernBalkanDescription": "Traverse la Macédoine du Nord, la Serbie, la Bosnie-Herzégovine, la Hongrie et la Croatie. Elle comporte des doubles clôtures de barbelés, des patrouilles de police avec des chiens, une surveillance biométrique et une exposition au froid hivernal dans des bâtiments abandonnés.",
+    "westernMediterraneanTitle": "Route de la Méditerranée occidentale et de l'Atlantique",
+    "westernMediterraneanDescription": "Du Maroc ou de l'Algérie vers l'Espagne continentale, ou de l'Afrique de l'Ouest (Sénégal, Mauritanie) à travers l'océan vers les îles Canaries. La route atlantique se fait en pirogues de bois ouvertes, exposées pendant des semaines à des courants traîtres.",
+    "discussionHeading": "Pistes de discussion en classe",
+    "discussionQuestion1": "Pourquoi les personnes réfugiées choisissent-elles des routes irrégulières et dangereuses plutôt que de prendre l'avion ou le ferry ? (Absence de visas légaux et sanctions contre les compagnies aériennes.)",
+    "discussionQuestion2": "Lorsqu'un pays européen renforce une frontière (par exemple la clôture hongroise en 2015), comment les flux migratoires se déplacent-ils vers des passages montagneux ou maritimes plus dangereux ?",
+    "discussionQuestion3": "Quelles responsabilités les États ont-ils, selon la Convention de Genève de 1951 relative au statut des réfugiés, en matière de non-refoulement (le principe de ne pas renvoyer une personne réfugiée dans un pays où elle risque d'être persécutée) ?",
+    "close": "Fermer le guide"
+  },
+  "risk": {
+    "levels": {
+      "minimal": "Risque minimal",
+      "low": "Risque faible",
+      "moderate": "Risque modéré",
+      "high": "Risque élevé",
+      "critical": "Danger critique"
+    },
+    "descriptions": {
+      "minimal": "Aucun obstacle documenté important n'a été trouvé dans le corridor de l'itinéraire. Des points de contrôle imprévus ou des contrôles frontaliers changeants restent toutefois possibles.",
+      "low": "Concentration relativement faible d'obstacles majeurs documentés, même si les personnes réfugiées font toujours face à l'épuisement physique, à un statut juridique précaire et à des changements imprévus aux frontières.",
+      "moderate": "Obstacles importants. Les voyages le long de ce corridor impliquent des terrains dangereux, des interceptions actives aux frontières ou des conditions de transit risquées qui imposent des détours dangereux.",
+      "high": "Dangers graves. Plusieurs risques mortels (haute mer, frontières militarisées ou corridors désertiques), avec des crises humanitaires et des violations des droits humains documentées.",
+      "critical": "Danger extrême à plusieurs niveaux. Ce corridor traverse plusieurs des points de contrôle et des passages les plus meurtriers des routes migratoires vers l'Europe, avec des risques très élevés de mort, de violence ou de détention prolongée."
+    }
+  },
+  "narratives": {
+    "maritime": "La réalité de la traversée maritime : les traversées se font sur des embarcations inadaptées, sans gilets de sauvetage, avec un risque d'hypothermie et la peur de chavirer dans l'obscurité. Les personnes réfugiées paient souvent toutes leurs économies pour une place sur un canot, sans savoir si les navires de sauvetage seront autorisés à accoster.",
+    "border": "La réalité des murs et des refoulements : des clôtures militarisées avec barbelés, caméras thermiques et patrouilles armées obligent les personnes réfugiées à tenter le passage encore et encore (« The Game »), en subissant des refoulements violents, la confiscation de leur téléphone et des blessures.",
+    "terrain": "La réalité d'un environnement hostile : traverser à pied des cols de montagne glacés ou des déserts brûlants sans chaussures, eau ni abri adaptés provoque des gelures, le pied de tranchée, une grave déshydratation et l'épuisement.",
+    "detention": "La réalité des droits humains et de la vulnérabilité : sans voies de fuite sûres et légales, les personnes réfugiées sont exposées à la traite des êtres humains, à la détention arbitraire dans des camps insalubres et à l'extorsion par des réseaux criminels organisés.",
+    "general": "Chaque passage de frontière sans documents légaux s'accompagne de stress psychologique, de la peur d'être arrêté, de la séparation d'avec des proches et de la dépendance à des conditions imprévisibles."
+  },
+  "obstaclePerspectives": {
+    "obs-med-central": "Imagine-toi entassé avec 120 personnes sur un canot pneumatique qui se dégonfle, dans des vagues de trois mètres à minuit, les fumées du moteur faisant vomir les passagers, sans aucun navire de sauvetage en vue.",
+    "obs-med-libya-coast": "Être ramené en arrière signifie perdre toutes ses économies, retourner en captivité arbitraire dans des centres de détention et revivre le traumatisme depuis le début.",
+    "obs-sahara-desert": "Des milliers de personnes meurent dans le sable du désert sans être recensées, avant même d'avoir vu la mer. Si un véhicule tombe en panne, l'eau vient à manquer en quelques heures.",
+    "obs-aegean-crossing": "Par peur d'être repérés par les caméras thermiques, les passeurs forcent les passagers à sauter dans une eau froide et profonde, à quelques mètres de falaises rocheuses, dans l'obscurité.",
+    "obs-evros-border": "Des personnes réfugiées racontent qu'on leur a pris téléphone, argent et vêtements chauds avant de les forcer à retraverser le fleuve glacé.",
+    "obs-balkan-mountains": "Les personnes réfugiées dorment dehors sous des tentes de fortune faites de bâches en plastique, dans la neige glacée, et souffrent du pied de tranchée, de gelures et d'attaques d'animaux.",
+    "obs-hungary-fence": "Les clôtures n'arrêtent pas les personnes qui fuient la guerre ; elles les poussent seulement entre les mains de passeurs organisés qui exigent des milliers d'euros pour des cachettes dangereuses.",
+    "obs-drina-river": "Les personnes réfugiées doivent traverser à la nage des eaux hivernales au courant rapide, avec toutes leurs affaires dans des sacs en plastique attachés autour du cou.",
+    "obs-smuggler-extortion": "Les personnes réfugiées se retrouvent souvent piégées sans recours juridique, entièrement à la merci de réseaux criminels, parce qu'il n'existe pas de voies légales et sûres.",
+    "obs-alps-winter": "Marcher pendant huit heures dans la neige jusqu'à la taille avec des baskets usées pour atteindre la sécurité, au risque d'une amputation due à de graves gelures.",
+    "obs-channel-straits": "De minuscules canots pneumatiques esquivent d'immenses porte-conteneurs de 400 mètres dont le sillage peut faire chavirer une petite embarcation en quelques secondes.",
+    "obs-water-scarcity": "Des enfants diabétiques et des grands-mères âgées doivent marcher chaque jour des dizaines de kilomètres sans médicaments de base ni eau potable.",
+    "obs-western-balkans-camp": "Des mois passés dans un vide administratif, coincés dans la boue et le froid, à attendre une occasion de tenter à nouveau « The Game » (le passage des frontières).",
+    "obs-morocco-melilla": "Des tentatives collectives désespérées d'escalader les clôtures ont causé des dizaines de morts et de graves blessures par écrasement."
+  },
+  "reflectionQuestions": {
+    "1": "Pourquoi une famille qui fuit un conflit pourrait-elle avoir le sentiment de ne pas avoir d'autre choix que de prendre cette route dangereuse ?",
+    "2": "Comment l'absence de voies d'asile sûres et légales influence-t-elle les décisions que les personnes réfugiées doivent prendre ?",
+    "3": "Si une frontière ou un corridor maritime est fortement bloqué, vers où penses-tu que les flux de personnes réfugiées se déplacent ?",
+    "4": "Quelles conséquences psychologiques et physiques ces obstacles auraient-ils sur une personne ou un enfant ?"
+  },
+  "units": {
+    "kilometers": "kilomètres",
+    "miles": "miles",
+    "meters": "mètres",
+    "nautical-miles": "milles nautiques"
+  },
+  "videos": {
+    "kinds": {
+      "documentary": "Documentaire",
+      "report": "Reportage",
+      "film": "Film de fiction",
+      "literature": "Adaptation littéraire"
+    },
+    "guidingQuestion": "Question guide :",
+    "contentWarning": "Cet extrait peut contenir des scènes difficiles (violence, mort, souffrance). Regarde-le seulement si tu t'en sens capable et parles-en à ton enseignant·e si quelque chose te préoccupe.",
+    "privacyNotice": "La vidéo n'est chargée depuis YouTube qu'après ton clic. YouTube (Google) reçoit alors des données comme ton adresse IP.",
+    "load": "Charger la vidéo depuis YouTube",
+    "loadClip": "Charger l'extrait ({{range}}) depuis YouTube",
+    "iframeTitle": "Vidéo intégrée",
+    "source": "Source : {{source}}",
+    "openOnYoutube": "Ouvrir sur YouTube"
+  },
+  "workRoutes": {
+    "tab": "Cinéma et littérature",
+    "introduction": "Compare ton itinéraire avec des parcours d'exil tirés du cinéma et de la littérature. Affiche un itinéraire sur la carte et lis ses étapes. Attention : les textes dévoilent une partie de l'intrigue.",
+    "show": "Afficher l'itinéraire sur la carte",
+    "hide": "Masquer l'itinéraire",
+    "stationsHeading": "Étapes : {{title}}",
+    "approximate": "Les étapes sont simplifiées et la ligne les relie directement. Elle ne montre pas le chemin exact de l'œuvre.",
+    "comparisonHeading": "Comparaison avec ton itinéraire",
+    "shared": "Dangers sur les deux itinéraires :",
+    "onlyWork": "Seulement sur l'itinéraire de l'œuvre :",
+    "onlyOwn": "Seulement sur ton itinéraire :",
+    "none": "aucun",
+    "generalQuestion": "Où as-tu pris une autre décision que le personnage ? Quelles informations avais-tu, qu'il n'avait pas ?",
+    "categories": {
+      "sea": "Mer",
+      "desert": "Désert",
+      "mountain": "Montagne",
+      "border": "Frontière",
+      "detention": "Détention et camps",
+      "exploitation": "Exploitation et passeurs",
+      "health": "Santé",
+      "terrain": "Terrain"
+    },
+    "ioCapitano": {
+      "title": "Io Capitano",
+      "meta": "Film de Matteo Garrone, 2023 (titre français : « Moi, capitaine »)",
+      "summary": "Les cousins Seydou et Moussa, deux adolescents de Dakar, partent en secret pour l'Europe. Leur voyage les mène à travers le Mali et le Niger, le Sahara et la Libye, où ils sont séparés. À la fin, Seydou pilote lui-même un bateau surchargé à travers la Méditerranée jusqu'en Italie.",
+      "stations": {
+        "dakar": {
+          "name": "Dakar (Sénégal)",
+          "text": "Les deux garçons économisent en secret pour le voyage. La mère de Seydou s'y oppose, alors ils partent à son insu."
+        },
+        "mali": {
+          "name": "Mali",
+          "text": "Ils remontent vers le nord en bus. Aux postes de contrôle, on leur réclame de l'argent ; sans papiers valables, ils sont à la merci des agents."
+        },
+        "agadez": {
+          "name": "Agadez (Niger)",
+          "text": "Point de départ de la traversée du Sahara. Les passeurs entassent les gens sur des pick-up."
+        },
+        "sahara": {
+          "name": "Sahara",
+          "text": "Une partie du trajet doit se faire à pied. Celles et ceux qui ne suivent pas restent en arrière."
+        },
+        "libya": {
+          "name": "Sud de la Libye",
+          "text": "Des groupes armés capturent les voyageurs et extorquent une rançon à leurs familles. La captivité signifie violence et torture."
+        },
+        "tripoli": {
+          "name": "Tripoli (Libye)",
+          "text": "Sans argent, Seydou doit travailler sous la contrainte jusqu'à ce que la traversée devienne possible."
+        },
+        "sea": {
+          "name": "Mer Méditerranée",
+          "text": "Un bateau surchargé, à peine en état de naviguer. Seydou doit le piloter alors qu'il n'a aucune expérience."
+        },
+        "italy": {
+          "name": "Au large de la Sicile",
+          "text": "L'arrivée en Europe ne met pas fin à l'incertitude."
+        }
+      },
+      "questions": [
+        "Pourquoi Seydou et Moussa partent-ils ? En quoi leurs raisons diffèrent-elles d'une fuite devant la guerre ou la persécution ?",
+        "Qui profite du voyage ? Trouve les étapes où de l'argent est demandé ou extorqué.",
+        "Le film est une fiction, mais il s'appuie sur des témoignages. Que peut montrer un film qu'une carte ne peut pas montrer, et inversement ?"
+      ]
+    },
+    "coccodrilli": {
+      "title": "Nel mare ci sono i coccodrilli",
+      "meta": "Roman de Fabio Geda, 2010 (titre français : « Dans la mer il y a des crocodiles »), d'après l'histoire vraie d'Enaiatollah Akbari",
+      "summary": "Enaiatollah n'est encore qu'un enfant lorsque sa mère le laisse au Pakistan pour le protéger de la violence en Afghanistan. Seul, il voyage pendant des années à travers l'Iran, la Turquie et la Grèce jusqu'en Italie, en travaillant en chemin pour payer l'étape suivante.",
+      "stations": {
+        "ghazni": {
+          "name": "Province de Ghazni (Afghanistan)",
+          "text": "Parce qu'elle est hazara, la famille d'Enaiatollah est menacée. Sa mère l'emmène pour le protéger."
+        },
+        "quetta": {
+          "name": "Quetta (Pakistan)",
+          "text": "Sa mère le laisse seul. Il doit travailler pour survivre."
+        },
+        "iran": {
+          "name": "Iran",
+          "text": "Travail sur des chantiers, sans papiers et dans la peur constante des contrôles de police et de l'expulsion."
+        },
+        "mountains": {
+          "name": "Montagnes à la frontière turque",
+          "text": "Une marche de plusieurs jours dans la neige et le froid. Tout le monde dans le groupe ne survit pas."
+        },
+        "istanbul": {
+          "name": "Istanbul (Turquie)",
+          "text": "De nouveau travailler et attendre que l'argent suffise pour l'étape suivante."
+        },
+        "aegean": {
+          "name": "Mer Égée, vers Lesbos",
+          "text": "La traversée de la mer avec d'autres garçons sur un petit canot pneumatique."
+        },
+        "athens": {
+          "name": "Athènes (Grèce)",
+          "text": "Sans titre de séjour, il travaille et cherche un moyen de rejoindre l'Italie."
+        },
+        "ferry": {
+          "name": "Port de l'ouest de la Grèce",
+          "text": "Caché sous un camion sur le ferry pour l'Italie : l'une des étapes les plus dangereuses."
+        },
+        "italy": {
+          "name": "Venise (Italie)",
+          "text": "Arrivée en Italie."
+        },
+        "turin": {
+          "name": "Turin",
+          "text": "Une famille l'accueille et il dépose une demande d'asile."
+        }
+      },
+      "questions": [
+        "Enaiatollah est un enfant qui voyage seul. Quels dangers sont plus grands pour lui que pour un adulte ?",
+        "Pourquoi son voyage dure-t-il des années et non des semaines ?",
+        "Compare son itinéraire avec les routes de l'OIM en Méditerranée orientale (niveau d'aide 2). Où se recoupent-elles ?"
+      ]
+    }
+  }
+}

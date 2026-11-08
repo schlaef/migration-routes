@@ -18,15 +18,27 @@ function loadLocale(locale) {
   );
 }
 
-test("English and German translation resources define matching keys", () => {
+test("all translation resources define the same keys as English", () => {
   const englishKeys = getTranslationKeys(loadLocale("en")).sort();
-  const germanKeys = getTranslationKeys(loadLocale("de")).sort();
+  for (const locale of ["de", "it", "fr"]) {
+    assert.deepEqual(getTranslationKeys(loadLocale(locale)).sort(), englishKeys, `${locale} keys differ from en`);
+  }
+});
 
-  assert.deepEqual(germanKeys, englishKeys);
+test("translations keep the same interpolation placeholders and markup", () => {
+  const english = loadLocale("en");
+  const lookup = (obj, path) => path.split(".").reduce((value, key) => value?.[key], obj);
+  const tokens = (text) => (String(text).match(/{{\s*\w+\s*}}|<\/?\w+>/g) || []).sort();
+  for (const locale of ["de", "it", "fr"]) {
+    const translation = loadLocale(locale);
+    for (const key of getTranslationKeys(english)) {
+      assert.deepEqual(tokens(lookup(translation, key)), tokens(lookup(english, key)), `${locale}: ${key}`);
+    }
+  }
 });
 
 test("sample obstacle perspective notes have English and German translations", () => {
-  for (const locale of ["en", "de"]) {
+  for (const locale of ["en", "de", "it", "fr"]) {
     const translations = loadLocale(locale).obstaclePerspectives;
 
     for (const obstacle of SAMPLE_OBSTACLES) {
