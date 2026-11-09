@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { WORK_ROUTES, compareWithAnalysis, getWorkRoute } from "../work-routes.js";
+import { WORK_ROUTES, compareWithAnalysis, getWorkRoute, getWorkRouteVideos } from "../work-routes.js";
+import CategoryVideo from "./CategoryVideo.jsx";
 
 const box = {
   backgroundColor: "var(--calcite-color-foreground-2, #f8f9fa)",
@@ -16,8 +17,26 @@ function CategoryList({ categories, emptyKey }) {
   return <span>{categories.map((category) => t(`workRoutes.categories.${category}`)).join(", ")}</span>;
 }
 
-export default function WorkRoutes({ analysis, selectedId, onSelect }) {
+export default function WorkRoutes({ analysis, selectedId, onSelect, showVideos = true }) {
   const { t } = useTranslation();
+
+  // Videos with their texts from the locale files (title and guiding question).
+  const renderVideos = (route, stationId) => {
+    if (!showVideos) return null;
+    const prefix = stationId
+      ? `workRoutes.${route.id}.stations.${stationId}.videos`
+      : `workRoutes.${route.id}.videos`;
+    return getWorkRouteVideos(route, stationId).map((video) => (
+      <CategoryVideo
+        key={`${video.videoId}-${video.start ?? 0}`}
+        video={{
+          ...video,
+          title: t(`${prefix}.${video.key}.title`, { defaultValue: "" }),
+          note: t(`${prefix}.${video.key}.note`, { defaultValue: "" })
+        }}
+      />
+    ));
+  };
   const route = getWorkRoute(selectedId);
   const comparison = route ? compareWithAnalysis(route, analysis) : null;
   const questions = route ? t(`workRoutes.${route.id}.questions`, { returnObjects: true }) : [];
@@ -40,6 +59,7 @@ export default function WorkRoutes({ analysis, selectedId, onSelect }) {
             <p style={{ fontSize: "0.85rem", lineHeight: "1.5", margin: "0.5rem 0" }}>
               {t(`workRoutes.${work.id}.summary`)}
             </p>
+            {renderVideos(work)}
             <div slot="footer-start">
               <calcite-button
                 scale="s"
@@ -71,6 +91,7 @@ export default function WorkRoutes({ analysis, selectedId, onSelect }) {
                   )}
                   <br />
                   {t(`workRoutes.${route.id}.stations.${station.id}.text`)}
+                  {renderVideos(route, station.id)}
                 </li>
               ))}
             </ol>

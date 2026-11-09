@@ -55,7 +55,7 @@ The report records which help stage was used, so teachers can take it into accou
     (videos load from YouTube only after a click, via `youtube-nocookie.com`, with a content warning).
   - **Film & literature:** shows the route of *Io Capitano* (Matteo Garrone, 2023) or *Nel mare ci sono i
     coccodrilli* (Fabio Geda, 2010) on the map with numbered stations, compares its dangers with the student's
-    route and asks questions about the work.
+    route and asks questions about the work. Each work has a trailer with a guiding question (click to load).
 - **Four languages:** German, French, Italian and English (language menu in the analysis panel). Switching
   the language updates all controls, including the ArcGIS map components.
 
@@ -136,7 +136,7 @@ and by **URL parameters** (highest priority).
 |---------|-------|-----|
 | Images per category | `src/assets/categories/<category>/` + `manifest.json` | See [`src/assets/categories/README.md`](src/assets/categories/README.md). Use the page describing the image as source and check the licence. |
 | Videos per category | `src/assets/categories/videos.json` | YouTube ID, optional start/end time, type (documentary, report, film, literature adaptation), guiding question, source, content warning. Only embed videos published by the rights holder. See the same README. |
-| Film & literature routes | `src/work-routes.js` (stations, coordinates, categories) + `workRoutes` in `src/locales/*/translation.json` (texts) | Station coordinates are approximate; the line connects the stations directly. |
+| Film & literature routes | `src/work-routes.js` (stations, coordinates, categories, videos) + `workRoutes` in `src/locales/*/translation.json` (texts) | Station coordinates are approximate; the line connects the stations directly. Each work can have videos (e.g. a trailer, shown with the work) and each station its own clips; video titles and guiding questions are in the locale files under `workRoutes.<work>.videos.<key>`. |
 | Starting points | `src/starting-points.js` + `startingPoints` in the locale files | |
 | Texts and translations | `src/locales/{de,fr,it,en}/translation.json` | Tests check that all four languages have the same keys, placeholders and markup. |
 

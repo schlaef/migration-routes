@@ -272,7 +272,13 @@
         "Why do Seydou and Moussa leave? How do their reasons differ from fleeing war or persecution?",
         "Who profits from the journey? Find the stations where money is demanded or extorted.",
         "The film is fiction but based on first-hand accounts. What can a feature film show that a map cannot, and vice versa?"
-      ]
+      ],
+      "videos": {
+        "trailer": {
+          "title": "Film trailer",
+          "note": "Which stations of the journey do you recognise in the trailer? Does it present the journey more as an adventure or as a danger?"
+        }
+      }
     },
     "coccodrilli": {
       "title": "Nel mare ci sono i coccodrilli",
@@ -324,7 +330,13 @@
         "Enaiatollah is a child travelling alone. Which dangers are greater for him than for adults?",
         "Why does his journey take years rather than weeks?",
         "Compare his route with the IOM routes in the Eastern Mediterranean (help stage 2). Where do they match?"
-      ]
+      ],
+      "videos": {
+        "trailer": {
+          "title": "Trailer of the film adaptation",
+          "note": "Compare the trailer with the novel: which stations of the journey do you recognise, and what is missing?"
+        }
+      }
     }
   },
   "header": {

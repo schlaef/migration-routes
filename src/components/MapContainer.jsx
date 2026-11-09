@@ -192,6 +192,9 @@ const MapContainer = forwardRef(function MapContainer(
         throw Object.assign(new Error("Map or sketch layer is not initialized yet."), { code: "notReady" });
       }
 
+      // Finish an ongoing edit so the analysis uses the final line and no edit handles remain.
+      sketchRef.current?.complete();
+
       // Load only the layers the analysis needs; one slow or blocked reference
       // layer (e.g. an external service filtered at school) must not block it.
       const analysisLayers = [
@@ -417,7 +420,9 @@ const MapContainer = forwardRef(function MapContainer(
         view,
         layer: routesLayer,
         polylineSymbol: new SimpleLineSymbol(ROUTE_SYMBOL_PROPERTIES),
-        defaultCreateOptions: { mode: "click" }
+        defaultCreateOptions: { mode: "click" },
+        // Clicking a finished route lets students move single vertices, not rotate or scale the whole line.
+        defaultUpdateOptions: { tool: "reshape", toggleToolOnClick: false, enableRotation: false, enableScaling: false }
       });
       sketchRef.current = sketch;
 

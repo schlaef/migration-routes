@@ -414,7 +414,12 @@ export default function AnalysisPanel({
 
             {/* Tab 4: Comparison with routes from film and literature */}
             {activeTab === "works" && showWorkRoutes && (
-              <WorkRoutes analysis={analysis} selectedId={workRouteId} onSelect={setWorkRouteId} />
+              <WorkRoutes
+                analysis={analysis}
+                selectedId={workRouteId}
+                onSelect={setWorkRouteId}
+                showVideos={config.showVideos !== false}
+              />
             )}
 
             {/* Tab 3: Categories Summary */}

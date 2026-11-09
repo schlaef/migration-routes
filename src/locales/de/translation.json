@@ -272,7 +272,13 @@
         "Warum brechen Seydou und Moussa auf? Wie unterscheiden sich ihre Gründe von einer Flucht vor Krieg oder Verfolgung?",
         "Wer verdient an der Reise? Suche die Stationen, an denen Geld verlangt oder erpresst wird.",
         "Der Film ist Fiktion, beruht aber auf Erfahrungsberichten. Was kann ein Spielfilm zeigen, was eine Karte nicht zeigen kann, und umgekehrt?"
-      ]
+      ],
+      "videos": {
+        "trailer": {
+          "title": "Trailer zum Film",
+          "note": "Welche Stationen der Reise erkennst du im Trailer wieder? Zeigt er die Reise eher als Abenteuer oder als Gefahr?"
+        }
+      }
     },
     "coccodrilli": {
       "title": "Nel mare ci sono i coccodrilli",
@@ -324,7 +330,13 @@
         "Enaiatollah ist ein Kind, als er allein unterwegs ist. Welche Gefahren sind für ihn grösser als für Erwachsene?",
         "Warum dauert seine Reise Jahre und nicht Wochen?",
         "Vergleiche seine Route mit den IOM-Routen im östlichen Mittelmeer (Hilfsstufe 2). Wo stimmen sie überein?"
-      ]
+      ],
+      "videos": {
+        "trailer": {
+          "title": "Trailer zur Verfilmung",
+          "note": "Vergleiche den Trailer mit dem Roman: Welche Stationen der Reise erkennst du wieder, und was fehlt?"
+        }
+      }
     }
   },
   "header": {
