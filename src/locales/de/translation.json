@@ -381,5 +381,49 @@
     "reset": "Standardwerte",
     "cancel": "Abbrechen",
     "save": "Speichern"
+  },
+  "phone": {
+    "heading": "Das Handy hier",
+    "helps": "Hilft:",
+    "fails": "Versagt:",
+    "introduction": "Manche sagen: «Wer ein Handy hat, kann nicht arm sein.» Auf der Flucht ist das Handy aber oft das wichtigste Hilfsmittel: Landkarte, Telefonbuch, Bank und Verbindung zur Familie zugleich. Bei jeder Gefahr siehst du, wo es hilft und wo es versagt.",
+    "categories": {
+      "sea": {
+        "helps": "Mit dem Handy kann man die eigene Position an Rettungsdienste oder an Notrufstellen wie das Alarm Phone senden. Angehörige erfahren, wann das Boot ablegt.",
+        "fails": "Auf offener See gibt es oft kein Mobilfunknetz, und Salzwasser kann das Gerät zerstören. Ohne Akku oder Netz kann niemand Hilfe rufen."
+      },
+      "desert": {
+        "helps": "Man hält Kontakt zu Fahrern und Vermittlern und ruft zu Hause an, um Geld für die nächste Etappe schicken zu lassen.",
+        "fails": "In der Wüste gibt es weite Strecken ohne Netz und ohne Strom. Wer zurückgelassen wird, kann oft niemanden erreichen."
+      },
+      "mountain": {
+        "helps": "GPS und Karten-Apps helfen, den Weg zu finden. Den eigenen Standort kann man mit anderen teilen, Wetterwarnungen kommen aufs Handy.",
+        "fails": "Kälte entleert den Akku schnell, und Steckdosen gibt es keine. In abgelegenen Tälern fehlt oft das Netz."
+      },
+      "border": {
+        "helps": "In Chatgruppen warnen Menschen einander, wo gerade kontrolliert wird oder ein Übergang geschlossen ist. Mit Fotos lässt sich Gewalt dokumentieren.",
+        "fails": "Bei Pushbacks werden Handys nach vielen Berichten abgenommen oder zerstört. Damit gehen Kontakte, Karten und Beweise verloren."
+      },
+      "detention": {
+        "helps": "Ein Anruf ist oft die einzige Verbindung zur Familie und zu Hilfsorganisationen.",
+        "fails": "In der Haft werden Handys meist weggenommen. Bewaffnete Gruppen nutzen das Telefon, um von Familien Lösegeld zu erpressen."
+      },
+      "exploitation": {
+        "helps": "Über Kontakte erfährt man, welche Preise üblich sind und vor welchen Vermittlern andere warnen. Geld kann von zu Hause geschickt werden.",
+        "fails": "Schlepper werben in sozialen Medien mit falschen Versprechen. Wer Schulden hat, wird per Telefon unter Druck gesetzt, oft auch die Familie zu Hause."
+      },
+      "health": {
+        "helps": "Man kann Hilfsorganisationen oder medizinische Hilfe erreichen und Übersetzungs-Apps nutzen.",
+        "fails": "Ohne Guthaben, Strom oder Netz lässt sich keine Hilfe holen, gerade dann, wenn es am dringendsten wäre."
+      },
+      "terrain": {
+        "helps": "Andere Migrant:innen teilen per Nachricht, ob ein Fluss gerade passierbar ist oder ein Weg gefährlich wird.",
+        "fails": "Solche Informationen sind manchmal veraltet oder falsch. Wasser und Kälte beschädigen das Gerät."
+      },
+      "general": {
+        "helps": "Das Handy ist Landkarte, Telefonbuch, Bank und Verbindung zur Familie zugleich.",
+        "fails": "Akku, Guthaben und Netz sind unterwegs knapp, und das Gerät kann verloren gehen oder gestohlen werden."
+      }
+    }
   }
 }

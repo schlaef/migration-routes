@@ -381,5 +381,49 @@
     "reset": "Reset to defaults",
     "cancel": "Cancel",
     "save": "Save"
+  },
+  "phone": {
+    "heading": "The phone here",
+    "helps": "Helps:",
+    "fails": "Fails:",
+    "introduction": "Some say: \"Anyone who has a phone can't be poor.\" On the move, however, the phone is often the most important tool: map, address book, bank and link to the family all at once. For each danger you can see where it helps and where it fails.",
+    "categories": {
+      "sea": {
+        "helps": "With a phone, people can send their position to rescue services or to hotlines such as Alarm Phone. Relatives learn when the boat leaves.",
+        "fails": "On the open sea there is often no mobile network, and salt water can destroy the device. Without battery or signal, nobody can call for help."
+      },
+      "desert": {
+        "helps": "People stay in touch with drivers and middlemen and call home to have money sent for the next stage.",
+        "fails": "The desert has long stretches without network or power. Anyone left behind often cannot reach anyone."
+      },
+      "mountain": {
+        "helps": "GPS and map apps help find the way. People can share their location, and weather warnings reach the phone.",
+        "fails": "Cold drains the battery quickly and there are no sockets. Remote valleys often have no network."
+      },
+      "border": {
+        "helps": "In chat groups, people warn each other where controls are taking place or a crossing is closed. Photos can document violence.",
+        "fails": "According to many reports, phones are taken away or destroyed during pushbacks. Contacts, maps and evidence are lost."
+      },
+      "detention": {
+        "helps": "A call is often the only link to the family and to aid organisations.",
+        "fails": "Phones are usually taken away in detention. Armed groups use the phone to extort ransom from families."
+      },
+      "exploitation": {
+        "helps": "Through contacts, people learn what prices are usual and which middlemen others warn about. Money can be sent from home.",
+        "fails": "Smugglers advertise on social media with false promises. People in debt are put under pressure by phone, often their families at home too."
+      },
+      "health": {
+        "helps": "People can reach aid organisations or medical help and use translation apps.",
+        "fails": "Without credit, power or network, nobody can get help, precisely when it is most urgent."
+      },
+      "terrain": {
+        "helps": "Other migrants share by message whether a river can be crossed right now or a path is becoming dangerous.",
+        "fails": "Such information is sometimes outdated or false. Water and cold damage the device."
+      },
+      "general": {
+        "helps": "The phone is map, address book, bank and link to the family all at once.",
+        "fails": "Battery, credit and network are scarce on the way, and the device can be lost or stolen."
+      }
+    }
   }
 }

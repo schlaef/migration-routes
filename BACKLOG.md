@@ -64,14 +64,14 @@ is the most important tool on the journey. People share warnings about dangers, 
 call home to ask for money, and use it for geolocation. The phone fits the app's core idea: it is
 how people on the move make the invisible obstacles partly visible, but not reliably and not everywhere.
 
-Recommended start: **P1 and P4** (little effort, address the prejudice directly). **P2** is the
+P1 ("the phone here" per category) is done. Recommended next: **P4** (little effort, addresses the
+prejudice directly). **P2** is the
 strongest didactically but needs credible, place-based content (possibly a project with a lecturer
 or a class). Avoid game mechanics such as battery or credit points: the app was deliberately made
 less gamified, and scoring survival would trivialise the topic.
 
 | # | Priority | Idea | Notes |
 |---|----------|------|-------|
-| P1 | Medium | **"The phone here" per category:** a short section with a phone icon in the categories tab, showing where the phone helps and where it fails. Sea: send position to rescue services or hotlines such as Alarm Phone / water damage, no signal. Desert: contact drivers, call home for money / no signal, no power. Border: warnings about controls in chat groups / phones confiscated or destroyed in pushbacks. Detention: contact family / phones taken, families extorted for ransom by phone. Mountains: GPS, weather, sharing location / cold drains the battery. | Texts only, in four languages; no data changes. |
 | P2 | Medium | **Help stage "Messages on the phone":** a fictional chat feed with place-based messages from other migrants ("The river at the border has been too high since yesterday, wait!", "Police checks at the petrol station before the village", "The driver in Agadez now wants twice as much"). Not all messages are true: some are outdated, some come from smugglers. After the analysis, students see which messages matched real obstacles. | Best as a separate WebMap layer (text, location, reliability: true / outdated / false, sender) so content can be maintained without code changes. |
 | P3 | Low | **"Here you have to call home" moments** in the report, e.g. "📱 Here you have to call home and ask for money" (smugglers, ransom) or "📱 Here it pays to know someone who has taken this route", plus a count of how often the phone was decisive on the route. | Needs a field such as `PhoneRole` in the obstacle layer, or a rule per category. |
 | P4 | Medium | **Before/after question about the prejudice:** before drawing, "Many say: 'They all have a phone, so they can't be poor.' What do you think?"; after the analysis, the same question next to the first answer, plus "What would you have needed the phone for on your route?" | Answers stay in the browser only (no grading). Good starting point for a class discussion. |

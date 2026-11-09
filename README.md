@@ -51,7 +51,8 @@ The report records which help stage was used, so teachers can take it into accou
 - **Analysis panel** with route length, number of obstacles and countries crossed, and four tabs:
   - **Refugee perspective:** narratives about the realities of the journey and reflection questions.
   - **Obstacles:** the obstacles found in the corridor; hovering over one highlights it on the map.
-  - **Categories:** what each danger means for people on the move, with **images** and **videos**
+  - **Categories:** what each danger means for people on the move, a note on **the phone as a resource**
+    (where it helps and where it fails, addressing the prejudice "they all have a phone"), **images** and **videos**
     (videos load from YouTube only after a click, via `youtube-nocookie.com`, with a content warning).
   - **Film & literature:** shows the route of *Io Capitano* (Matteo Garrone, 2023) or *Nel mare ci sono i
     coccodrilli* (Fabio Geda, 2010) on the map with numbered stations, compares its dangers with the student's

@@ -381,5 +381,49 @@
     "reset": "Valeurs par défaut",
     "cancel": "Annuler",
     "save": "Enregistrer"
+  },
+  "phone": {
+    "heading": "Le téléphone ici",
+    "helps": "Aide :",
+    "fails": "Ne marche pas :",
+    "introduction": "Certains disent : « Quelqu'un qui a un téléphone ne peut pas être pauvre. » Sur la route de l'exil, le téléphone est pourtant souvent l'outil le plus important : carte, carnet d'adresses, banque et lien avec la famille à la fois. Pour chaque danger, tu vois où il aide et où il ne sert à rien.",
+    "categories": {
+      "sea": {
+        "helps": "Avec un téléphone, on peut envoyer sa position aux services de secours ou à des lignes d'urgence comme Alarm Phone. Les proches savent quand le bateau part.",
+        "fails": "En pleine mer, il n'y a souvent pas de réseau, et l'eau salée peut détruire l'appareil. Sans batterie ni réseau, personne ne peut appeler à l'aide."
+      },
+      "desert": {
+        "helps": "On reste en contact avec les chauffeurs et les intermédiaires et on appelle chez soi pour se faire envoyer de l'argent pour l'étape suivante.",
+        "fails": "Le désert compte de longues distances sans réseau ni électricité. Celles et ceux qui sont abandonnés ne peuvent souvent joindre personne."
+      },
+      "mountain": {
+        "helps": "Le GPS et les applications de cartes aident à trouver le chemin. On peut partager sa position et recevoir des alertes météo.",
+        "fails": "Le froid vide vite la batterie et il n'y a pas de prises. Dans les vallées isolées, le réseau manque souvent."
+      },
+      "border": {
+        "helps": "Dans des groupes de discussion, les gens se préviennent des endroits où ont lieu des contrôles ou des passages fermés. Les photos permettent de documenter les violences.",
+        "fails": "Selon de nombreux témoignages, les téléphones sont confisqués ou détruits lors des refoulements. Contacts, cartes et preuves sont perdus."
+      },
+      "detention": {
+        "helps": "Un appel est souvent le seul lien avec la famille et les organisations d'aide.",
+        "fails": "En détention, les téléphones sont généralement confisqués. Des groupes armés utilisent le téléphone pour extorquer une rançon aux familles."
+      },
+      "exploitation": {
+        "helps": "Grâce aux contacts, on apprend quels prix sont habituels et contre quels intermédiaires les autres mettent en garde. De l'argent peut être envoyé depuis chez soi.",
+        "fails": "Les passeurs font de la publicité sur les réseaux sociaux avec de fausses promesses. Les personnes endettées subissent des pressions par téléphone, souvent aussi leur famille."
+      },
+      "health": {
+        "helps": "On peut joindre des organisations d'aide ou une aide médicale et utiliser des applications de traduction.",
+        "fails": "Sans crédit, électricité ou réseau, impossible d'obtenir de l'aide, justement quand ce serait le plus urgent."
+      },
+      "terrain": {
+        "helps": "D'autres migrant·e·s partagent par message si une rivière peut être traversée en ce moment ou si un chemin devient dangereux.",
+        "fails": "Ces informations sont parfois dépassées ou fausses. L'eau et le froid endommagent l'appareil."
+      },
+      "general": {
+        "helps": "Le téléphone est à la fois carte, carnet d'adresses, banque et lien avec la famille.",
+        "fails": "Batterie, crédit et réseau sont rares en chemin, et l'appareil peut être perdu ou volé."
+      }
+    }
   }
 }

@@ -6,6 +6,7 @@ import categoryVideos from "../assets/categories/videos.json";
 import { getCategoryVideos } from "../category-videos.js";
 import CategoryVideo from "./CategoryVideo.jsx";
 import WorkRoutes from "./WorkRoutes.jsx";
+import PhoneNote from "./PhoneNote.jsx";
 import { getWorkRoute } from "../work-routes.js";
 import RouteHelp from "./RouteHelp.jsx";
 import { HELP_STAGES, getHighestHelpStage } from "../reference-layers.js";
@@ -425,6 +426,9 @@ export default function AnalysisPanel({
             {/* Tab 3: Categories Summary */}
             {activeTab === "categories" && (
               <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                {analysis.perspectiveFeedback?.categories?.length > 0 && (
+                  <p style={{ margin: 0, fontSize: "0.85rem", lineHeight: "1.5" }}>{t("phone.introduction")}</p>
+                )}
                 {analysis.perspectiveFeedback?.categories?.map((cat, idx) => (
                   <calcite-card key={idx} style={{ width: "100%" }}>
                     <div slot="heading" style={{ fontSize: "0.9rem", fontWeight: "600" }}>
@@ -436,6 +440,7 @@ export default function AnalysisPanel({
                     <p style={{ fontSize: "0.85rem", lineHeight: "1.5", margin: "0.5rem 0" }}>
                       {t(cat.descriptionKey)}
                     </p>
+                    <PhoneNote descriptionKey={cat.descriptionKey} />
                     {getCategoryImages(cat.descriptionKey, categoryImages, categoryImageUrls).map((image) => (
                         <figure key={image.filename} style={{ margin: "0.75rem 0" }}>
                           <img

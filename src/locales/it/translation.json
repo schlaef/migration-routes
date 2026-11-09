@@ -381,5 +381,49 @@
     "reset": "Ripristina i valori predefiniti",
     "cancel": "Annulla",
     "save": "Salva"
+  },
+  "phone": {
+    "heading": "Il telefono qui",
+    "helps": "Aiuta:",
+    "fails": "Non funziona:",
+    "introduction": "Alcuni dicono: «Chi ha un telefono non può essere povero.» Durante la fuga, però, il telefono è spesso lo strumento più importante: mappa, rubrica, banca e legame con la famiglia allo stesso tempo. Per ogni pericolo vedi dove aiuta e dove non funziona.",
+    "categories": {
+      "sea": {
+        "helps": "Con il telefono si può inviare la propria posizione ai servizi di soccorso o a linee di emergenza come Alarm Phone. I familiari sanno quando la barca parte.",
+        "fails": "In mare aperto spesso non c'è rete e l'acqua salata può distruggere il dispositivo. Senza batteria o rete nessuno può chiedere aiuto."
+      },
+      "desert": {
+        "helps": "Si resta in contatto con autisti e intermediari e si chiama a casa per farsi mandare i soldi per la tappa successiva.",
+        "fails": "Nel deserto ci sono lunghi tratti senza rete e senza corrente. Chi viene abbandonato spesso non riesce a raggiungere nessuno."
+      },
+      "mountain": {
+        "helps": "Il GPS e le app di mappe aiutano a trovare la strada. Si può condividere la propria posizione e ricevere allerte meteo.",
+        "fails": "Il freddo scarica rapidamente la batteria e non ci sono prese. Nelle valli isolate spesso manca la rete."
+      },
+      "border": {
+        "helps": "Nei gruppi di chat le persone si avvisano a vicenda su dove ci sono controlli o un valico è chiuso. Con le foto si può documentare la violenza.",
+        "fails": "Secondo molte testimonianze, durante i respingimenti i telefoni vengono sequestrati o distrutti. Si perdono contatti, mappe e prove."
+      },
+      "detention": {
+        "helps": "Una telefonata è spesso l'unico legame con la famiglia e con le organizzazioni umanitarie.",
+        "fails": "In detenzione i telefoni vengono di solito sequestrati. Gruppi armati usano il telefono per estorcere un riscatto alle famiglie."
+      },
+      "exploitation": {
+        "helps": "Grazie ai contatti si scopre quali prezzi sono normali e da quali intermediari gli altri mettono in guardia. Da casa possono arrivare soldi.",
+        "fails": "I trafficanti fanno pubblicità sui social media con false promesse. Chi ha debiti viene messo sotto pressione per telefono, spesso anche la famiglia a casa."
+      },
+      "health": {
+        "helps": "Si possono raggiungere organizzazioni umanitarie o assistenza medica e usare app di traduzione.",
+        "fails": "Senza credito, corrente o rete non si può chiedere aiuto, proprio quando servirebbe di più."
+      },
+      "terrain": {
+        "helps": "Altri migranti condividono via messaggio se un fiume è attraversabile in quel momento o se un sentiero sta diventando pericoloso.",
+        "fails": "Queste informazioni a volte sono superate o false. L'acqua e il freddo danneggiano il dispositivo."
+      },
+      "general": {
+        "helps": "Il telefono è mappa, rubrica, banca e legame con la famiglia allo stesso tempo.",
+        "fails": "Batteria, credito e rete scarseggiano durante il viaggio e il dispositivo può essere perso o rubato."
+      }
+    }
   }
 }
