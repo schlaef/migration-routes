@@ -1,10 +1,10 @@
 # Backlog: Fixes & Enhancements
 
-Findings from querying the configured WebMap
+Open points for the app and its WebMap
 [`5688732d6f59462c842d450b5c9bb584`](https://www.arcgis.com/home/item.html?id=5688732d6f59462c842d450b5c9bb584)
-("Migrationsrouten", owner `sts4sch`) and its obstacle layer
-`Routenschwierigkeiten` (`MigrationRoutes/FeatureServer/0`, 99 polygons), plus a
-review of the codebase (state as of 2026-11-07).
+("Migrationsrouten") with the obstacle layer `Routenschwierigkeiten`
+(`MigrationRoutes/FeatureServer/0`, 99 polygons). Last checked: 2026-11-09.
+Completed items are removed; see the git history for what was done.
 
 Numbers are stable IDs for reference (e.g. "see #D2"); they do not imply priority.
 Priority: **High** = analysis output is misleading or broken, **Medium** = noticeably
@@ -14,43 +14,83 @@ degrades the experience, **Low** = polish.
 
 ## A. Obstacle data (WebMap / ArcGIS Online)
 
-These are fixed by editing the hosted feature layer, not the code.
+These are fixed by editing the hosted feature layer, not the code. Possible data sources for new
+categories are listed in [section F](#f-data-sources-for-new-obstacle-categories).
 
 | # | Priority | Issue | Proposed fix |
 |---|----------|-------|--------------|
-| D1 | High | `Weight` is `1` for all 99 obstacles, so total score, average and peak threat cannot distinguish routes. | Assign severity weights 1–10 per obstacle (e.g. open sea crossings 9–10, Sahara transit 8–9, high mountain passes 5–7). |
-| D2 | High | `Description` is empty for all 99 obstacles; the report's obstacle list shows titles only. | Write a short, sourced description per obstacle (what the danger is and who is affected). |
-| D3 | High | No border, detention or exploitation obstacles exist; those categories and their reflection prompts never appear. | Add polygons for e.g. Evros/Meriç border fence, Croatia–Bosnia pushbacks, Libyan detention centres, smuggling hubs (Agadez). Existing images in `src/assets/categories/border/` already support the border category. |
-| D4 | Medium | The 66 `Gebirge` polygons are a worldwide copy of World Mountain Ranges (Antarctica, Australia, Siberia, Western Ghats, …), unrelated to routes into Europe. | Delete polygons outside the study area (roughly Sahel → Middle East → Europe), keep e.g. Alps, Pyrenees, Carpathians, Caucasus, Taurus, Zagros, Hindu Kush, Balkan ranges. |
-| D5 | Medium | 8 `Desert` polygons, including the most route-relevant ones, have no `Name`; they appear as "Obstacle" in the report. | Fill in `Name` for all polygons (e.g. "Sahara – Niger transit corridor"). |
-| D6 | Low | Only 2 `Meer` (sea) polygons. | Split into the distinct crossings (Central Mediterranean Libya/Tunisia → Italy, Aegean, Strait of Gibraltar/Alborán, Atlantic route to the Canaries, English Channel) with individual weights and descriptions. |
+| D1 | High | `Weight` is `1` for all 99 obstacles, so the analysis cannot distinguish routes. | Assign severity weights 1–10 per obstacle (e.g. open sea crossings 9–10, Sahara transit 8–9, high mountain passes 5–7). |
+| D2 | High | `Description` is empty for all 99 obstacles; the obstacle list shows titles only. | Write a short, sourced description per obstacle (what the danger is and who is affected). |
+| D3 | High | Only `Gebirge`, `Desert` and `Meer` exist. No border, detention, exploitation, health or terrain obstacles, so those categories, their images and reflection prompts never appear. | Add polygons, e.g. Evros/Meriç border fence, Croatia–Bosnia pushback area, Libyan detention centres, smuggling hubs (Agadez), border rivers (Evros, Drina, Una). See section F. |
+| D4 | Medium | The 66 `Gebirge` polygons are a worldwide copy of World Mountain Ranges (Antarctica, Australia, Siberia, …), unrelated to routes into Europe. | Delete polygons outside the study area (roughly Sahel → Middle East → Europe); keep e.g. Alps, Pyrenees, Carpathians, Caucasus, Taurus, Zagros, Hindu Kush, Balkan ranges. |
+| D5 | Medium | 8 `Desert` polygons, including the most route-relevant ones, have no `Name`; they appear as "Obstacle". | Fill in `Name` for all polygons (e.g. "Sahara – Niger transit corridor"). |
+| D6 | Low | Only 2 `Meer` (sea) polygons. | Split into the distinct crossings (Central Mediterranean, Aegean, Strait of Gibraltar/Alborán, Atlantic route to the Canaries, English Channel) with individual weights and descriptions. |
 | D7 | Low | `ObstacleType` mixes languages (`Gebirge`, `Meer` vs. `Desert`). | Use one vocabulary consistently (or a coded-value domain), e.g. `Meer`, `Wüste`, `Gebirge`, `Grenze`, `Haft`, `Ausbeutung`. |
-| D8 | Low | Layer `Migrationsrouten` (`FeatureServer/1`) is in the WebMap but has 0 features. | Remove it from the WebMap, or populate it (e.g. as a reference / teacher solution layer). |
+| D8 | Low | Layer `Migrationsrouten` (`FeatureServer/1`) is in the WebMap but has 0 features. | Remove it from the WebMap, or use it (e.g. as a teacher solution layer). |
 
 ## B. Code
 
 | # | Priority | Issue | Proposed fix |
 |---|----------|-------|--------------|
-| C1 | High | `src/analyzer.js` (~lines 362–373): the `hasMaritime` / `hasTerrain` checks for tailored reflection texts only match English keywords, so the German categories `Meer` and `Gebirge` never trigger them (`Desert` does). | Reuse `getCategoryDescriptionKey()` (line 327), which already handles German names, instead of the separate keyword checks; add tests with German category names. |
-| C2 | Low | `src/config.js` sets `titleField: "Title"`, but the layer's field is `Name`. It works only through the fallback chain in `extractObstacleAttributes`. | Change the default to `titleField: "Name"`. |
-| C3 | Low | `src/app.js` (1,011 lines) is not imported anywhere; it appears to be a leftover of an earlier version. | Confirm unused and delete. |
-| C4 | Low | Production build emits a chunk > 2 MB (mostly ArcGIS SDK). | Code-split via dynamic `import()` or configure `build.rolldownOptions.output` chunking. |
+| C1 | High | `src/analyzer.js` (~lines 362–375): the `hasMaritime` / `hasBorder` / `hasDetention` / `hasTerrain` checks for the narrative texts only match English keywords, so the German categories `Meer` and `Gebirge` never trigger them (`Desert` does). | Reuse `getCategoryDescriptionKey()`, which already handles German names; add tests with German category names. |
+| C2 | Low | `src/config.js` sets `titleField: "Title"`, but the layer's field is `Name`. It works only through a fallback. | Change the default to `titleField: "Name"`. |
+| C3 | Low | `src/app.js` (1,011 lines) is not imported anywhere; a leftover of an earlier version. | Delete it. |
+| C4 | Low | Production build emits a chunk > 2 MB (mostly ArcGIS SDK). | Code-split via dynamic `import()` or configure chunking. |
 
-## C. Documentation
+## C. Content and review
 
 | # | Priority | Issue | Proposed fix |
 |---|----------|-------|--------------|
-| X1 | ✅ Done | README lists WebMap ID `433c2a6b28f84737a4d538e14674724b`, which does not exist or is inaccessible; config uses `5688732d6f59462c842d450b5c9bb584`. | Update the configuration table in README. |
-| X2 | ✅ Done | README configuration table lists defaults `route-obstacles`, `weight`, `description`, `title`, `category`; actual defaults are `Routenschwierigkeiten`, `Weight`, `Description`, `Title`, `ObstacleType`. | Sync the table with `src/config.js`. |
-| X3 | ✅ Done | README feature list and project structure omit newer features: start-point chooser, route help / helper reference layers, category images, `route-drawing.js`, `starting-points.js`, `reference-layers.js`, `i18n.js`, `locales/`. | Update the Features and Project Structure sections. |
-| X4 | ✅ Done | No documentation of the expected obstacle layer schema for teachers building their own WebMap. | Add a section describing fields (`ObstacleType`, `Name`, `Weight`, `Description`), allowed categories and weight scale. |
+| K1 | Medium | `src/assets/categories/videos.json` is empty, so the categories show no videos yet. | Select documentary clips per category (e.g. smugglers' prices for the sea crossing), published by the rights holder (SRF, ARTE, DW, …), with start/end time and guiding question. |
+| K2 | Medium | Station texts and coordinates of the film and literature routes were written from memory and kept general. | Have a teacher check them against *Io Capitano* and *Nel mare ci sono i coccodrilli*; also check the French titles. |
+| K3 | Medium | Italian and French translations have not been proofread by native speakers. | Review by the language teachers. |
+| K4 | Low | The trailer of *Nel mare ci sono i coccodrilli* was uploaded by a trailer channel (MovieDigger), not the rights holder; it may disappear. | Replace with an official upload if available (`src/work-routes.js`). |
+| K5 | Low | Images exist only for sea, desert and border. | Add images for mountain, detention, exploitation, health and terrain, with source and licence in `manifest.json`. |
+| K6 | Low | Some existing German texts use "ß" (e.g. "anschließend"), unusual for Swiss schools. | Replace with "ss" in `src/locales/de/translation.json`. |
 
 ## D. Enhancements
 
 | # | Priority | Idea |
 |---|----------|------|
-| E1 | Medium | Add images for the empty categories in `src/assets/categories/` (mountain, detention, exploitation, health, terrain, general), with licence/attribution noted in `manifest.json`. |
-| E2 | Low | Exportable / printable route report so students can hand in their analysis. |
-| E3 | Low | Compare several sketched routes side by side (score, countries crossed, categories). |
-| E4 | Low | Teacher "scenario" mode: fixed start and destination via URL parameters, with a set task. |
-| E5 | Low | Data-quality check at startup (all weights equal, empty descriptions, missing names) with a notice in the Settings dialog, to help teachers who bring their own WebMap. |
+| E1 | Low | Compare several sketched routes side by side (countries crossed, categories, obstacles). |
+| E2 | Low | Teacher "scenario" mode: fixed start and destination via URL parameters, with a set task. |
+| E3 | Low | Data-quality check at startup (all weights equal, empty descriptions, missing names) with a notice in the settings dialog, for teachers who bring their own WebMap. |
+| E4 | Low | Category notes pointing to matching scenes in the works, e.g. "This danger is also shown in *Io Capitano* (station Sahara)" with a link to the "Film & literature" tab, without embedding the video twice. |
+
+## E. The mobile phone as a resource
+
+Input from a lecturer: prejudices such as "they're rich, they all have a phone" ignore that the phone
+is the most important tool on the journey. People share warnings about dangers, controls and routes,
+call home to ask for money, and use it for geolocation. The phone fits the app's core idea: it is
+how people on the move make the invisible obstacles partly visible, but not reliably and not everywhere.
+
+Recommended start: **P1 and P4** (little effort, address the prejudice directly). **P2** is the
+strongest didactically but needs credible, place-based content (possibly a project with a lecturer
+or a class). Avoid game mechanics such as battery or credit points: the app was deliberately made
+less gamified, and scoring survival would trivialise the topic.
+
+| # | Priority | Idea | Notes |
+|---|----------|------|-------|
+| P1 | Medium | **"The phone here" per category:** a short section with a phone icon in the categories tab, showing where the phone helps and where it fails. Sea: send position to rescue services or hotlines such as Alarm Phone / water damage, no signal. Desert: contact drivers, call home for money / no signal, no power. Border: warnings about controls in chat groups / phones confiscated or destroyed in pushbacks. Detention: contact family / phones taken, families extorted for ransom by phone. Mountains: GPS, weather, sharing location / cold drains the battery. | Texts only, in four languages; no data changes. |
+| P2 | Medium | **Help stage "Messages on the phone":** a fictional chat feed with place-based messages from other migrants ("The river at the border has been too high since yesterday, wait!", "Police checks at the petrol station before the village", "The driver in Agadez now wants twice as much"). Not all messages are true: some are outdated, some come from smugglers. After the analysis, students see which messages matched real obstacles. | Best as a separate WebMap layer (text, location, reliability: true / outdated / false, sender) so content can be maintained without code changes. |
+| P3 | Low | **"Here you have to call home" moments** in the report, e.g. "📱 Here you have to call home and ask for money" (smugglers, ransom) or "📱 Here it pays to know someone who has taken this route", plus a count of how often the phone was decisive on the route. | Needs a field such as `PhoneRole` in the obstacle layer, or a rule per category. |
+| P4 | Medium | **Before/after question about the prejudice:** before drawing, "Many say: 'They all have a phone, so they can't be poor.' What do you think?"; after the analysis, the same question next to the first answer, plus "What would you have needed the phone for on your route?" | Answers stay in the browser only (no grading). Good starting point for a class discussion. |
+| P5 | Low | **Phone question for the works:** "What role do phones and contacts play in the story? How would the journey have gone with or without a phone?" (*Nel mare ci sono i coccodrilli* is set in the 2000s: then vs. now). | A teacher should judge how prominent phones are in the film and the book. |
+
+Sources for texts: UNHCR report "Connecting Refugees" (2016), Alarm Phone (alarmphone.org), InfoMigrants
+(infomigrants.net). Take figures only after checking the original source.
+
+## F. Data sources for new obstacle categories
+
+Candidate sources for D3. Check each licence and how exact the locations are before publishing; most
+point datasets need to be turned into polygons (e.g. buffers) for the obstacle layer.
+
+| Category | Source | What it offers | Notes |
+|----------|--------|----------------|-------|
+| Deaths on all routes (sea, desert, border) | [IOM Missing Migrants Project](https://missingmigrants.iom.int/data), also on [HDX](https://data.humdata.org/dataset/iom-missing-migrants-project-data) | Incidents of deaths and disappearances with coordinates, CSV, updated weekly | Coordinates are often estimates. Good for weighting existing obstacles or locating dangerous stretches. |
+| Border (pushbacks) | [Border Violence Monitoring Network](https://borderviolence.eu/our-data) | Open database of pushback testimonies (Balkans, Greece, …) | Locations of testimonies; check whether data can be exported and under which terms. |
+| Border (fences, walls) | [Princeton: international border walls dataset](https://dss.princeton.edu/catalog/resource7658), [EPRS briefing on EU border fences (2022)](https://www.europarl.europa.eu/RegData/etudes/BRIE/2022/733692/EPRS_BRI%282022%29733692_EN.pdf), OpenStreetMap (`barrier=fence` along borders) | Geolocated border walls; list of 19 EU/Schengen border fences | No ready-made European dataset found; the EPRS list can serve as a checklist for digitising. |
+| Detention | [Global Detention Project](https://www.globaldetentionproject.org/detention-centres/map-view), [Migreurop "Map of camps"](https://www.migreurop.org/article2747.html?lang=en), [GDP: immigration detention in Libya](https://www.globaldetentionproject.org/immigration-detention-in-libya) | Detention centres in Europe, North Africa and beyond (map and list) | Export not confirmed; Migreurop maps are mostly 2016 or older. |
+| Exploitation / violence | [UCDP Georeferenced Event Dataset](https://ucdp.uu.se/downloads/ged/ged261.pdf) (free download), ACLED (registration and licence terms) | Geolocated conflict events, e.g. Libya, Sahel | UCDP asks for citation; licence not confirmed. Good for areas controlled by armed groups. |
+| Terrain (rivers), health / cold | HydroSHEDS (HydroRIVERS), Natural Earth, ArcGIS Living Atlas (rivers, temperature, land cover) | Border rivers (Evros, Drina, Una), winter temperatures | For the "terrain" and "health" categories, e.g. cold on the Balkan route. |
+| Mixed humanitarian data | [Humanitarian Data Exchange (HDX)](https://data.humdata.org/) | Camps, border crossings, IOM data per country | Search per country (Libya, Niger, Greece, Bosnia, …). |
