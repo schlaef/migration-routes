@@ -144,3 +144,4 @@ vite.config.ts.timestamp-*
 
 # Output of scripts/download_iom_routes.py
 iom_routes_*.geojson
+pushback_zones*.geojson
