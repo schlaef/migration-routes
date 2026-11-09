@@ -5,15 +5,9 @@
     "description_one": "{{count}} ostacolo analizzato (corridoio di {{distance}} {{unit}})",
     "description_other": "{{count}} ostacoli analizzati (corridoio di {{distance}} {{unit}})",
     "language": "Lingua",
-    "copyReport": "Copia rapporto",
-    "copied": "Copiato!",
-    "copyTooltip": "Copia il rapporto di analisi negli appunti",
-    "downloadJson": "Scarica JSON",
-    "downloadTooltip": "Scarica il rapporto di analisi come JSON",
     "closePanel": "Chiudi pannello",
     "collapsePanel": "Comprimi il pannello di analisi",
     "loading": "Analisi del corridoio e degli ostacoli invisibili lungo il percorso in corso...",
-    "reportFilename": "analisi-percorso-migratorio-{{timestamp}}.json",
     "complete": "Analisi completata",
     "riskSummary": "{{level}} — Difficoltà complessiva: {{weight}}",
     "obstacles": "Ostacoli",
@@ -49,8 +43,17 @@
     "general": "Questo ostacolo può ritardare il viaggio o esporre i rifugiati a ulteriori pericoli, sfinimento e incertezza. I suoi effetti dipendono dalle condizioni e dalle risorse di chi lo attraversa."
   },
   "drawing": {
-    "instructions": "Tieni premuto e trascina, oppure clicca per aggiungere punti. Fai doppio clic o premi Invio per terminare.",
-    "cancel": "Annulla il disegno"
+    "instructions": "Clicca per aggiungere punti, fai doppio clic per terminare. Mentre disegni puoi continuare a spostare e ingrandire la mappa.",
+    "cancel": "Annulla il disegno",
+    "draw": "Disegna un percorso",
+    "drawTooltip": "Inizia a disegnare un percorso sulla mappa",
+    "corridor": "Corridoio: {{distance}} {{unit}}",
+    "unitsShort": {
+      "kilometers": "km",
+      "miles": "mi",
+      "meters": "m",
+      "nautical-miles": "NM"
+    }
   },
   "routeHelp": {
     "title": "Hai difficoltà a immaginare un percorso?",
@@ -109,8 +112,8 @@
   },
   "guide": {
     "title": "Come analizzare un percorso migratorio",
-    "sketch": "<strong>Disegna un percorso:</strong> clicca sul pulsante <em>Draw a route</em> sulla mappa e traccia un percorso da un paese d'origine (ad esempio Siria, Afghanistan, Libia) verso una destinazione in Europa.",
-    "analyze": "<strong>Avvia l'analisi:</strong> clicca sul pulsante <em>Analyze Route</em> nell'intestazione.",
+    "sketch": "<strong>Disegna un percorso:</strong> clicca su <em>Disegna un percorso</em> sulla mappa e traccia un percorso da un paese d'origine (ad esempio Siria, Afghanistan, Libia) verso una destinazione in Europa.",
+    "analyze": "<strong>Avvia l'analisi:</strong> clicca su <em>Analizza il percorso</em> nell'intestazione.",
     "perspective": "<strong>Assumi la prospettiva dei rifugiati:</strong> considera gli ostacoli documentati e le domande di riflessione per comprendere le difficoltà e le incertezze della fuga. Ogni viaggio verso la sicurezza comporta rischi, indipendentemente dagli ostacoli registrati qui.",
     "purposeTitle": "Obiettivo didattico",
     "purpose": "Chi fugge da persecuzioni e guerre non dispone delle stesse informazioni degli altri: recinzioni di frontiera militarizzate, respingimenti, pericoli in mare e campi di detenzione non sono indicati chiaramente sulle mappe comuni. Simulando percorsi con ostacoli invisibili, gli studenti sperimentano l'incertezza opprimente vissuta dalle persone in fuga.",
@@ -323,5 +326,48 @@
         "Confronta il suo percorso con i percorsi OIM nel Mediterraneo orientale (livello di aiuto 2). Dove coincidono?"
       ]
     }
+  },
+  "header": {
+    "title": "Analisi dei percorsi migratori",
+    "subtitle": "Gli ostacoli invisibili sulla strada verso l'Europa",
+    "analyze": "Analizza il percorso",
+    "analyzing": "Analisi in corso...",
+    "analyzeTooltip": "Verifica gli ostacoli nel corridoio del percorso",
+    "analyzeDisabledTooltip": "Disegna prima un percorso sulla mappa",
+    "clear": "Cancella",
+    "clearTooltip": "Elimina tutti i percorsi e l'analisi",
+    "settings": "Impostazioni",
+    "guide": "Guida didattica",
+    "collapsePanel": "Comprimi il pannello di analisi",
+    "expandPanel": "Espandi il pannello di analisi"
+  },
+  "errors": {
+    "title": "Avviso sull'analisi",
+    "dismiss": "Chiudi",
+    "notReady": "La mappa non è ancora pronta. Attendi un momento e riprova.",
+    "noRoute": "Disegna prima almeno un percorso sulla mappa.",
+    "bufferFailed": "Non è stato possibile calcolare il corridoio del percorso ({{detail}}).",
+    "queryFailed": "Non è stato possibile interrogare il livello degli ostacoli ({{detail}}).",
+    "analysisFailed": "Non è stato possibile analizzare il percorso."
+  },
+  "settings": {
+    "title": "Impostazioni di simulazione e analisi",
+    "description": "Configura la WebMap di ArcGIS Online, la larghezza del corridoio intorno al percorso e i campi del livello degli ostacoli. Le impostazioni vengono salvate in questo browser.",
+    "webmapId": "ID dell'elemento WebMap di ArcGIS Online",
+    "bufferDistance": "Larghezza del corridoio",
+    "bufferUnit": "Unità",
+    "units": {
+      "kilometers": "Chilometri (km)",
+      "miles": "Miglia (mi)",
+      "meters": "Metri (m)",
+      "nautical-miles": "Miglia nautiche (NM)"
+    },
+    "obstacleLayerTitle": "Titolo del livello degli ostacoli (nella WebMap)",
+    "obstacleLayerNote": "Questo livello resta sempre invisibile, così gli ostacoli non si vedono durante il disegno.",
+    "weightField": "Campo del peso",
+    "descriptionField": "Campo della descrizione",
+    "reset": "Ripristina i valori predefiniti",
+    "cancel": "Annulla",
+    "save": "Salva"
   }
 }

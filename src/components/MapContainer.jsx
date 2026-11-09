@@ -8,12 +8,12 @@ import SimpleFillSymbol from "@arcgis/core/symbols/SimpleFillSymbol.js";
 import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol.js";
 import TextSymbol from "@arcgis/core/symbols/TextSymbol.js";
 import Point from "@arcgis/core/geometry/Point.js";
+import SketchViewModel from "@arcgis/core/widgets/Sketch/SketchViewModel.js";
 import Polyline from "@arcgis/core/geometry/Polyline.js";
 import * as webMercatorUtils from "@arcgis/core/geometry/support/webMercatorUtils.js";
-import Draw from "@arcgis/core/views/draw/Draw.js";
 import * as geometryEngine from "@arcgis/core/geometry/geometryEngine.js";
 import { sampleObstacles } from "../sample-obstacles.js";
-import { startRouteDrawing } from "../route-drawing.js";
+import { ROUTE_SYMBOL_PROPERTIES, countRoutes } from "../route-drawing.js";
 import { syncReferenceLayers } from "../reference-layers.js";
 import { focusStartingPoint } from "../starting-points.js";
 import { getWorkRoutePath } from "../work-routes.js";
@@ -35,7 +35,7 @@ const MapContainer = forwardRef(function MapContainer(
   const [sketching, setSketching] = useState(false);
   const mapElementRef = useRef(null);
   const viewRef = useRef(null);
-  const drawRef = useRef(null);
+  const sketchRef = useRef(null);
   const routesLayerRef = useRef(null);
   const bufferLayerRef = useRef(null);
   const highlightLayerRef = useRef(null);
@@ -52,20 +52,17 @@ const MapContainer = forwardRef(function MapContainer(
     }
   }, [referenceLayers, onReferenceLayerAvailabilityChange]);
 
+  // Latest callback for the SketchViewModel events (created once per map).
+  const onRouteChangeRef = useRef(onRouteChange);
+  onRouteChangeRef.current = onRouteChange;
+
+  // Start a new route with the ArcGIS SketchViewModel (the logic behind the Sketch
+  // component, without its toolbar). In "click" mode, dragging pans and the mouse
+  // wheel zooms while drawing; vertices are shown as control points.
   const startSketch = () => {
-    const draw = drawRef.current;
-    const view = viewRef.current;
-    const routesLayer = routesLayerRef.current;
-    if (!draw || !view || !routesLayer || sketching) return;
-    startRouteDrawing(draw, view, routesLayer, () => {
-      const count = routesLayer.graphics.filter(
-        (graphic) => graphic?.geometry?.type === "polyline"
-      ).length;
-      if (onRouteChange) onRouteChange(count);
-      if (onStatusUpdate) {
-        onStatusUpdate("Route polyline sketched. Click 'Analyze Route' to evaluate.");
-      }
-    }, setSketching);
+    const sketch = sketchRef.current;
+    if (!sketch?.layer || sketching) return;
+    sketch.create("polyline", { mode: "click" });
   };
 
   // Expose imperative methods to parent (App.jsx)
@@ -154,7 +151,7 @@ const MapContainer = forwardRef(function MapContainer(
     },
 
     clearAll() {
-      if (drawRef.current) drawRef.current.reset();
+      sketchRef.current?.cancel();
       if (routesLayerRef.current) routesLayerRef.current.removeAll();
       if (bufferLayerRef.current) bufferLayerRef.current.removeAll();
       if (highlightLayerRef.current) highlightLayerRef.current.removeAll();
@@ -192,7 +189,7 @@ const MapContainer = forwardRef(function MapContainer(
 
     async analyze() {
       if (!routesLayerRef.current || !viewRef.current) {
-        throw new Error("Map or sketch layer is not initialized yet.");
+        throw Object.assign(new Error("Map or sketch layer is not initialized yet."), { code: "notReady" });
       }
 
       // Load only the layers the analysis needs; one slow or blocked reference
@@ -216,7 +213,7 @@ const MapContainer = forwardRef(function MapContainer(
         .toArray();
 
       if (routeGraphics.length === 0) {
-        throw new Error("Please sketch at least one migration route on the map first.");
+        throw Object.assign(new Error("Please sketch at least one migration route on the map first."), { code: "noRoute" });
       }
 
       const routeGeometries = routeGraphics.map((g) => g.geometry);
@@ -231,7 +228,7 @@ const MapContainer = forwardRef(function MapContainer(
           geometryEngine
         );
       } catch (err) {
-        throw new Error(`Buffering failed: ${err.message}`);
+        throw Object.assign(new Error(`Buffering failed: ${err.message}`), { code: "bufferFailed", detail: err.message });
       }
 
       // 2. Clear old buffer & highlight graphics, render new buffer
@@ -275,7 +272,10 @@ const MapContainer = forwardRef(function MapContainer(
           }
         } catch (queryErr) {
           console.warn("Could not query obstacle layer:", queryErr);
-          throw new Error(`Could not query obstacle layer: ${queryErr.message}`);
+          throw Object.assign(new Error(`Could not query obstacle layer: ${queryErr.message}`), {
+            code: "queryFailed",
+            detail: queryErr.message
+          });
         }
       }
 
@@ -412,6 +412,29 @@ const MapContainer = forwardRef(function MapContainer(
       });
       view.map.add(routesLayer);
       routesLayerRef.current = routesLayer;
+      sketchRef.current?.destroy();
+      const sketch = new SketchViewModel({
+        view,
+        layer: routesLayer,
+        polylineSymbol: new SimpleLineSymbol(ROUTE_SYMBOL_PROPERTIES),
+        defaultCreateOptions: { mode: "click" }
+      });
+      sketchRef.current = sketch;
+
+      // Keep the route count and the "drawing" state in sync with sketching and editing.
+      const reportCount = () => onRouteChangeRef.current?.(countRoutes(routesLayer));
+      sketch.on("create", (event) => {
+        if (event.state === "start") setSketching(true);
+        if (event.state === "complete" || event.state === "cancel") {
+          setSketching(false);
+          reportCount();
+        }
+      });
+      sketch.on("update", (event) => {
+        if (event.state === "complete") reportCount();
+      });
+      sketch.on(["delete", "undo", "redo"], reportCount);
+      onRouteChangeRef.current?.(0);
 
       // 2. Buffer corridor visualization layer
       const bufferLayer = new GraphicsLayer({
@@ -476,8 +499,6 @@ const MapContainer = forwardRef(function MapContainer(
         }
       }
 
-      drawRef.current = new Draw({ view });
-
     }
 
     const handleViewReady = (event) => {
@@ -499,10 +520,8 @@ const MapContainer = forwardRef(function MapContainer(
       if (mapEl) {
         mapEl.removeEventListener("arcgisViewReadyChange", handleViewReady);
       }
-      if (drawRef.current) {
-        drawRef.current.destroy();
-        drawRef.current = null;
-      }
+      sketchRef.current?.destroy();
+      sketchRef.current = null;
       if (hoverLayer && hoverMap) hoverMap.remove(hoverLayer);
       if (hoverLayerRef.current === hoverLayer) hoverLayerRef.current = null;
       if (viewRef.current?.map === initializingMap) viewRef.current = null;
@@ -545,13 +564,13 @@ const MapContainer = forwardRef(function MapContainer(
           icon-start="pencil"
           disabled={sketching ? true : undefined}
           onClick={startSketch}
-          title="Click to start drawing a migration route on the map"
+          title={t("drawing.drawTooltip")}
         >
-          Draw a route 
+          {t("drawing.draw")}
         </calcite-button>
 
         <calcite-chip scale="s" value="buffer-info" icon="extent">
-          Corridor: {config.bufferDistance} {config.bufferUnit}
+          {t("drawing.corridor", { distance: config.bufferDistance, unit: t(`drawing.unitsShort.${config.bufferUnit}`) })}
         </calcite-chip>
       </div>
 
@@ -581,7 +600,7 @@ const MapContainer = forwardRef(function MapContainer(
             icon="x"
             text={t("drawing.cancel")}
             title={t("drawing.cancel")}
-            onClick={() => drawRef.current?.reset()}
+            onClick={() => sketchRef.current?.cancel()}
           />
         </div>
       )}

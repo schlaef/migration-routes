@@ -5,15 +5,9 @@
     "description_one": "Analyzed {{count}} obstacle ({{distance}} {{unit}} corridor)",
     "description_other": "Analyzed {{count}} obstacles ({{distance}} {{unit}} corridor)",
     "language": "Language",
-    "copyReport": "Copy Report",
-    "copied": "Copied!",
-    "copyTooltip": "Copy analysis summary to clipboard",
-    "downloadJson": "Download JSON",
-    "downloadTooltip": "Download analysis report as JSON",
     "closePanel": "Close Panel",
     "collapsePanel": "Collapse Analysis Panel",
     "loading": "Analyzing corridor and intersecting unseen route obstacles...",
-    "reportFilename": "migration-route-analysis-{{timestamp}}.json",
     "complete": "Analysis complete",
     "riskSummary": "{{level}} — Total Difficulty Weight: {{weight}}",
     "obstacles": "Obstacles",
@@ -49,8 +43,17 @@
     "general": "This obstacle can delay a journey or expose refugees to additional danger, exhaustion, and uncertainty. Its effects depend on the conditions and the resources available to those crossing."
   },
   "drawing": {
-    "instructions": "Hold and drag, or click to add points. Double-click or press Enter to finish.",
-    "cancel": "Cancel drawing"
+    "instructions": "Click to add points, double-click to finish. You can still pan and zoom the map while drawing.",
+    "cancel": "Cancel drawing",
+    "draw": "Draw a route",
+    "drawTooltip": "Start drawing a route on the map",
+    "corridor": "Corridor: {{distance}} {{unit}}",
+    "unitsShort": {
+      "kilometers": "km",
+      "miles": "mi",
+      "meters": "m",
+      "nautical-miles": "NM"
+    }
   },
   "routeHelp": {
     "title": "Need help imagining a route?",
@@ -109,8 +112,8 @@
   },
   "guide": {
     "title": "How to Analyze a Migration Route",
-    "sketch": "<strong>Sketch a Route:</strong> Click the <em>Draw Route Polyline</em> button on the map to trace a route from an origin (e.g., Syria, Afghanistan, Libya) toward a European destination.",
-    "analyze": "<strong>Run Analysis:</strong> Click the <em>Analyze Route</em> button in the header.",
+    "sketch": "<strong>Draw a route:</strong> Click <em>Draw a route</em> on the map and trace a route from an origin (e.g., Syria, Afghanistan, Libya) toward a European destination.",
+    "analyze": "<strong>Run the analysis:</strong> Click <em>Analyze route</em> in the header.",
     "perspective": "<strong>Take the Perspective of Refugees:</strong> Consider the documented obstacles and reflection questions to understand the challenges and uncertainties of forced displacement. Every journey to safety carries risks, regardless of the obstacles recorded here.",
     "purposeTitle": "Pedagogical Purpose",
     "purpose": "Refugees fleeing persecution and war face information asymmetry: militarized border fences, pushbacks, maritime perils, and deportation camps are not clearly marked on ordinary maps. By simulating routes against unseen obstacles, students experience the daunting uncertainty faced by displaced persons.",
@@ -323,5 +326,48 @@
         "Compare his route with the IOM routes in the Eastern Mediterranean (help stage 2). Where do they match?"
       ]
     }
+  },
+  "header": {
+    "title": "Refugee Migration Routes Analyzer",
+    "subtitle": "The unseen obstacles on journeys into Europe",
+    "analyze": "Analyze route",
+    "analyzing": "Analyzing...",
+    "analyzeTooltip": "Check the route corridor for obstacles",
+    "analyzeDisabledTooltip": "Draw a route on the map first",
+    "clear": "Clear",
+    "clearTooltip": "Delete all routes and the analysis",
+    "settings": "Settings",
+    "guide": "Educational guide",
+    "collapsePanel": "Collapse analysis panel",
+    "expandPanel": "Expand analysis panel"
+  },
+  "errors": {
+    "title": "Analysis notice",
+    "dismiss": "Dismiss",
+    "notReady": "The map is not ready yet. Please wait a moment and try again.",
+    "noRoute": "Please draw at least one route on the map first.",
+    "bufferFailed": "The route corridor could not be calculated ({{detail}}).",
+    "queryFailed": "The obstacle layer could not be queried ({{detail}}).",
+    "analysisFailed": "The route could not be analyzed."
+  },
+  "settings": {
+    "title": "Simulation and analysis settings",
+    "description": "Configure the ArcGIS Online WebMap, the width of the route corridor and the fields of the obstacle layer. Settings are saved in this browser.",
+    "webmapId": "ArcGIS Online WebMap item ID",
+    "bufferDistance": "Corridor width",
+    "bufferUnit": "Unit",
+    "units": {
+      "kilometers": "Kilometers (km)",
+      "miles": "Miles (mi)",
+      "meters": "Meters (m)",
+      "nautical-miles": "Nautical miles (NM)"
+    },
+    "obstacleLayerTitle": "Title of the obstacle layer (in the WebMap)",
+    "obstacleLayerNote": "This layer is always kept invisible so students cannot see the obstacles while drawing.",
+    "weightField": "Weight field",
+    "descriptionField": "Description field",
+    "reset": "Reset to defaults",
+    "cancel": "Cancel",
+    "save": "Save"
   }
 }

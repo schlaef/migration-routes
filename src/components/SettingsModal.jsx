@@ -1,7 +1,9 @@
+import { useTranslation } from "react-i18next";
 import React, { useState, useEffect, useRef } from "react";
 import { DEFAULT_CONFIG, saveConfig, clearSavedConfig } from "../config.js";
 
 export default function SettingsModal({ open, config, onSave, onReset, onClose }) {
+  const { t } = useTranslation();
   const modalRef = useRef(null);
 
   const [webmapId, setWebmapId] = useState(config.webmapId || "");
@@ -73,26 +75,26 @@ export default function SettingsModal({ open, config, onSave, onReset, onClose }
     <calcite-dialog
       ref={modalRef}
       open
-      heading="Simulation & Analysis Settings"
+      heading={t("settings.title")}
       width-scale="m"
     >
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         <p style={{ margin: "0 0 0.5rem 0", color: "var(--calcite-color-text-2)", fontSize: "0.9rem" }}>
-          Configure non-static values including the ArcGIS Online WebMap ID, route corridor buffer distance, units, and obstacle layer attributes.
+          {t("settings.description")}
         </p>
 
         <calcite-label>
-          ArcGIS Online WebMap Item ID
+          {t("settings.webmapId")}
           <calcite-input-text
             value={webmapId}
             onInput={(e) => setWebmapId(e.target.value)}
-            placeholder="e.g. 433c2a6b28f84737a4d538e14674724b"
+            placeholder={DEFAULT_CONFIG.webmapId}
           />
         </calcite-label>
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
           <calcite-label>
-            Corridor Buffer Distance
+            {t("settings.bufferDistance")}
             <calcite-input-number
               value={bufferDistance}
               min={1}
@@ -103,55 +105,55 @@ export default function SettingsModal({ open, config, onSave, onReset, onClose }
           </calcite-label>
 
           <calcite-label>
-            Buffer Unit
+            {t("settings.bufferUnit")}
             <calcite-select
               value={bufferUnit}
               onCalciteSelectChange={(e) => setBufferUnit(e.target.value)}
             >
               <calcite-option value="kilometers" selected={bufferUnit === "kilometers" ? true : undefined}>
-                Kilometers (km)
+                {t("settings.units.kilometers")}
               </calcite-option>
               <calcite-option value="miles" selected={bufferUnit === "miles" ? true : undefined}>
-                Miles (mi)
+                {t("settings.units.miles")}
               </calcite-option>
               <calcite-option value="meters" selected={bufferUnit === "meters" ? true : undefined}>
-                Meters (m)
+                {t("settings.units.meters")}
               </calcite-option>
               <calcite-option value="nautical-miles" selected={bufferUnit === "nautical-miles" ? true : undefined}>
-                Nautical Miles (NM)
+                {t("settings.units.nautical-miles")}
               </calcite-option>
             </calcite-select>
           </calcite-label>
         </div>
 
         <calcite-label>
-          Route Obstacles Layer Title (in WebMap)
+          {t("settings.obstacleLayerTitle")}
           <calcite-input-text
             value={obstacleLayerTitle}
             onInput={(e) => setObstacleLayerTitle(e.target.value)}
-            placeholder="route-obstacles"
+            placeholder={DEFAULT_CONFIG.obstacleLayerTitle}
           />
           <span style={{ fontSize: "0.8rem", color: "var(--calcite-color-text-3)" }}>
-            * Note: As required, this layer is kept invisible on the map so users cannot see obstacles while sketching.
+            {t("settings.obstacleLayerNote")}
           </span>
         </calcite-label>
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
           <calcite-label>
-            Weight Field Name
+            {t("settings.weightField")}
             <calcite-input-text
               value={weightField}
               onInput={(e) => setWeightField(e.target.value)}
-              placeholder="weight"
+              placeholder={DEFAULT_CONFIG.weightField}
             />
           </calcite-label>
 
           <calcite-label>
-            Description Field Name
+            {t("settings.descriptionField")}
             <calcite-input-text
               value={descriptionField}
               onInput={(e) => setDescriptionField(e.target.value)}
-              placeholder="description"
+              placeholder={DEFAULT_CONFIG.descriptionField}
             />
           </calcite-label>
         </div>
@@ -159,13 +161,13 @@ export default function SettingsModal({ open, config, onSave, onReset, onClose }
 
       <div slot="footer-end" style={{ display: "flex", gap: "0.5rem" }}>
         <calcite-button appearance="outline" kind="danger" onClick={handleReset}>
-          Reset to Defaults
+          {t("settings.reset")}
         </calcite-button>
         <calcite-button appearance="outline" kind="neutral" onClick={onClose}>
-          Cancel
+          {t("settings.cancel")}
         </calcite-button>
         <calcite-button kind="brand" onClick={handleSave}>
-          Save Changes
+          {t("settings.save")}
         </calcite-button>
       </div>
     </calcite-dialog>

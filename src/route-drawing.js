@@ -1,63 +1,21 @@
-import Graphic from "@arcgis/core/Graphic.js";
-import Polyline from "@arcgis/core/geometry/Polyline.js";
-import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol.js";
+/**
+ * Shared settings for drawing routes with the ArcGIS SketchViewModel
+ * (the behaviour of the Sketch component without its toolbar, see MapContainer.jsx).
+ */
 
-export function startRouteDrawing(draw, view, routesLayer, onComplete, onDrawingChange) {
-  const action = draw.create("polyline", { mode: "hybrid" });
-  const symbol = new SimpleLineSymbol({ color: [255, 140, 0, 1], width: 3.5, style: "solid" });
-  const surface = view.container?.querySelector?.(".esri-view-surface") || view.container;
-  const previousCursor = surface?.style?.cursor;
-  let preview = null;
-  let cleanedUp = false;
+// Orange route line, used while drawing and for finished routes.
+export const ROUTE_SYMBOL_PROPERTIES = {
+  color: [255, 140, 0, 1],
+  width: 3.5,
+  style: "solid"
+};
 
-  if (surface?.style) surface.style.cursor = "crosshair";
-  onDrawingChange?.(true);
-
-  const clearPreview = () => {
-    if (preview) view.graphics.remove(preview);
-    preview = null;
-  };
-
-  const cancelHandle = view.on("key-down", (event) => {
-    if (event.key === "Escape" && draw.activeAction === action) {
-      event.stopPropagation();
-      draw.reset();
-    }
-  });
-
-  const cleanup = () => {
-    if (cleanedUp) return;
-    cleanedUp = true;
-    clearPreview();
-    cancelHandle.remove();
-    if (surface?.style) surface.style.cursor = previousCursor;
-    onDrawingChange?.(false);
-  };
-
-  const makeGeometry = (vertices) => new Polyline({
-    paths: [vertices],
-    spatialReference: view.spatialReference
-  });
-
-  const updatePreview = ({ vertices }) => {
-    if (vertices.length < 2) {
-      clearPreview();
-      return;
-    }
-    if (preview) {
-      preview.geometry = makeGeometry(vertices);
-    } else {
-      preview = new Graphic({ geometry: makeGeometry(vertices), symbol });
-      view.graphics.add(preview);
-    }
-  };
-
-  action.on(["vertex-add", "vertex-remove", "cursor-update", "undo", "redo"], updatePreview);
-  action.on("draw-complete", ({ vertices }) => {
-    cleanup();
-    if (vertices.length < 2) return;
-    routesLayer.add(new Graphic({ geometry: makeGeometry(vertices), symbol }));
-    onComplete();
-  });
-  action.on("destroy", cleanup);
+/**
+ * Number of route lines in the sketch layer.
+ */
+export function countRoutes(layer) {
+  const graphics = layer?.graphics;
+  if (!graphics) return 0;
+  const list = typeof graphics.toArray === "function" ? graphics.toArray() : Array.from(graphics);
+  return list.filter((graphic) => graphic?.geometry?.type === "polyline").length;
 }

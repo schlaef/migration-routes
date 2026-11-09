@@ -40,7 +40,10 @@ The report records which help stage was used, so teachers can take it into accou
 
 **For students**
 - **Starting point chooser** for 17 countries of origin or transit in Africa, the Middle East and Central Asia.
-- **Route drawing** (click or drag, finish with double-click or Enter); several routes are possible.
+- **Route drawing** with the ArcGIS `SketchViewModel` (the behaviour of the standard Sketch component, without
+  its toolbar): click to add points, double-click to finish. Vertices are shown as control points, and the map
+  can still be panned and zoomed while drawing. Clicking a finished route lets students move its vertices or
+  delete it. Several routes are possible.
 - **Scaffolded help** while drawing:
   - Stage 1: *Border crossing points* (UNHCR) and *European Union*, each with an explanation and a source link.
   - Stage 2: *Known refugee routes (IOM 2026)*, unlocked once a stage 1 layer has been used. The region
@@ -53,9 +56,8 @@ The report records which help stage was used, so teachers can take it into accou
   - **Film & literature:** shows the route of *Io Capitano* (Matteo Garrone, 2023) or *Nel mare ci sono i
     coccodrilli* (Fabio Geda, 2010) on the map with numbered stations, compares its dangers with the student's
     route and asks questions about the work.
-- **Four languages:** German, French, Italian and English (language menu in the analysis panel).
-- **Report export:** copy or download the analysis as JSON. The export also contains the difficulty weights
-  and risk level, which are not shown in the interface.
+- **Four languages:** German, French, Italian and English (language menu in the analysis panel). Switching
+  the language updates all controls, including the ArcGIS map components.
 
 **For teachers**
 - **Links with parameters** to prepare an assignment (see [Teaching parameters](#teaching-parameters)).
@@ -208,7 +210,7 @@ Pages must be set to **Settings → Pages → Source: GitHub Actions**. After a 
 │   ├── analyzer.js              # Corridor buffer, intersection, categories, feedback
 │   ├── reference-layers.js      # Help layers, stages, IOM region filter
 │   ├── starting-points.js       # Starting point chooser
-│   ├── route-drawing.js         # Drawing tool
+│   ├── route-drawing.js         # Route symbol and route count for the SketchViewModel
 │   ├── work-routes.js           # Routes from film and literature, comparison
 │   ├── category-images.js       # Images per category
 │   ├── category-videos.js       # Videos per category (embed URLs, validation)
@@ -237,8 +239,6 @@ Open points are tracked in [`BACKLOG.md`](BACKLOG.md). The most relevant ones:
 - **Film & literature:** station texts and coordinates are simplified and should be checked against the works
   before use in class.
 - **Videos:** `videos.json` is still empty; videos have to be selected and added.
-- The buttons in the top bar and on the map ("Analyze Route", "Clear", "Draw a route") and the settings dialog
-  are not translated yet.
 - `src/app.js` is an unused leftover of an earlier version.
 
 ---

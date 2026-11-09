@@ -1,8 +1,7 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Header({
-  appTitle,
-  appSubtitle,
   routeCount,
   analyzing,
   onAnalyze,
@@ -12,12 +11,15 @@ export default function Header({
   panelOpen,
   onTogglePanel
 }) {
+  const { t } = useTranslation();
+  const panelText = panelOpen ? t("header.collapsePanel") : t("header.expandPanel");
+
   return (
     <calcite-navigation slot="header">
       <calcite-navigation-logo
         slot="logo"
-        heading={appTitle || "Refugee Migration Routes Analyzer"}
-        description={appSubtitle || "Analyzing perils on migration routes into Europe"}
+        heading={t("header.title")}
+        description={t("header.subtitle")}
         icon="compass"
       />
 
@@ -32,13 +34,9 @@ export default function Header({
           loading={analyzing ? true : undefined}
           disabled={routeCount === 0 || analyzing ? true : undefined}
           onClick={onAnalyze}
-          title={
-            routeCount === 0
-              ? "Sketch a migration route on the map first"
-              : "Analyze route buffer against obstacles"
-          }
+          title={routeCount === 0 ? t("header.analyzeDisabledTooltip") : t("header.analyzeTooltip")}
         >
-          {analyzing ? "Analyzing..." : "Analyze Route"}
+          {analyzing ? t("header.analyzing") : t("header.analyze")}
         </calcite-button>
 
         <calcite-button
@@ -47,33 +45,33 @@ export default function Header({
           icon-start="trash"
           disabled={routeCount === 0 || analyzing ? true : undefined}
           onClick={onClear}
-          title="Clear all sketched routes and analysis"
+          title={t("header.clearTooltip")}
         >
-          Clear
+          {t("header.clear")}
         </calcite-button>
 
         <calcite-action
-          text="Settings"
+          text={t("header.settings")}
           icon="gear"
           text-enabled={false}
           onClick={onOpenSettings}
-          title="Configure WebMap ID, Buffer, and Fields"
+          title={t("header.settings")}
         />
 
         <calcite-action
-          text="Educational Guide"
+          text={t("header.guide")}
           icon="information"
           text-enabled={false}
           onClick={onOpenGuide}
-          title="About this Educational Simulation"
+          title={t("header.guide")}
         />
 
         <calcite-action
-          text={panelOpen ? "Collapse Analysis Panel" : "Expand Analysis Panel"}
+          text={panelText}
           icon={panelOpen ? "chevrons-right" : "chevrons-left"}
           text-enabled={false}
           onClick={onTogglePanel}
-          title="Toggle Analysis Panel"
+          title={panelText}
         />
       </div>
     </calcite-navigation>
