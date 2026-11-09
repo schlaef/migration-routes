@@ -93,6 +93,7 @@
     "southSudan": "South Sudan",
     "libya": "Libya",
     "niger": "Niger",
+    "senegal": "Senegal",
     "mali": "Mali",
     "burkinaFaso": "Burkina Faso",
     "chad": "Chad",
@@ -202,5 +203,125 @@
     "iframeTitle": "Embedded video",
     "source": "Source: {{source}}",
     "openOnYoutube": "Open on YouTube"
+  },
+  "workRoutes": {
+    "tab": "Film & literature",
+    "introduction": "Compare your route with refugee journeys from film and literature. Show a route on the map and read its stations. Note: the texts reveal parts of the plot.",
+    "show": "Show route on map",
+    "hide": "Hide route",
+    "stationsHeading": "Stations: {{title}}",
+    "approximate": "The stations are simplified and the line connects them directly. It does not show the exact path in the work.",
+    "comparisonHeading": "Comparison with your route",
+    "shared": "Dangers on both routes:",
+    "onlyWork": "Only on the route in the work:",
+    "onlyOwn": "Only on your route:",
+    "none": "none",
+    "generalQuestion": "Where did you decide differently from the character? What information did you have that they did not?",
+    "categories": {
+      "sea": "Sea",
+      "desert": "Desert",
+      "mountain": "Mountains",
+      "border": "Border",
+      "detention": "Detention and camps",
+      "exploitation": "Exploitation and smugglers",
+      "health": "Health",
+      "terrain": "Terrain"
+    },
+    "ioCapitano": {
+      "title": "Io Capitano",
+      "meta": "Feature film by Matteo Garrone, 2023",
+      "summary": "Cousins Seydou and Moussa, two teenagers from Dakar, secretly set off for Europe. Their journey leads through Mali and Niger, across the Sahara and into Libya, where they are separated. In the end, Seydou himself steers an overcrowded boat across the Mediterranean to Italy.",
+      "stations": {
+        "dakar": {
+          "name": "Dakar (Senegal)",
+          "text": "The two secretly save money for the journey. Seydou's mother is against it, so they leave without her knowing."
+        },
+        "mali": {
+          "name": "Mali",
+          "text": "They travel north by bus. Officials at checkpoints demand money, and without valid papers the two are at their mercy."
+        },
+        "agadez": {
+          "name": "Agadez (Niger)",
+          "text": "Starting point for crossing the Sahara. Smugglers pack people tightly onto pickup trucks."
+        },
+        "sahara": {
+          "name": "Sahara",
+          "text": "Part of the way has to be covered on foot. Anyone who cannot keep up is left behind."
+        },
+        "libya": {
+          "name": "Southern Libya",
+          "text": "Armed groups capture travellers and extort ransom from their families. Captivity means violence and torture."
+        },
+        "tripoli": {
+          "name": "Tripoli (Libya)",
+          "text": "Without money, Seydou has to work under coercion until the crossing becomes possible."
+        },
+        "sea": {
+          "name": "Mediterranean Sea",
+          "text": "An overcrowded, barely seaworthy boat. Seydou has to steer it although he has no experience."
+        },
+        "italy": {
+          "name": "Off the coast of Sicily",
+          "text": "Arriving in Europe is not the end of uncertainty."
+        }
+      },
+      "questions": [
+        "Why do Seydou and Moussa leave? How do their reasons differ from fleeing war or persecution?",
+        "Who profits from the journey? Find the stations where money is demanded or extorted.",
+        "The film is fiction but based on first-hand accounts. What can a feature film show that a map cannot, and vice versa?"
+      ]
+    },
+    "coccodrilli": {
+      "title": "Nel mare ci sono i coccodrilli",
+      "meta": "Novel by Fabio Geda, 2010 (English: \"In the Sea There Are Crocodiles\"), based on the true story of Enaiatollah Akbari",
+      "summary": "Enaiatollah is still a child when his mother leaves him in Pakistan to protect him from violence in Afghanistan. Alone, he travels for years through Iran, Türkiye and Greece to Italy, working along the way to pay for the next stage.",
+      "stations": {
+        "ghazni": {
+          "name": "Ghazni province (Afghanistan)",
+          "text": "As Hazara, Enaiatollah's family is under threat. His mother takes him away to protect him."
+        },
+        "quetta": {
+          "name": "Quetta (Pakistan)",
+          "text": "His mother leaves him behind alone. He has to work to survive."
+        },
+        "iran": {
+          "name": "Iran",
+          "text": "Work on building sites, without papers and in constant fear of police checks and deportation."
+        },
+        "mountains": {
+          "name": "Mountains on the border with Türkiye",
+          "text": "A march of several days through snow and cold. Not everyone in the group survives."
+        },
+        "istanbul": {
+          "name": "Istanbul (Türkiye)",
+          "text": "Working and waiting again until there is enough money for the next stage."
+        },
+        "aegean": {
+          "name": "Aegean Sea, to Lesbos",
+          "text": "Crossing the sea with other boys in a small inflatable boat."
+        },
+        "athens": {
+          "name": "Athens (Greece)",
+          "text": "Without a residence permit he works and looks for a way to Italy."
+        },
+        "ferry": {
+          "name": "Port in western Greece",
+          "text": "Hidden under a lorry on the ferry to Italy, one of the most dangerous stages."
+        },
+        "italy": {
+          "name": "Venice (Italy)",
+          "text": "Arrival in Italy."
+        },
+        "turin": {
+          "name": "Turin",
+          "text": "A family takes him in, and he applies for asylum."
+        }
+      },
+      "questions": [
+        "Enaiatollah is a child travelling alone. Which dangers are greater for him than for adults?",
+        "Why does his journey take years rather than weeks?",
+        "Compare his route with the IOM routes in the Eastern Mediterranean (help stage 2). Where do they match?"
+      ]
+    }
   }
 }

@@ -6,12 +6,17 @@ import Graphic from "@arcgis/core/Graphic.js";
 import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol.js";
 import SimpleFillSymbol from "@arcgis/core/symbols/SimpleFillSymbol.js";
 import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol.js";
+import TextSymbol from "@arcgis/core/symbols/TextSymbol.js";
+import Point from "@arcgis/core/geometry/Point.js";
+import Polyline from "@arcgis/core/geometry/Polyline.js";
+import * as webMercatorUtils from "@arcgis/core/geometry/support/webMercatorUtils.js";
 import Draw from "@arcgis/core/views/draw/Draw.js";
 import * as geometryEngine from "@arcgis/core/geometry/geometryEngine.js";
 import { sampleObstacles } from "../sample-obstacles.js";
 import { startRouteDrawing } from "../route-drawing.js";
 import { syncReferenceLayers } from "../reference-layers.js";
 import { focusStartingPoint } from "../starting-points.js";
+import { getWorkRoutePath } from "../work-routes.js";
 import {
   findObstacleLayer,
   ensureObstacleLayerHidden,
@@ -35,6 +40,8 @@ const MapContainer = forwardRef(function MapContainer(
   const bufferLayerRef = useRef(null);
   const highlightLayerRef = useRef(null);
   const hoverLayerRef = useRef(null);
+  const workRouteLayerRef = useRef(null);
+  const workRouteLabelLayerRef = useRef(null);
   const obstacleLayerRef = useRef(null);
   const referenceLayersRef = useRef(referenceLayers);
 
@@ -71,12 +78,89 @@ const MapContainer = forwardRef(function MapContainer(
       });
     },
 
+    /**
+     * Shows a route from film or literature (or hides it when route is null).
+     * stationLabels: translated station names in station order.
+     */
+    showWorkRoute(route, stationLabels = []) {
+      const view = viewRef.current;
+      if (!view?.map) return;
+
+      const ensureLayer = (layerRef, id) => {
+        if (!layerRef.current || !view.map.layers.includes(layerRef.current)) {
+          layerRef.current = new GraphicsLayer({ id, title: "Route from film / literature", listMode: "hide" });
+          view.map.add(layerRef.current);
+        }
+        layerRef.current.removeAll();
+        return layerRef.current;
+      };
+      const layer = ensureLayer(workRouteLayerRef, "work-route");
+      // Labels on their own layer: if label fonts cannot be loaded, line and points still show.
+      const labelLayer = ensureLayer(workRouteLabelLayerRef, "work-route-labels");
+      if (!route) return;
+
+      // Station coordinates are WGS84; convert for Web Mercator maps so lines and zoom work without a projection engine.
+      const toView = (geometry) =>
+        view.spatialReference?.isWebMercator && webMercatorUtils.canProject(geometry, view.spatialReference)
+          ? webMercatorUtils.geographicToWebMercator(geometry)
+          : geometry;
+      const spatialReference = { wkid: 4326 };
+      const line = new Graphic({
+        geometry: toView(new Polyline({ paths: [getWorkRoutePath(route)], spatialReference })),
+        symbol: new SimpleLineSymbol({ color: [123, 63, 160, 0.95], width: 3, style: "short-dash" })
+      });
+      const labels = [];
+      const stations = route.stations.map((station, index) => {
+        const geometry = toView(new Point({ x: station.coordinates[0], y: station.coordinates[1], spatialReference }));
+        labels.push(
+          new Graphic({
+            geometry,
+            symbol: new TextSymbol({
+              text: String(index + 1),
+              color: "white",
+              font: { size: 9, weight: "bold" },
+              yoffset: -3
+            })
+          }),
+          new Graphic({
+            geometry,
+            symbol: new TextSymbol({
+              text: stationLabels[index] || "",
+              color: [60, 20, 90, 1],
+              haloColor: "white",
+              haloSize: 1.5,
+              font: { size: 10, weight: "bold" },
+              xoffset: 12,
+              yoffset: 8,
+              horizontalAlignment: "left"
+            })
+          })
+        );
+        return new Graphic({
+          geometry,
+          symbol: new SimpleMarkerSymbol({
+            style: "circle",
+            size: 18,
+            color: [123, 63, 160, 1],
+            outline: { color: [255, 255, 255, 1], width: 1.5 }
+          })
+        });
+      });
+      layer.addMany([line, ...stations]);
+      labelLayer.addMany(labels);
+      view.goTo(line.geometry.extent.clone().expand(1.3), { duration: 800 }).catch((error) => {
+        if (error.name !== "AbortError") console.warn("Could not zoom to work route:", error);
+      });
+    },
+
     clearAll() {
       if (drawRef.current) drawRef.current.reset();
       if (routesLayerRef.current) routesLayerRef.current.removeAll();
       if (bufferLayerRef.current) bufferLayerRef.current.removeAll();
       if (highlightLayerRef.current) highlightLayerRef.current.removeAll();
       if (hoverLayerRef.current) hoverLayerRef.current.removeAll();
+      if (workRouteLayerRef.current) workRouteLayerRef.current.removeAll();
+      if (workRouteLabelLayerRef.current) workRouteLabelLayerRef.current.removeAll();
       if (onRouteChange) onRouteChange(0);
     },
 
@@ -111,11 +195,16 @@ const MapContainer = forwardRef(function MapContainer(
         throw new Error("Map or sketch layer is not initialized yet.");
       }
 
-      try {
-        await viewRef.current.map.loadAll();
-      } catch (loadErr) {
-        console.warn("Could not load every WebMap layer before analysis:", loadErr);
-      }
+      // Load only the layers the analysis needs; one slow or blocked reference
+      // layer (e.g. an external service filtered at school) must not block it.
+      const analysisLayers = [
+        findObstacleLayer(viewRef.current.map, config.obstacleLayerTitle) || obstacleLayerRef.current,
+        findObstacleLayer(viewRef.current.map, "Political Boundaries - Countries")
+      ].filter((layer) => typeof layer?.load === "function");
+      const loadResults = await Promise.allSettled(analysisLayers.map((layer) => layer.load()));
+      loadResults
+        .filter((result) => result.status === "rejected")
+        .forEach((result) => console.warn("Could not load a layer needed for the analysis:", result.reason));
 
       const routeGraphics = routesLayerRef.current.graphics
         .filter(
@@ -300,10 +389,12 @@ const MapContainer = forwardRef(function MapContainer(
       if (destroyed || view.map !== map) return;
       onReferenceLayerAvailabilityChange?.(syncReferenceLayers(map, referenceLayersRef.current));
 
+      // Only wait for the obstacle layer, not for every layer in the WebMap:
+      // drawing must not depend on slow or blocked external reference layers.
       try {
-        await map.loadAll();
+        await findObstacleLayer(map, config.obstacleLayerTitle)?.load?.();
       } catch (loadErr) {
-        console.warn("Could not load every WebMap layer before obstacle discovery:", loadErr);
+        console.warn("Could not load the obstacle layer:", loadErr);
       }
 
       if (destroyed || view.map !== map) return;

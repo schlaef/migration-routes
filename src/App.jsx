@@ -92,6 +92,10 @@ export default function App() {
     setConfig(defaultConfig);
   };
 
+  const handleShowWorkRoute = useCallback((route, labels) => {
+    mapContainerRef.current?.showWorkRoute(route, labels);
+  }, []);
+
   const handleObstacleHover = (obstacle) => {
     mapContainerRef.current?.highlightObstacle(obstacle);
   };
@@ -139,6 +143,7 @@ export default function App() {
           usedHelp={usedHelp}
           onStartingPointChange={(id) => mapContainerRef.current?.goToStartingPoint(id)}
           onReferenceLayerChange={handleReferenceLayerChange}
+          onShowWorkRoute={handleShowWorkRoute}
         />
       </calcite-shell-panel>
 

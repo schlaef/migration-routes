@@ -34,7 +34,10 @@ This application challenges students to **take the perspective of refugees**:
   - Full list of intersected obstacles with severity badges and descriptions
 - **Interactive Map Feedback**: Highlights triggered obstacles on the map after analysis, allowing students to click obstacles in the summary to zoom directly to their locations.
 - **Refugee Perspective & Inquiry Prompts**: Structured reflection questions guiding classroom discussions on asylum policies, border closures, and humanitarian needs.
-- **Localization**: English and German interface translations are stored in `src/locales/`; the browser language is detected automatically, and the selected language is remembered.
+- **Localization**: German, French, Italian and English interface translations are stored in `src/locales/`; the browser language is detected automatically, the selected language is remembered, and `?lang=it` (or `fr`, `de`, `en`) opens the app in a given language, e.g. for foreign-language classes.
+- **Scaffolded Help**: Stage 1 (border crossings, EU) and stage 2 (real IOM routes, unlocked after stage 1, filterable by region). The report records which help was used.
+- **Film & Literature Comparison**: After the analysis, students can show the routes from *Io Capitano* (Matteo Garrone, 2023) and *Nel mare ci sono i coccodrilli* (Fabio Geda, 2010) on the map, read their stations and compare the dangers with their own route (`src/work-routes.js`, texts in the locale files). Station coordinates are approximate.
+- **Videos per Category**: Documentary or film clips per danger category, loaded from YouTube only after a click (`src/assets/categories/videos.json`).
 - **High Configurability**: WebMap ID, buffer distance, units, layer title, and attribute field names can be configured in:
   1. The built-in **Settings Dialog** (saved in browser `localStorage`)
   2. **URL Query Parameters** (enabling teachers to generate one-click shareable assignment links)
@@ -57,6 +60,17 @@ All non-static parameters are completely configurable:
 | `descriptionField` | `"description"` | Obstacle attribute for description | `?descField=description` |
 | `titleField` | `"title"` | Obstacle attribute for name/title | `?titleField=title` |
 | `categoryField` | `"category"` | Obstacle attribute for category | `?categoryField=category` |
+
+### Teaching Parameters (URL only)
+
+| URL Query Param | Values | Effect |
+|-----------------|--------|--------|
+| `lang` | `de`, `fr`, `it`, `en` | Interface language |
+| `hilfen` / `help` | `0`, `1`, `2` (default `2`) | Help offered while drawing: none, orientation only, or also real IOM routes |
+| `werke` / `works` | `on` / `off` | Comparison with routes from film and literature |
+| `videos` | `on` / `off` | Videos in the category summary |
+
+Example for an Italian class without real routes: `?lang=it&hilfen=1`
 
 ### Shareable URL Example for Teachers:
 ```

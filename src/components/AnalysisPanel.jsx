@@ -5,6 +5,8 @@ import { getCategoryImages } from "../category-images.js";
 import categoryVideos from "../assets/categories/videos.json";
 import { getCategoryVideos } from "../category-videos.js";
 import CategoryVideo from "./CategoryVideo.jsx";
+import WorkRoutes from "./WorkRoutes.jsx";
+import { getWorkRoute } from "../work-routes.js";
 import RouteHelp from "./RouteHelp.jsx";
 import { HELP_STAGES, getHighestHelpStage } from "../reference-layers.js";
 
@@ -26,15 +28,32 @@ export default function AnalysisPanel({
   helpLevel,
   usedHelp,
   onReferenceLayerChange,
-  onStartingPointChange
+  onStartingPointChange,
+  onShowWorkRoute
 }) {
   const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState("perspective");
   const [copied, setCopied] = useState(false);
+  const [workRouteId, setWorkRouteId] = useState(null);
+  const showWorkRoutes = config.showWorkRoutes !== false;
+
+  // Hide the work route when the analysis is cleared or work routes are disabled.
+  useEffect(() => {
+    if (!analysis || !showWorkRoutes) setWorkRouteId(null);
+  }, [analysis, showWorkRoutes]);
+
+  // Draw (or remove) the selected work route; redraw labels when the language changes.
+  useEffect(() => {
+    const route = getWorkRoute(workRouteId);
+    const labels = route
+      ? route.stations.map((station) => t(`workRoutes.${route.id}.stations.${station.id}.name`))
+      : [];
+    onShowWorkRoute?.(route, labels);
+  }, [workRouteId, i18n.resolvedLanguage, onShowWorkRoute, t]);
   const languageSelectRef = useRef(null);
 
   useEffect(() => {
-    document.documentElement.lang = i18n.resolvedLanguage?.startsWith("de") ? "de" : "en";
+    document.documentElement.lang = i18n.resolvedLanguage || "en";
   }, [i18n.resolvedLanguage]);
 
   useEffect(() => {
@@ -140,12 +159,14 @@ export default function AnalysisPanel({
         <calcite-select
           ref={languageSelectRef}
           scale="s"
-          value={i18n.resolvedLanguage?.startsWith("de") ? "de" : "en"}
+          value={i18n.resolvedLanguage || "en"}
           aria-label={t("analysis.language")}
           title={t("analysis.language")}
         >
-          <calcite-option value="en">English</calcite-option>
-          <calcite-option value="de">Deutsch</calcite-option>
+          <calcite-option value="de" selected={i18n.resolvedLanguage === "de" ? true : undefined}>Deutsch</calcite-option>
+          <calcite-option value="fr" selected={i18n.resolvedLanguage === "fr" ? true : undefined}>Français</calcite-option>
+          <calcite-option value="it" selected={i18n.resolvedLanguage === "it" ? true : undefined}>Italiano</calcite-option>
+          <calcite-option value="en" selected={i18n.resolvedLanguage === "en" ? true : undefined}>English</calcite-option>
         </calcite-select>
         {analysis && (
           <>
@@ -347,6 +368,16 @@ export default function AnalysisPanel({
               >
                 {t("analysis.categoriesTab")}
               </calcite-button>
+              {showWorkRoutes && (
+                <calcite-button
+                  appearance={activeTab === "works" ? "solid" : "outline"}
+                  kind={activeTab === "works" ? "brand" : "neutral"}
+                  scale="s"
+                  onClick={() => changeTab("works")}
+                >
+                  {t("workRoutes.tab")}
+                </calcite-button>
+              )}
             </div>
 
             {/* Tab 1: Refugee Perspective & Reflection */}
@@ -452,6 +483,11 @@ export default function AnalysisPanel({
                   ))
                 )}
               </div>
+            )}
+
+            {/* Tab 4: Comparison with routes from film and literature */}
+            {activeTab === "works" && showWorkRoutes && (
+              <WorkRoutes analysis={analysis} selectedId={workRouteId} onSelect={setWorkRouteId} />
             )}
 
             {/* Tab 3: Categories Summary */}
