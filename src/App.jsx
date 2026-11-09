@@ -4,6 +4,7 @@ import MapContainer from "./components/MapContainer.jsx";
 import AnalysisPanel from "./components/AnalysisPanel.jsx";
 import SettingsModal from "./components/SettingsModal.jsx";
 import GuideModal from "./components/GuideModal.jsx";
+import { useTranslation } from "react-i18next";
 import { getConfig } from "./config.js";
 import {
   INITIAL_REFERENCE_LAYERS,
@@ -14,6 +15,7 @@ import {
 } from "./reference-layers.js";
 
 export default function App() {
+  const { t } = useTranslation();
   const [config, setConfig] = useState(() => getConfig());
   const [routeCount, setRouteCount] = useState(0);
   const [analyzing, setAnalyzing] = useState(false);
@@ -69,7 +71,10 @@ export default function App() {
       setPanelOpen(true);
     } catch (err) {
       console.error("Analysis error:", err);
-      setErrorMessage(err.message || "Failed to analyze sketched route.");
+      // Errors from the analysis carry a code with a translated message; others show their own text.
+      setErrorMessage(
+        err.code ? t(`errors.${err.code}`, { detail: err.detail || "" }) : err.message || t("errors.analysisFailed")
+      );
     } finally {
       setAnalyzing(false);
     }
@@ -108,8 +113,6 @@ export default function App() {
   return (
     <calcite-shell style={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "column" }}>
       <Header
-        appTitle={config.appTitle}
-        appSubtitle={config.appSubtitle}
         routeCount={routeCount}
         analyzing={analyzing}
         onAnalyze={handleAnalyze}
@@ -161,12 +164,12 @@ export default function App() {
             }}
           >
             <calcite-notice open kind="danger" icon="exclamation-mark-triangle">
-              <div slot="title">Analysis Notice</div>
+              <div slot="title">{t("errors.title")}</div>
               <div slot="message">{errorMessage}</div>
               <calcite-action
                 slot="actions-end"
                 icon="x"
-                text="Dismiss"
+                text={t("errors.dismiss")}
                 onClick={() => setErrorMessage(null)}
               />
             </calcite-notice>

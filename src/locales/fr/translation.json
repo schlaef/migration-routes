@@ -5,15 +5,9 @@
     "description_one": "{{count}} obstacle analysé (corridor de {{distance}} {{unit}})",
     "description_other": "{{count}} obstacles analysés (corridor de {{distance}} {{unit}})",
     "language": "Langue",
-    "copyReport": "Copier le rapport",
-    "copied": "Copié !",
-    "copyTooltip": "Copier le rapport d'analyse dans le presse-papiers",
-    "downloadJson": "Télécharger en JSON",
-    "downloadTooltip": "Télécharger le rapport d'analyse au format JSON",
     "closePanel": "Fermer le panneau",
     "collapsePanel": "Réduire le panneau d'analyse",
     "loading": "Analyse du corridor et des obstacles invisibles le long de l'itinéraire en cours...",
-    "reportFilename": "analyse-itineraire-migratoire-{{timestamp}}.json",
     "complete": "Analyse terminée",
     "riskSummary": "{{level}} — Difficulté totale : {{weight}}",
     "obstacles": "Obstacles",
@@ -49,8 +43,17 @@
     "general": "Cet obstacle peut retarder le voyage ou exposer les personnes réfugiées à des dangers supplémentaires, à l'épuisement et à l'incertitude. Ses effets dépendent des conditions et des ressources de celles et ceux qui le franchissent."
   },
   "drawing": {
-    "instructions": "Maintenez le bouton enfoncé et faites glisser, ou cliquez pour ajouter des points. Double-cliquez ou appuyez sur Entrée pour terminer.",
-    "cancel": "Annuler le dessin"
+    "instructions": "Clique pour ajouter des points, double-clique pour terminer. Tu peux toujours déplacer la carte et zoomer pendant le dessin.",
+    "cancel": "Annuler le dessin",
+    "draw": "Dessiner un itinéraire",
+    "drawTooltip": "Commencer à dessiner un itinéraire sur la carte",
+    "corridor": "Corridor : {{distance}} {{unit}}",
+    "unitsShort": {
+      "kilometers": "km",
+      "miles": "mi",
+      "meters": "m",
+      "nautical-miles": "NM"
+    }
   },
   "routeHelp": {
     "title": "Tu as du mal à imaginer un itinéraire ?",
@@ -109,8 +112,8 @@
   },
   "guide": {
     "title": "Comment analyser un itinéraire migratoire",
-    "sketch": "<strong>Dessine un itinéraire :</strong> clique sur le bouton <em>Draw a route</em> sur la carte et trace un itinéraire depuis un pays d'origine (par exemple la Syrie, l'Afghanistan, la Libye) vers une destination en Europe.",
-    "analyze": "<strong>Lance l'analyse :</strong> clique sur le bouton <em>Analyze Route</em> dans l'en-tête.",
+    "sketch": "<strong>Dessine un itinéraire :</strong> clique sur <em>Dessiner un itinéraire</em> sur la carte et trace un itinéraire depuis un pays d'origine (par exemple la Syrie, l'Afghanistan, la Libye) vers une destination en Europe.",
+    "analyze": "<strong>Lance l'analyse :</strong> clique sur <em>Analyser l'itinéraire</em> dans l'en-tête.",
     "perspective": "<strong>Adopte le point de vue des personnes réfugiées :</strong> examine les obstacles documentés et les questions de réflexion pour comprendre les difficultés et les incertitudes de l'exil. Chaque voyage vers la sécurité comporte des risques, indépendamment des obstacles enregistrés ici.",
     "purposeTitle": "Objectif pédagogique",
     "purpose": "Les personnes qui fuient les persécutions et la guerre ne disposent pas des mêmes informations que les autres : clôtures frontalières militarisées, refoulements, dangers en mer et camps de détention ne figurent pas clairement sur les cartes ordinaires. En simulant des itinéraires face à des obstacles invisibles, les élèves font l'expérience de l'incertitude pesante que vivent les personnes déplacées.",
@@ -269,7 +272,13 @@
         "Pourquoi Seydou et Moussa partent-ils ? En quoi leurs raisons diffèrent-elles d'une fuite devant la guerre ou la persécution ?",
         "Qui profite du voyage ? Trouve les étapes où de l'argent est demandé ou extorqué.",
         "Le film est une fiction, mais il s'appuie sur des témoignages. Que peut montrer un film qu'une carte ne peut pas montrer, et inversement ?"
-      ]
+      ],
+      "videos": {
+        "trailer": {
+          "title": "Bande-annonce du film",
+          "note": "Quelles étapes du voyage reconnais-tu dans la bande-annonce ? Présente-t-elle le voyage plutôt comme une aventure ou comme un danger ?"
+        }
+      }
     },
     "coccodrilli": {
       "title": "Nel mare ci sono i coccodrilli",
@@ -321,7 +330,56 @@
         "Enaiatollah est un enfant qui voyage seul. Quels dangers sont plus grands pour lui que pour un adulte ?",
         "Pourquoi son voyage dure-t-il des années et non des semaines ?",
         "Compare son itinéraire avec les routes de l'OIM en Méditerranée orientale (niveau d'aide 2). Où se recoupent-elles ?"
-      ]
+      ],
+      "videos": {
+        "trailer": {
+          "title": "Bande-annonce de l'adaptation",
+          "note": "Compare la bande-annonce avec le roman : quelles étapes du voyage reconnais-tu, et qu'est-ce qui manque ?"
+        }
+      }
     }
+  },
+  "header": {
+    "title": "Analyse des routes migratoires",
+    "subtitle": "Les obstacles invisibles sur la route de l'Europe",
+    "analyze": "Analyser l'itinéraire",
+    "analyzing": "Analyse en cours...",
+    "analyzeTooltip": "Rechercher les obstacles dans le corridor de l'itinéraire",
+    "analyzeDisabledTooltip": "Dessine d'abord un itinéraire sur la carte",
+    "clear": "Effacer",
+    "clearTooltip": "Supprimer tous les itinéraires et l'analyse",
+    "settings": "Paramètres",
+    "guide": "Guide pédagogique",
+    "collapsePanel": "Réduire le panneau d'analyse",
+    "expandPanel": "Développer le panneau d'analyse"
+  },
+  "errors": {
+    "title": "Remarque sur l'analyse",
+    "dismiss": "Fermer",
+    "notReady": "La carte n'est pas encore prête. Attends un instant et réessaie.",
+    "noRoute": "Dessine d'abord au moins un itinéraire sur la carte.",
+    "bufferFailed": "Le corridor de l'itinéraire n'a pas pu être calculé ({{detail}}).",
+    "queryFailed": "La couche des obstacles n'a pas pu être interrogée ({{detail}}).",
+    "analysisFailed": "L'itinéraire n'a pas pu être analysé."
+  },
+  "settings": {
+    "title": "Paramètres de simulation et d'analyse",
+    "description": "Configure la WebMap ArcGIS Online, la largeur du corridor autour de l'itinéraire et les champs de la couche des obstacles. Les paramètres sont enregistrés dans ce navigateur.",
+    "webmapId": "ID de l'élément WebMap ArcGIS Online",
+    "bufferDistance": "Largeur du corridor",
+    "bufferUnit": "Unité",
+    "units": {
+      "kilometers": "Kilomètres (km)",
+      "miles": "Miles (mi)",
+      "meters": "Mètres (m)",
+      "nautical-miles": "Milles nautiques (NM)"
+    },
+    "obstacleLayerTitle": "Titre de la couche des obstacles (dans la WebMap)",
+    "obstacleLayerNote": "Cette couche reste toujours invisible pour que les obstacles ne soient pas visibles pendant le dessin.",
+    "weightField": "Champ du poids",
+    "descriptionField": "Champ de la description",
+    "reset": "Valeurs par défaut",
+    "cancel": "Annuler",
+    "save": "Enregistrer"
   }
 }

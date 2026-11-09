@@ -1,190 +1,253 @@
 # Refugee Migration Routes Analyzer
 
-An educational web application built with the **ArcGIS Maps SDK for JavaScript** that provides critical feedback on sketched refugee migration routes into Europe.
+An educational web app for upper secondary schools (Gymnasium) in Switzerland. Students draw a possible
+refugee route into Europe on a map. The app then checks the route against **dangers that are hidden
+on the map** and gives feedback from the perspective of people on the move. Built with the
+**ArcGIS Maps SDK for JavaScript**, React and Esri Calcite.
+
+**Live app:** https://schlaef.github.io/migration-routes/ (deployed from `main`)
 
 ---
 
-## 🎯 Pedagogical & Educational Purpose
+## 🎯 Educational Idea
 
-When studying migration and forced displacement, students often view maps as abstract political boundaries. In reality, refugees escaping war, persecution, and human rights violations face severe, perilous obstacles along their journeys.
+Refugees do not have a map of the dangers ahead: border fences, pushbacks, detention camps or deadly
+sea crossings are not marked anywhere. The app recreates this lack of information:
 
-This application challenges students to **take the perspective of refugees**:
-1. Students use drawing tools to sketch potential migration routes (polylines) from regions of origin or transit (such as Syria, Afghanistan, or North Africa) across the Mediterranean, the Balkans, or Eastern Europe.
-2. An **invisible layer** in the WebMap called `route-obstacles` contains real-world difficulties: deadly sea corridors, militarized border walls, pushbacks, sub-zero mountain passes, desert transit hazards, and human exploitation checkpoints.
-3. Upon clicking **"Analyze Route"**, the application buffers the sketched paths and performs spatial intersections with the unseen obstacle layer.
-4. The application returns an educational summary detailing cumulative difficulty weights, categorized hazard breakdowns, and reflective inquiry prompts to help students understand the lived reality and harrowing choices of forced displacement.
+1. **Choose a starting point** (e.g. Syria, Afghanistan, Sudan, Senegal) and **draw a route** towards Europe.
+2. If students need support, they can switch on **help layers in stages** (see below).
+3. **Analyze the route:** the app builds a corridor around the route (default 30 km) and intersects it with an
+   **invisible obstacle layer** (sea, desert, mountains, borders, detention, exploitation, …).
+4. The **feedback** describes the dangers met on the way, shows images and videos per danger category and
+   asks reflection questions.
+5. Finally, students **compare their route with the journeys in a film and a novel**.
+
+### Suggested sequence in class
+
+| Step | Students | App |
+|------|----------|-----|
+| 0 | Form a hypothesis: draw their own route | Starting point chooser, drawing tool |
+| 1 | Orientation, if needed | Help stage 1: border crossing points, European Union |
+| 2 | More input, if needed | Help stage 2: real routes documented by IOM (unlocked after stage 1, filterable by region) |
+| 3 | Analysis and reflection | Analysis panel: perspective, obstacles, categories with images/videos |
+| 4 | Comparison with fiction and first-hand accounts | Tab "Film & literature": *Io Capitano* and *Nel mare ci sono i coccodrilli* |
+
+The report records which help stage was used, so teachers can take it into account.
 
 ---
 
 ## ✨ Features
 
-- **React 18 + Vite**: High-performance, modern React architecture with modular components.
-- **ArcGIS Map Components (`@arcgis/map-components`)**: Declarative ArcGIS web components including `<arcgis-map>`, `<arcgis-zoom>`, and `<arcgis-scale-bar>`.
-- **Esri Calcite UI (`@esri/calcite-components`)**: Beautiful, accessible, enterprise-grade design system following Esri best practices with `<calcite-shell>`, `<calcite-navigation>`, `<calcite-panel>`, `<calcite-dialog>`, `<calcite-card>`, `<calcite-chip>`, and `<calcite-notice>`.
-- **ArcGIS Maps SDK for JavaScript**: Deep integration with `WebMap`, `MapView`, `Draw`, `GraphicsLayer`, and `geometryEngine`.
-- **Route Drawing**: Draw noneditable polylines with custom line styling and route distance metrics.
-- **Geodesic Buffering**: Configurable corridor buffering (e.g. 30 km) using `geometryEngine.geodesicBuffer` to accurately model the route's sphere of interaction across continental distances.
-- **Countries Crossed**: Counts distinct countries intersected by the sketched routes using the hidden `Political Boundaries - Countries` WebMap layer, including the origin and destination countries. The report shows the count as unavailable if the layer is missing or cannot be queried.
-- **Invisible Obstacles Layer**: The `route-obstacles` layer is hidden on the map (`visible = false`, `listMode = "hide"`) to represent the unseen dangers that refugees cannot anticipate until they encounter them.
-- **Difficulty Weights & Descriptions**: Each obstacle has a severity weight (1–10) and description.
-- **Spatial Intersection & Aggregation**: Buffer polygons intersect with the obstacles layer to compute:
-  - Total cumulative difficulty score
-  - Average and peak threat levels
-  - Categorized breakdown (Maritime Hazards, Border Enforcement, Environmental/Terrain, Human Exploitation)
-  - Full list of intersected obstacles with severity badges and descriptions
-- **Interactive Map Feedback**: Highlights triggered obstacles on the map after analysis, allowing students to click obstacles in the summary to zoom directly to their locations.
-- **Refugee Perspective & Inquiry Prompts**: Structured reflection questions guiding classroom discussions on asylum policies, border closures, and humanitarian needs.
-- **Localization**: German, French, Italian and English interface translations are stored in `src/locales/`; the browser language is detected automatically, the selected language is remembered, and `?lang=it` (or `fr`, `de`, `en`) opens the app in a given language, e.g. for foreign-language classes.
-- **Scaffolded Help**: Stage 1 (border crossings, EU) and stage 2 (real IOM routes, unlocked after stage 1, filterable by region). The report records which help was used.
-- **Film & Literature Comparison**: After the analysis, students can show the routes from *Io Capitano* (Matteo Garrone, 2023) and *Nel mare ci sono i coccodrilli* (Fabio Geda, 2010) on the map, read their stations and compare the dangers with their own route (`src/work-routes.js`, texts in the locale files). Station coordinates are approximate.
-- **Videos per Category**: Documentary or film clips per danger category, loaded from YouTube only after a click (`src/assets/categories/videos.json`).
-- **High Configurability**: WebMap ID, buffer distance, units, layer title, and attribute field names can be configured in:
-  1. The built-in **Settings Dialog** (saved in browser `localStorage`)
-  2. **URL Query Parameters** (enabling teachers to generate one-click shareable assignment links)
-  3. `src/config.js`
-- **Zero-Dependency Fallback & Standalone Mode**: If the WebMap ID is not specified or offline, the app seamlessly activates a rich dataset of realistic sample obstacles so the app is always fully interactive.
+**For students**
+- **Starting point chooser** for 17 countries of origin or transit in Africa, the Middle East and Central Asia.
+- **Route drawing** with the ArcGIS `SketchViewModel` (the behaviour of the standard Sketch component, without
+  its toolbar): click to add points, double-click to finish. Vertices are shown as control points, and the map
+  can still be panned and zoomed while drawing. Clicking a finished route lets students move its vertices or
+  delete it. Several routes are possible.
+- **Scaffolded help** while drawing:
+  - Stage 1: *Border crossing points* (UNHCR) and *European Union*, each with an explanation and a source link.
+  - Stage 2: *Known refugee routes (IOM 2026)*, unlocked once a stage 1 layer has been used. The region
+    (central, eastern, western Mediterranean) is pre-selected from the starting point.
+- **Analysis panel** with route length, number of obstacles and countries crossed, and four tabs:
+  - **Refugee perspective:** narratives about the realities of the journey and reflection questions.
+  - **Obstacles:** the obstacles found in the corridor; hovering over one highlights it on the map.
+  - **Categories:** what each danger means for people on the move, with **images** and **videos**
+    (videos load from YouTube only after a click, via `youtube-nocookie.com`, with a content warning).
+  - **Film & literature:** shows the route of *Io Capitano* (Matteo Garrone, 2023) or *Nel mare ci sono i
+    coccodrilli* (Fabio Geda, 2010) on the map with numbered stations, compares its dangers with the student's
+    route and asks questions about the work. Each work has a trailer with a guiding question (click to load).
+- **Four languages:** German, French, Italian and English (language menu in the analysis panel). Switching
+  the language updates all controls, including the ArcGIS map components.
+
+**For teachers**
+- **Links with parameters** to prepare an assignment (see [Teaching parameters](#teaching-parameters)).
+- **Settings dialog** (gear icon) for WebMap, corridor width and obstacle fields; saved in the browser.
+- **Fallback data:** if the obstacle layer cannot be found, the app uses 14 built-in sample obstacles, so it
+  stays usable without the WebMap.
 
 ---
 
-## ⚙️ Configuration Options
+## 🗺️ The WebMap
 
-All non-static parameters are completely configurable:
+Default WebMap: [`5688732d6f59462c842d450b5c9bb584`](https://www.arcgis.com/home/item.html?id=5688732d6f59462c842d450b5c9bb584)
+("Migrationsrouten"). The app finds layers by their **title**, so keep these titles when editing the WebMap:
 
-| Parameter | Default Value | Description | URL Query Param |
-|-----------|---------------|-------------|-----------------|
-| `webmapId` | `"433c2a6b28f84737a4d538e14674724b"` | ArcGIS Online WebMap item ID | `?webmap=...` |
-| `bufferDistance` | `30` | Distance of route corridor buffer | `?buffer=50` |
-| `bufferUnit` | `"kilometers"` | Unit: `kilometers`, `miles`, `meters`, `nautical-miles` | `?unit=kilometers` |
-| `obstacleLayerTitle` | `"route-obstacles"` | Name/title of hidden layer in WebMap | `?layer=route-obstacles` |
-| `weightField` | `"weight"` | Obstacle attribute for difficulty weight | `?weightField=weight` |
-| `descriptionField` | `"description"` | Obstacle attribute for description | `?descField=description` |
-| `titleField` | `"title"` | Obstacle attribute for name/title | `?titleField=title` |
-| `categoryField` | `"category"` | Obstacle attribute for category | `?categoryField=category` |
+| Layer title | Purpose | Notes |
+|-------------|---------|-------|
+| `Routenschwierigkeiten` | Hidden obstacles (polygons) | Fields: `ObstacleType` (category), `Name`, `Weight` (1–10), `Description`. The app always keeps it hidden. |
+| `Political Boundaries - Countries` | Counting countries crossed | Shown as "unavailable" if missing. |
+| `Border crossing points` | Help stage 1 | |
+| `European Union` | Help stage 1 | |
+| `IOM_routes_2026` | Help stage 2 | Hosted feature layer with field `MedRegion` (`central`, `eastern`, `western`), see [IOM route data](#-iom-route-data). |
 
-### Teaching Parameters (URL only)
+All help layers are hidden when the app starts, even if they are saved as visible in the WebMap.
 
-| URL Query Param | Values | Effect |
-|-----------------|--------|--------|
-| `lang` | `de`, `fr`, `it`, `en` | Interface language |
-| `hilfen` / `help` | `0`, `1`, `2` (default `2`) | Help offered while drawing: none, orientation only, or also real IOM routes |
-| `werke` / `works` | `on` / `off` | Comparison with routes from film and literature |
-| `videos` | `on` / `off` | Videos in the category summary |
-
-Example for an Italian class without real routes: `?lang=it&hilfen=1`
-
-### Shareable URL Example for Teachers:
-```
-https://example.com/?webmap=YOUR_WEBMAP_ID&buffer=40&unit=kilometers&layer=route-obstacles
-```
+**Obstacle categories.** `ObstacleType` values are matched by German and English keywords,
+e.g. `Meer`/`sea`, `Wüste`/`desert`, `Gebirge`/`mountain`, `Grenze`/`border`, `Haft`/`detention`,
+`Ausbeutung`/`exploitation`, `Gesundheit`/`health`, `Gelände`/`terrain`. Each category has its own description,
+images and videos. Unknown values fall back to a general description.
 
 ---
 
-## 🚀 Getting Started
+## 👩‍🏫 Teaching Parameters
 
-### Prerequisites
-- Node.js 22.12+ (or 20.19+), as required by Vite 8. Use `nvm use` to select the version in `.nvmrc`.
+Append these to the app URL to prepare a link for a class:
 
-### Development Server
-```bash
-npm run dev
-```
+| Parameter | Values | Effect |
+|-----------|--------|--------|
+| `lang` | `de`, `fr`, `it`, `en` | Interface language (e.g. for foreign-language classes) |
+| `hilfen` / `help` | `0`, `1`, `2` (default `2`) | Help while drawing: none, stage 1 only, or stages 1 and 2 |
+| `werke` / `works` | `on` / `off` | Show the "Film & literature" tab |
+| `videos` | `on` / `off` | Show videos in the categories tab (e.g. where YouTube is blocked) |
+| `buffer` | number, e.g. `50` | Corridor width around the route |
+| `unit` | `kilometers`, `miles`, `meters`, `nautical-miles` | Unit of the corridor width |
 
-### Building for Production
-```bash
-npm run build
-```
-
-### Previewing Production Build
-```bash
-npm run preview
-```
-or launch the included production server:
-```bash
-npm start
-```
-
-### Running Tests
-To run the automated unit test suite:
-```bash
-npm test
-```
-
-### GitHub Pages
-
-The app is published at **https://ech-sts.github.io/migration-routes-analyzer/** after a successful deployment.
-
-To enable deployment, open the repository's **Settings → Pages → Build and deployment** and select **GitHub Actions** as the source.
-
-The **Deploy app to GitHub Pages** workflow (`.github/workflows/pages.yml`) runs on pushes to `main` and can also be started manually from the **Actions** tab. It installs dependencies with `npm ci`, builds the app using Node.js 22, uploads `dist/` as a Pages artifact, and deploys it to the `github-pages` environment. No separate `gh-pages` branch or committed build output is needed.
-
-The workflow uses the base path provided by GitHub Pages so assets load correctly under `/migration-routes-analyzer/` (or a configured custom domain), without changing local development defaults.
-
-To preview the project-site build locally:
-```bash
-npm run build -- --base /migration-routes-analyzer/
-npm run preview
-```
-Then open `http://localhost:4173/migration-routes-analyzer/`.
+Examples:
+- Italian class, without real routes: `https://schlaef.github.io/migration-routes/?lang=it&hilfen=1`
+- Assessment without any help and without videos: `?hilfen=0&videos=off`
 
 ---
 
-## 🧭 IOM Route Data (help stage 2)
+## ⚙️ Configuration
 
-The help layer `IOM_routes_2026` shows known migration routes around the Mediterranean from the
-[IOM Displacement Tracking Matrix (DTM)](https://dtm.iom.int/). Instead of loading the six GeoJSON
-files directly from IOM's server (no CORS headers, can be slow or blocked by school networks), host
-them in your own ArcGIS Online organization:
+Defaults are in `src/config.js`. They can be overridden in the **Settings dialog** (stored in `localStorage`)
+and by **URL parameters** (highest priority).
+
+| Setting | Default | URL parameter | In settings dialog |
+|---------|---------|---------------|:-:|
+| `webmapId` | `5688732d6f59462c842d450b5c9bb584` | `webmap` | ✓ |
+| `bufferDistance` | `30` | `buffer` | ✓ |
+| `bufferUnit` | `kilometers` | `unit` | ✓ |
+| `obstacleLayerTitle` | `Routenschwierigkeiten` | `layer` | ✓ |
+| `weightField` | `Weight` | `weightField` | ✓ |
+| `descriptionField` | `Description` | `descField` | ✓ |
+| `titleField` | `Title` (falls back to `Name`) | `titleField` | |
+| `categoryField` | `ObstacleType` | `categoryField` | |
+| `helpLevel` | `2` | `hilfen` / `help` | |
+| `showWorkRoutes` | `true` | `werke` / `works` | |
+| `showVideos` | `true` | `videos` | |
+| `portalUrl` | `https://www.arcgis.com` | `portalUrl` | |
+
+---
+
+## 🖼️ Maintaining Content
+
+| Content | Where | How |
+|---------|-------|-----|
+| Images per category | `src/assets/categories/<category>/` + `manifest.json` | See [`src/assets/categories/README.md`](src/assets/categories/README.md). Use the page describing the image as source and check the licence. |
+| Videos per category | `src/assets/categories/videos.json` | YouTube ID, optional start/end time, type (documentary, report, film, literature adaptation), guiding question, source, content warning. Only embed videos published by the rights holder. See the same README. |
+| Film & literature routes | `src/work-routes.js` (stations, coordinates, categories, videos) + `workRoutes` in `src/locales/*/translation.json` (texts) | Station coordinates are approximate; the line connects the stations directly. Each work can have videos (e.g. a trailer, shown with the work) and each station its own clips; video titles and guiding questions are in the locale files under `workRoutes.<work>.videos.<key>`. |
+| Starting points | `src/starting-points.js` + `startingPoints` in the locale files | |
+| Texts and translations | `src/locales/{de,fr,it,en}/translation.json` | Tests check that all four languages have the same keys, placeholders and markup. |
+
+---
+
+## 🧭 IOM Route Data
+
+Help stage 2 shows known routes around the Mediterranean from the
+[IOM Displacement Tracking Matrix (DTM)](https://dtm.iom.int/). IOM publishes them as six GeoJSON files.
+Their server sends no CORS headers and can be slow, so the routes are hosted as a feature layer in ArcGIS Online.
+To update them:
 
 ```bash
 python3 scripts/download_iom_routes.py --simplify 0.005 --precision 5
 ```
 
-This downloads the six files (central/eastern/western Mediterranean × land/sea), merges them into
-`iom_routes_2026.geojson` and adds the fields `MedRegion` (`central`, `eastern`, `western`) and `Mode`
-(`land`, `sea`). `--simplify 0.005` (~500 m) reduces the file from ~12.5 MB to ~0.25 MB without a
-visible difference at classroom scale; omit it to keep all vertices. Only the Python standard library
-is required.
+The script (Python standard library only) downloads the six files (central/eastern/western Mediterranean ×
+land/sea), merges them into `iom_routes_2026.geojson` with readable field names and adds `MedRegion`, `Mode`
+(`land`/`sea`), source and download date. `--simplify 0.005` (~500 m) reduces the file from ~12.5 MB to
+~0.25 MB without a visible difference at classroom scale.
 
-Then in ArcGIS Online:
-1. **Content → New item**, upload the file and choose **Add and create a hosted feature layer**.
-2. Credit the source on the item (“IOM Displacement Tracking Matrix (DTM)”, download date) and check IOM's terms of use.
-3. Share the layer publicly, add it to the WebMap, title it **`IOM_routes_2026`** and set it to hidden. Remove the old GeoJSON group layer.
-4. Optional: style by `Mode` (e.g. dashed lines for sea routes).
+Then in ArcGIS Online: **Content → New item**, upload the file, **Add and create a hosted feature layer**, credit
+"IOM Displacement Tracking Matrix (DTM)" with the download date, check IOM's terms of use, share publicly and
+replace the layer titled `IOM_routes_2026` in the WebMap.
 
-The app filters the region either by the `MedRegion` field (merged layer) or by sublayer titles
-starting with `cmr_`, `emr_`, `wmr_` (original group layer).
+---
+
+## 🚀 Development
+
+Requires Node.js 22.12+ (or 20.19+), as required by Vite 8. `nvm use` selects the version in `.nvmrc`.
+
+```bash
+npm install
+```
+
+```bash
+npm run dev
+```
+
+```bash
+npm test
+```
+
+```bash
+npm run build
+```
+
+`npm run preview` or `npm start` (`server.js`) serve the production build locally.
+
+### Deployment (GitHub Pages)
+
+The workflow `.github/workflows/pages.yml` builds and deploys the app on every push to `main` (or manually from
+the **Actions** tab). It uses the base path provided by GitHub Pages, so no build settings need changing.
+Pages must be set to **Settings → Pages → Source: GitHub Actions**. After a deployment, reload without cache
+(Ctrl+Shift+R) if the old version still shows.
 
 ---
 
 ## 📁 Project Structure
 
 ```
-migration-routes-analyzer/
-├── index.html                  # Vite + React HTML template
-├── vite.config.js              # Vite configuration with React plugin
-├── server.js                   # Production static asset server
+├── index.html
+├── server.js                    # Static server for the production build
 ├── scripts/
-│   └── download_iom_routes.py  # Downloads and merges the IOM route GeoJSON files
-├── package.json                # Project manifest, scripts, and dependencies
-├── README.md                   # Documentation and pedagogical guide
+│   └── download_iom_routes.py   # Downloads and merges the IOM route GeoJSON files
 ├── src/
-│   ├── main.jsx                # React root and component registration
-│   ├── App.jsx                 # Main application shell with Calcite Shell
-│   ├── analyzer.js             # Buffering, spatial intersection & perspective logic
-│   ├── config.js               # Configuration manager (defaults, URL params, storage)
-│   ├── sample-obstacles.js     # Realistic fallback refugee obstacles dataset
+│   ├── main.jsx                 # React root, Calcite/ArcGIS component registration
+│   ├── App.jsx                  # App shell and state (help stages, analysis)
+│   ├── i18n.js                  # Languages (de, fr, it, en) and ?lang= detection
+│   ├── config.js                # Defaults, URL parameters, saved settings
+│   ├── analyzer.js              # Corridor buffer, intersection, categories, feedback
+│   ├── reference-layers.js      # Help layers, stages, IOM region filter
+│   ├── starting-points.js       # Starting point chooser
+│   ├── route-drawing.js         # Route symbol and route count for the SketchViewModel
+│   ├── work-routes.js           # Routes from film and literature, comparison
+│   ├── category-images.js       # Images per category
+│   ├── category-videos.js       # Videos per category (embed URLs, validation)
+│   ├── sample-obstacles.js      # Fallback obstacles when the WebMap layer is missing
+│   ├── assets/categories/       # Images, manifest.json, videos.json
+│   ├── locales/{de,fr,it,en}/   # Translations
 │   └── components/
-│       ├── Header.jsx          # Calcite navigation header with action buttons
-│       ├── MapContainer.jsx    # ArcGIS Map Component, Sketch & analysis pipeline
-│       ├── AnalysisPanel.jsx   # Results panel with difficulty metrics & inquiry prompts
-│       ├── SettingsModal.jsx   # Calcite dialog for non-static parameter configuration
-│       └── GuideModal.jsx      # Educational guide dialog explaining refugee journey context
-└── tests/
-    ├── analyzer.test.js        # Unit tests for spatial analysis & risk evaluation
-    └── config.test.js          # Unit tests for configuration & URL parameters
+│       ├── Header.jsx           # Top bar (analyze, clear, settings, guide)
+│       ├── MapContainer.jsx     # Map, drawing, analysis, highlights, work route display
+│       ├── AnalysisPanel.jsx    # Side panel with metrics and tabs
+│       ├── RouteHelp.jsx        # Starting point and help stages
+│       ├── CategoryVideo.jsx    # Click-to-load video with content warning
+│       ├── WorkRoutes.jsx       # "Film & literature" tab
+│       ├── SettingsModal.jsx    # Settings dialog
+│       └── GuideModal.jsx       # Educational guide
+└── tests/                       # Node test runner (npm test)
 ```
 
 ---
+
+## ⚠️ Known Limitations
+
+Open points are tracked in [`BACKLOG.md`](BACKLOG.md). The most relevant ones:
+- **Obstacle data:** all obstacles currently have weight 1 and no description, and there are no border,
+  detention or exploitation obstacles yet. The mountain polygons cover the whole world.
+- **Film & literature:** station texts and coordinates are simplified and should be checked against the works
+  before use in class.
+- **Videos:** `videos.json` is still empty; videos have to be selected and added.
+- `src/app.js` is an unused leftover of an earlier version.
+
+---
+
+## 📚 Sources
+
+- Route data: IOM Displacement Tracking Matrix (DTM), https://dtm.iom.int/
+- Border crossing points: UNHCR
+- Images: see the source links in `src/assets/categories/manifest.json`
 
 ## 📜 License
 

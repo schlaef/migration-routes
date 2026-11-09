@@ -1,3 +1,5 @@
+import { normalizeVideo } from "./category-videos.js";
+
 /**
  * Routes from film and literature, shown after the analysis for comparison.
  *
@@ -9,12 +11,29 @@
  * `category` links a station to the app's obstacle categories
  * (see getCategoryDescriptionKey in analyzer.js) so the route can be compared
  * with the student's own analysis.
+ *
+ * `videos` (on a route, e.g. a trailer, or on a station, e.g. a scene) use the
+ * same fields as src/assets/categories/videos.json: videoId, start, end, kind,
+ * source, sourceUrl, contentWarning. Title and guiding question come from the
+ * locale files: workRoutes.<routeId>.videos.<videoKey>.title / .note for route
+ * videos and workRoutes.<routeId>.stations.<stationId>.videos.<videoKey>.* for
+ * station videos. Only embed videos published by the rights holder where possible.
  */
 export const WORK_ROUTES = [
   {
     id: "ioCapitano",
     kind: "film",
     startingPoint: "senegal",
+    videos: [
+      {
+        key: "trailer",
+        videoId: "ZRY2NZp-W8M",
+        kind: "film",
+        source: "01 Distribution (YouTube)",
+        sourceUrl: "https://www.youtube.com/@01distribution",
+        contentWarning: true
+      }
+    ],
     stations: [
       { id: "dakar", coordinates: [-17.45, 14.69], category: "general" },
       { id: "mali", coordinates: [-8.0, 12.64], category: "border" },
@@ -30,6 +49,18 @@ export const WORK_ROUTES = [
     id: "coccodrilli",
     kind: "literature",
     startingPoint: "afghanistan",
+    videos: [
+      {
+        key: "trailer",
+        // Uploaded by a trailer channel (MovieDigger), not by the rights holder: replace
+        // with an official upload if one becomes available.
+        videoId: "3U229vpOfJU",
+        kind: "literature",
+        source: "MovieDigger (YouTube)",
+        sourceUrl: "https://www.youtube.com/@MovieDiggers",
+        contentWarning: true
+      }
+    ],
     stations: [
       { id: "ghazni", coordinates: [67.6, 33.3], category: "general" },
       { id: "quetta", coordinates: [67.0, 30.18], category: "exploitation" },
@@ -44,6 +75,23 @@ export const WORK_ROUTES = [
     ]
   }
 ];
+
+/**
+ * Videos of a whole route (without stationId) or of one station, with validated fields.
+ * Each entry keeps its `key` so the texts can be looked up in the locale files.
+ */
+export function getWorkRouteVideos(route, stationId) {
+  if (!route) return [];
+  const source = stationId
+    ? route.stations.find((station) => station.id === stationId)?.videos
+    : route.videos;
+  return (source || [])
+    .map((video) => {
+      const normalized = normalizeVideo(video);
+      return normalized ? { ...normalized, key: video.key } : null;
+    })
+    .filter(Boolean);
+}
 
 export function getWorkRoute(id) {
   return WORK_ROUTES.find((route) => route.id === id) || null;

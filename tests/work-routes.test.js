@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { WORK_ROUTES, compareWithAnalysis, getWorkRoute, getWorkRouteCategories, getWorkRoutePath } from "../src/work-routes.js";
+import { WORK_ROUTES, compareWithAnalysis, getWorkRoute, getWorkRouteCategories, getWorkRoutePath, getWorkRouteVideos } from "../src/work-routes.js";
 import { STARTING_POINTS } from "../src/starting-points.js";
 import { getCategoryDescriptionKey } from "../src/analyzer.js";
 import { parseUrlParams, DEFAULT_CONFIG } from "../src/config.js";
@@ -73,4 +73,25 @@ test("work routes can be switched off via URL", () => {
   assert.equal(parseUrlParams("?werke=aus").showWorkRoutes, false);
   assert.equal(parseUrlParams("?works=on").showWorkRoutes, true);
   assert.equal(parseUrlParams("?werke=x").showWorkRoutes, undefined);
+});
+
+test("work route videos are embeddable and have texts in all languages", () => {
+  for (const route of WORK_ROUTES) {
+    const lists = [[route.videos, null], ...route.stations.map((station) => [station.videos, station.id])];
+    for (const [videos = [], stationId] of lists) {
+      const valid = getWorkRouteVideos(route, stationId);
+      assert.equal(valid.length, videos.length, `${route.id}/${stationId ?? "route"}: invalid video entry`);
+      for (const video of valid) {
+        assert.ok(video.key, `${route.id}: video without key`);
+        for (const lang of LANGUAGES) {
+          const base = locale(lang).workRoutes[route.id];
+          const texts = stationId ? base.stations[stationId].videos?.[video.key] : base.videos?.[video.key];
+          assert.ok(texts?.title, `${lang}: ${route.id}/${stationId ?? "route"}/${video.key} title`);
+        }
+      }
+    }
+  }
+  assert.equal(getWorkRouteVideos(getWorkRoute("ioCapitano"))[0].videoId, "ZRY2NZp-W8M");
+  assert.equal(getWorkRouteVideos(getWorkRoute("coccodrilli"))[0].videoId, "3U229vpOfJU");
+  assert.deepEqual(getWorkRouteVideos(null), []);
 });

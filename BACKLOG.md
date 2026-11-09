@@ -40,10 +40,10 @@ These are fixed by editing the hosted feature layer, not the code.
 
 | # | Priority | Issue | Proposed fix |
 |---|----------|-------|--------------|
-| X1 | Medium | README lists WebMap ID `433c2a6b28f84737a4d538e14674724b`, which does not exist or is inaccessible; config uses `5688732d6f59462c842d450b5c9bb584`. | Update the configuration table in README. |
-| X2 | Medium | README configuration table lists defaults `route-obstacles`, `weight`, `description`, `title`, `category`; actual defaults are `Routenschwierigkeiten`, `Weight`, `Description`, `Title`, `ObstacleType`. | Sync the table with `src/config.js`. |
-| X3 | Low | README feature list and project structure omit newer features: start-point chooser, route help / helper reference layers, category images, `route-drawing.js`, `starting-points.js`, `reference-layers.js`, `i18n.js`, `locales/`. | Update the Features and Project Structure sections. |
-| X4 | Low | No documentation of the expected obstacle layer schema for teachers building their own WebMap. | Add a section describing fields (`ObstacleType`, `Name`, `Weight`, `Description`), allowed categories and weight scale. |
+| X1 | ✅ Done | README lists WebMap ID `433c2a6b28f84737a4d538e14674724b`, which does not exist or is inaccessible; config uses `5688732d6f59462c842d450b5c9bb584`. | Update the configuration table in README. |
+| X2 | ✅ Done | README configuration table lists defaults `route-obstacles`, `weight`, `description`, `title`, `category`; actual defaults are `Routenschwierigkeiten`, `Weight`, `Description`, `Title`, `ObstacleType`. | Sync the table with `src/config.js`. |
+| X3 | ✅ Done | README feature list and project structure omit newer features: start-point chooser, route help / helper reference layers, category images, `route-drawing.js`, `starting-points.js`, `reference-layers.js`, `i18n.js`, `locales/`. | Update the Features and Project Structure sections. |
+| X4 | ✅ Done | No documentation of the expected obstacle layer schema for teachers building their own WebMap. | Add a section describing fields (`ObstacleType`, `Name`, `Weight`, `Description`), allowed categories and weight scale. |
 
 ## D. Enhancements
 

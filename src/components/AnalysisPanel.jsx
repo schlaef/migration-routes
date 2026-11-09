@@ -33,7 +33,6 @@ export default function AnalysisPanel({
 }) {
   const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState("perspective");
-  const [copied, setCopied] = useState(false);
   const [workRouteId, setWorkRouteId] = useState(null);
   const showWorkRoutes = config.showWorkRoutes !== false;
 
@@ -53,10 +52,6 @@ export default function AnalysisPanel({
   const languageSelectRef = useRef(null);
 
   useEffect(() => {
-    document.documentElement.lang = i18n.resolvedLanguage || "en";
-  }, [i18n.resolvedLanguage]);
-
-  useEffect(() => {
     const languageSelect = languageSelectRef.current;
     if (!languageSelect) return;
 
@@ -67,34 +62,6 @@ export default function AnalysisPanel({
     languageSelect.addEventListener("calciteSelectChange", handleLanguageChange);
     return () => languageSelect.removeEventListener("calciteSelectChange", handleLanguageChange);
   }, [i18n]);
-
-  const getLocalizedReport = () => {
-    if (!analysis) return null;
-    const feedback = analysis.perspectiveFeedback;
-
-    return {
-      ...analysis,
-      helpUsed: getHelpUsedLabels(analysis.helpUsed),
-      highestHelpStage: getHighestHelpStage(analysis.helpUsed),
-      obstacles: analysis.obstacles.map((obstacle) =>
-        obstacle.perspectiveNote
-          ? { ...obstacle, perspectiveNote: getObstaclePerspective(obstacle) }
-          : obstacle
-      ),
-      perspectiveFeedback: feedback
-        ? {
-            ...feedback,
-            categories: feedback.categories?.map((category) => ({
-              ...category,
-              description: t(category.descriptionKey)
-            })),
-            narratives: feedback.narrativeKeys?.map((key) => t(key)) || feedback.narratives,
-            reflectionQuestions:
-              feedback.reflectionQuestionKeys?.map((key) => t(key)) || feedback.reflectionQuestions
-          }
-        : feedback
-    };
-  };
 
   const feedback = analysis?.perspectiveFeedback;
   const narratives = (feedback?.narrativeKeys || feedback?.narratives || []).map((item) =>
@@ -115,30 +82,6 @@ export default function AnalysisPanel({
   const changeTab = (tab) => {
     onObstacleHover?.(null);
     setActiveTab(tab);
-  };
-
-  const handleCopySummary = () => {
-    if (!analysis) return;
-    const text = JSON.stringify(getLocalizedReport(), null, 2);
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(text).then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2500);
-      });
-    }
-  };
-
-  const handleDownloadReport = () => {
-    if (!analysis) return;
-    const blob = new Blob([JSON.stringify(getLocalizedReport(), null, 2)], {
-      type: "application/json"
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = t("analysis.reportFilename", { timestamp: Date.now() });
-    a.click();
-    URL.revokeObjectURL(url);
   };
 
   return (
@@ -168,22 +111,6 @@ export default function AnalysisPanel({
           <calcite-option value="it" selected={i18n.resolvedLanguage === "it" ? true : undefined}>Italiano</calcite-option>
           <calcite-option value="en" selected={i18n.resolvedLanguage === "en" ? true : undefined}>English</calcite-option>
         </calcite-select>
-        {analysis && (
-          <>
-            <calcite-action
-              text={copied ? t("analysis.copied") : t("analysis.copyReport")}
-              icon={copied ? "check" : "copy-to-clipboard"}
-              onClick={handleCopySummary}
-              title={t("analysis.copyTooltip")}
-            />
-            <calcite-action
-              text={t("analysis.downloadJson")}
-              icon="download"
-              onClick={handleDownloadReport}
-              title={t("analysis.downloadTooltip")}
-            />
-          </>
-        )}
         {onClose && (
           <calcite-action
             text={t("analysis.closePanel")}
@@ -487,7 +414,12 @@ export default function AnalysisPanel({
 
             {/* Tab 4: Comparison with routes from film and literature */}
             {activeTab === "works" && showWorkRoutes && (
-              <WorkRoutes analysis={analysis} selectedId={workRouteId} onSelect={setWorkRouteId} />
+              <WorkRoutes
+                analysis={analysis}
+                selectedId={workRouteId}
+                onSelect={setWorkRouteId}
+                showVideos={config.showVideos !== false}
+              />
             )}
 
             {/* Tab 3: Categories Summary */}

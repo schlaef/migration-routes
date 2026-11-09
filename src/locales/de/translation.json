@@ -5,15 +5,9 @@
     "description_one": "{{count}} Hindernis analysiert ({{distance}}-{{unit}}-Korridor)",
     "description_other": "{{count}} Hindernisse analysiert ({{distance}}-{{unit}}-Korridor)",
     "language": "Sprache",
-    "copyReport": "Bericht kopieren",
-    "copied": "Kopiert!",
-    "copyTooltip": "Analysebericht in die Zwischenablage kopieren",
-    "downloadJson": "JSON herunterladen",
-    "downloadTooltip": "Analysebericht als JSON herunterladen",
     "closePanel": "Fenster schließen",
     "collapsePanel": "Analysefenster einklappen",
     "loading": "Korridor und darin liegende, nicht sichtbare Routenhindernisse werden analysiert ...",
-    "reportFilename": "migrationsrouten-analyse-{{timestamp}}.json",
     "complete": "Analyse abgeschlossen",
     "riskSummary": "{{level}} — Gesamtschwierigkeit: {{weight}}",
     "obstacles": "Hindernisse",
@@ -49,8 +43,17 @@
     "general": "Dieses Hindernis kann eine Reise verzögern oder Geflüchtete zusätzlicher Gefahr, Erschöpfung und Ungewissheit aussetzen. Die Auswirkungen hängen von den Bedingungen und den verfügbaren Mitteln ab."
   },
   "drawing": {
-    "instructions": "Maustaste gedrückt halten und ziehen oder Punkte anklicken. Mit Doppelklick oder Eingabetaste abschließen.",
-    "cancel": "Zeichnen abbrechen"
+    "instructions": "Klicke Punkte an, mit Doppelklick beendest du die Route. Du kannst die Karte beim Zeichnen weiterhin verschieben und zoomen.",
+    "cancel": "Zeichnen abbrechen",
+    "draw": "Route zeichnen",
+    "drawTooltip": "Eine Route auf der Karte zeichnen",
+    "corridor": "Korridor: {{distance}} {{unit}}",
+    "unitsShort": {
+      "kilometers": "km",
+      "miles": "mi",
+      "meters": "m",
+      "nautical-miles": "sm"
+    }
   },
   "routeHelp": {
     "title": "Fällt es dir schwer, dir eine Route vorzustellen?",
@@ -109,7 +112,7 @@
   },
   "guide": {
     "title": "So analysierst du eine Migrationsroute",
-    "sketch": "<strong>Route einzeichnen:</strong> Zeichne mit der Schaltfläche <em>Routenlinie zeichnen</em> auf der Karte einen Weg vom Herkunftsort (z. B. Syrien, Afghanistan oder Libyen) zu einem Ziel in Europa.",
+    "sketch": "<strong>Route zeichnen:</strong> Klicke auf der Karte auf <em>Route zeichnen</em> und zeichne einen Weg von einem Herkunftsort (z. B. Syrien, Afghanistan oder Libyen) zu einem Ziel in Europa.",
     "analyze": "<strong>Analyse starten:</strong> Klicke oben auf <em>Route analysieren</em>.",
     "perspective": "<strong>Die Perspektive Geflüchteter einnehmen:</strong> Beschäftige dich mit den dokumentierten Hindernissen und den Reflexionsfragen, um die Herausforderungen und Unsicherheiten einer Flucht nachzuvollziehen. Jede Flucht birgt Risiken, unabhängig von den hier erfassten Hindernissen.",
     "purposeTitle": "Pädagogischer Zweck",
@@ -269,7 +272,13 @@
         "Warum brechen Seydou und Moussa auf? Wie unterscheiden sich ihre Gründe von einer Flucht vor Krieg oder Verfolgung?",
         "Wer verdient an der Reise? Suche die Stationen, an denen Geld verlangt oder erpresst wird.",
         "Der Film ist Fiktion, beruht aber auf Erfahrungsberichten. Was kann ein Spielfilm zeigen, was eine Karte nicht zeigen kann, und umgekehrt?"
-      ]
+      ],
+      "videos": {
+        "trailer": {
+          "title": "Trailer zum Film",
+          "note": "Welche Stationen der Reise erkennst du im Trailer wieder? Zeigt er die Reise eher als Abenteuer oder als Gefahr?"
+        }
+      }
     },
     "coccodrilli": {
       "title": "Nel mare ci sono i coccodrilli",
@@ -321,7 +330,56 @@
         "Enaiatollah ist ein Kind, als er allein unterwegs ist. Welche Gefahren sind für ihn grösser als für Erwachsene?",
         "Warum dauert seine Reise Jahre und nicht Wochen?",
         "Vergleiche seine Route mit den IOM-Routen im östlichen Mittelmeer (Hilfsstufe 2). Wo stimmen sie überein?"
-      ]
+      ],
+      "videos": {
+        "trailer": {
+          "title": "Trailer zur Verfilmung",
+          "note": "Vergleiche den Trailer mit dem Roman: Welche Stationen der Reise erkennst du wieder, und was fehlt?"
+        }
+      }
     }
+  },
+  "header": {
+    "title": "Fluchtrouten-Analyse",
+    "subtitle": "Die unsichtbaren Hindernisse auf dem Weg nach Europa",
+    "analyze": "Route analysieren",
+    "analyzing": "Wird analysiert ...",
+    "analyzeTooltip": "Den Korridor der Route auf Hindernisse prüfen",
+    "analyzeDisabledTooltip": "Zeichne zuerst eine Route auf der Karte",
+    "clear": "Löschen",
+    "clearTooltip": "Alle Routen und die Analyse löschen",
+    "settings": "Einstellungen",
+    "guide": "Lernleitfaden",
+    "collapsePanel": "Analysefenster einklappen",
+    "expandPanel": "Analysefenster ausklappen"
+  },
+  "errors": {
+    "title": "Hinweis zur Analyse",
+    "dismiss": "Schliessen",
+    "notReady": "Die Karte ist noch nicht bereit. Warte einen Moment und versuche es erneut.",
+    "noRoute": "Zeichne zuerst mindestens eine Route auf der Karte.",
+    "bufferFailed": "Der Korridor der Route konnte nicht berechnet werden ({{detail}}).",
+    "queryFailed": "Der Hindernis-Layer konnte nicht abgefragt werden ({{detail}}).",
+    "analysisFailed": "Die Route konnte nicht analysiert werden."
+  },
+  "settings": {
+    "title": "Einstellungen für Simulation und Analyse",
+    "description": "Lege die ArcGIS-Online-WebMap, die Breite des Korridors um die Route und die Felder des Hindernis-Layers fest. Die Einstellungen werden in diesem Browser gespeichert.",
+    "webmapId": "Element-ID der ArcGIS-Online-WebMap",
+    "bufferDistance": "Breite des Korridors",
+    "bufferUnit": "Einheit",
+    "units": {
+      "kilometers": "Kilometer (km)",
+      "miles": "Meilen (mi)",
+      "meters": "Meter (m)",
+      "nautical-miles": "Seemeilen (sm)"
+    },
+    "obstacleLayerTitle": "Titel des Hindernis-Layers (in der WebMap)",
+    "obstacleLayerNote": "Dieser Layer bleibt immer unsichtbar, damit die Hindernisse beim Zeichnen nicht zu sehen sind.",
+    "weightField": "Feld für die Gewichtung",
+    "descriptionField": "Feld für die Beschreibung",
+    "reset": "Standardwerte",
+    "cancel": "Abbrechen",
+    "save": "Speichern"
   }
 }
