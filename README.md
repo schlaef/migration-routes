@@ -51,7 +51,8 @@ The report records which help stage was used, so teachers can take it into accou
 - **Analysis panel** with route length, number of obstacles and countries crossed, and four tabs:
   - **Refugee perspective:** narratives about the realities of the journey and reflection questions.
   - **Obstacles:** the obstacles found in the corridor; hovering over one highlights it on the map.
-  - **Categories:** what each danger means for people on the move, with **images** and **videos**
+  - **Categories:** what each danger means for people on the move, a note on **the phone as a resource**
+    (where it helps and where it fails, addressing the prejudice "they all have a phone"), **images** and **videos**
     (videos load from YouTube only after a click, via `youtube-nocookie.com`, with a content warning).
   - **Film & literature:** shows the route of *Io Capitano* (Matteo Garrone, 2023) or *Nel mare ci sono i
     coccodrilli* (Fabio Geda, 2010) on the map with numbered stations, compares its dangers with the student's
@@ -164,6 +165,34 @@ replace the layer titled `IOM_routes_2026` in the WebMap.
 
 ---
 
+## 🚧 Pushback Zones (border obstacles)
+
+Testimonies of pushbacks from the [Border Violence Monitoring Network](https://borderviolence.eu/our-data) are
+points: a route across the Balkans would otherwise touch hundreds of them. The script turns them into **one
+obstacle zone per border** (e.g. "Pushbacks Kroatien → Bosnien und Herzegowina"), so each border counts once:
+
+```bash
+pip install shapely pyproj numpy
+```
+
+```bash
+python3 scripts/build_pushback_zones.py --since 2022-01-01 --buffer-km 15 --min-count 5
+```
+
+It reads the point layer `pushbacks` (published from the BVMN export), keeps incidents from the start date,
+merges spelling variants of country names, drops points that lie outside both countries involved (mislocated),
+groups by `Pushback_From` → `Pushback_To` (sea pushbacks separately), buffers the points and dissolves each
+group into one (multi)polygon. Output: `pushback_zones.geojson` with `ObstacleType` = `Grenze`, `Name`,
+`Weight` (by number of testimonies: <20 → 4, 20–99 → 6, 100–299 → 7, ≥300 → 8) and a German `Description`
+based on the data (number of testimonies and people, share of reports with violence, with belongings taken
+or destroyed, with asylum requested). No personal data from the testimonies is written to the output.
+
+Then upload the GeoJSON to ArcGIS Online and **append** it to `Routenschwierigkeiten` (map `ObstacleType`,
+`Name`, `Weight`, `Description`). The raw point layer is not needed by the app: keep it out of the WebMap
+and set it to private, since it contains the full testimonies.
+
+---
+
 ## 🚀 Development
 
 Requires Node.js 22.12+ (or 20.19+), as required by Vite 8. `nvm use` selects the version in `.nvmrc`.
@@ -201,7 +230,8 @@ Pages must be set to **Settings → Pages → Source: GitHub Actions**. After a 
 ├── index.html
 ├── server.js                    # Static server for the production build
 ├── scripts/
-│   └── download_iom_routes.py   # Downloads and merges the IOM route GeoJSON files
+│   ├── download_iom_routes.py   # Downloads and merges the IOM route GeoJSON files
+│   └── build_pushback_zones.py  # Turns BVMN pushback points into one obstacle zone per border
 ├── src/
 │   ├── main.jsx                 # React root, Calcite/ArcGIS component registration
 │   ├── App.jsx                  # App shell and state (help stages, analysis)
