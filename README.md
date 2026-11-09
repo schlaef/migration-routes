@@ -183,7 +183,7 @@ It reads the point layer `pushbacks` (published from the BVMN export), keeps inc
 merges spelling variants of country names, drops points that lie outside both countries involved (mislocated),
 groups by `Pushback_From` → `Pushback_To` (sea pushbacks separately), buffers the points and dissolves each
 group into one (multi)polygon. Output: `pushback_zones.geojson` with `ObstacleType` = `Grenze`, `Name`,
-`Weight` (by number of testimonies: <20 → 4, 20–99 → 6, 100–299 → 7, ≥300 → 8) and a German `Description`
+`Weight` (by number of testimonies: <20 → 4, 20–99 → 6, 100–299 → 7, ≥300 → 8) and a short German `Description` (max. 256 characters, the field length of the obstacle layer)
 based on the data (number of testimonies and people, share of reports with violence, with belongings taken
 or destroyed, with asylum requested). No personal data from the testimonies is written to the output.
 
