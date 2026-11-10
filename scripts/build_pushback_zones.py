@@ -191,34 +191,35 @@ def percent(part: int, whole: int) -> int:
     return round(100 * part / whole) if whole else 0
 
 
+# Text fields of the obstacle layer `Routenschwierigkeiten` hold at most 256 characters.
+MAX_TEXT_LENGTH = 256
+
+
 def describe(group: dict) -> str:
+    """Short German description from the data, at most MAX_TEXT_LENGTH characters."""
     n = group["count"]
     first, last = group["first"].year, group["last"].year
     period = f"{first}" if first == last else f"{first}–{last}"
     where = (
-        f"auf See von {country_de(group['from'])} in Richtung {country_de(group['to'])}"
+        f"auf See von {country_de(group['from'])} Richtung {country_de(group['to'])}"
         if group["maritime"]
         else f"von {country_de(group['from'])} {country_de_to(group['to'])}"
     )
-    parts = [
-        f"Das Border Violence Monitoring Network hat {n} Zeugenaussagen ({period}) zu Zurückweisungen "
-        f"{where} dokumentiert, betroffen waren rund {group['people']} Menschen."
-    ]
-    known_violence = group["violence_known"]
-    if known_violence:
-        parts.append(f"In {percent(group['violence'], known_violence)} % der Berichte wird Gewalt beschrieben")
+    text = f"BVMN: {n} Zeugenaussagen ({period}) zu Zurückweisungen {where}, rund {group['people']} Menschen."
+    facts = []
+    if group["violence_known"]:
+        facts.append(f"Gewalt in {percent(group['violence'], group['violence_known'])} % der Berichte")
         if group["belongings"]:
-            parts[-1] += (
-                f", in {percent(group['belongings'], known_violence)} % wurden Sachen wie Handys oder Geld "
-                "abgenommen oder zerstört"
-            )
-        parts[-1] += "."
+            facts.append(f"Handys/Geld abgenommen oder zerstört in {percent(group['belongings'], group['violence_known'])} %")
     if group["asylum_known"]:
-        parts.append(
-            f"In {percent(group['asylum_yes'], group['asylum_known'])} % der Fälle hatten die Menschen "
-            "um Asyl gebeten."
-        )
-    return " ".join(parts)
+        facts.append(f"Asylgesuch in {percent(group['asylum_yes'], group['asylum_known'])} %")
+    # Add facts only as long as the text still fits into the field.
+    for fact in facts:
+        candidate = f"{text} {fact}."
+        if len(candidate) > MAX_TEXT_LENGTH:
+            break
+        text = candidate
+    return text[:MAX_TEXT_LENGTH]
 
 
 def build_zones(features: list[dict], buffer_km: float, min_count: int, simplify_m: float) -> tuple[list[dict], list[dict], dict, list[str]]:
@@ -275,6 +276,7 @@ def build_zones(features: list[dict], buffer_km: float, min_count: int, simplify
         name = f"Pushbacks {country_de(group['from'])} → {country_de(group['to'])}"
         if group["maritime"]:
             name += " (auf See)"
+        name = name[:MAX_TEXT_LENGTH]
         zones.append({
             "type": "Feature",
             "geometry": mapping(zone),

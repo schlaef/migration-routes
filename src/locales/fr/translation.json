@@ -351,7 +351,9 @@
     "settings": "Paramètres",
     "guide": "Guide pédagogique",
     "collapsePanel": "Réduire le panneau d'analyse",
-    "expandPanel": "Développer le panneau d'analyse"
+    "expandPanel": "Développer le panneau d'analyse",
+    "back": "Retour",
+    "backTooltip": "Retour à {{host}}"
   },
   "errors": {
     "title": "Remarque sur l'analyse",

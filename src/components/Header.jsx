@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 export default function Header({
+  returnLink,
   routeCount,
   analyzing,
   onAnalyze,
@@ -22,6 +23,20 @@ export default function Header({
         description={t("header.subtitle")}
         icon="compass"
       />
+
+      {returnLink && (
+        <div slot="content-start" style={{ display: "flex", alignItems: "center", paddingInline: "0.5rem" }}>
+          <calcite-button
+            appearance="outline"
+            kind="neutral"
+            icon-start="arrow-left"
+            href={returnLink.url}
+            title={t("header.backTooltip", { host: returnLink.host })}
+          >
+            {returnLink.label || t("header.back")}
+          </calcite-button>
+        </div>
+      )}
 
       <div
         slot="content-end"
