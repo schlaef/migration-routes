@@ -299,9 +299,9 @@ def build_zones(features: list[dict], buffer_km: float, min_count: int, simplify
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--layer", default=DEFAULT_LAYER, help="URL of the pushback point layer")
-    parser.add_argument("--since", default="2022-01-01", help="first incident date to include (YYYY-MM-DD)")
-    parser.add_argument("--buffer-km", type=float, default=15, help="buffer around each testimony point in km")
-    parser.add_argument("--min-count", type=int, default=5, help="minimum testimonies for a border to become a zone")
+    parser.add_argument("--since", default="2021-01-01", help="first incident date to include (YYYY-MM-DD)")
+    parser.add_argument("--buffer-km", type=float, default=10, help="buffer around each testimony point in km")
+    parser.add_argument("--min-count", type=int, default=4, help="minimum testimonies for a border to become a zone")
     parser.add_argument("--simplify-m", type=float, default=500, help="simplify zone outlines (metres, 0 = off)")
     parser.add_argument("-o", "--output", default="pushback_zones.geojson", help="output GeoJSON file")
     args = parser.parse_args()
