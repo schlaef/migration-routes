@@ -6,6 +6,7 @@ import SettingsModal from "./components/SettingsModal.jsx";
 import GuideModal from "./components/GuideModal.jsx";
 import { useTranslation } from "react-i18next";
 import { getConfig } from "./config.js";
+import { getReturnLink } from "./return-link.js";
 import {
   INITIAL_REFERENCE_LAYERS,
   HELP_STAGES,
@@ -17,6 +18,8 @@ import {
 export default function App() {
   const { t } = useTranslation();
   const [config, setConfig] = useState(() => getConfig());
+  // Optional link back to the calling app (?back=<url>&backLabel=<text>)
+  const [returnLink] = useState(() => getReturnLink());
   const [routeCount, setRouteCount] = useState(0);
   const [analyzing, setAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState(null);
@@ -113,6 +116,7 @@ export default function App() {
   return (
     <calcite-shell style={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "column" }}>
       <Header
+        returnLink={returnLink}
         routeCount={routeCount}
         analyzing={analyzing}
         onAnalyze={handleAnalyze}

@@ -100,12 +100,16 @@ Append these to the app URL to prepare a link for a class:
 | `hilfen` / `help` | `0`, `1`, `2` (default `2`) | Help while drawing: none, stage 1 only, or stages 1 and 2 |
 | `werke` / `works` | `on` / `off` | Show the "Film & literature" tab |
 | `videos` | `on` / `off` | Show videos in the categories tab (e.g. where YouTube is blocked) |
+| `back` | URL-encoded http(s) address | Shows a back button in the header that leads to the calling app (e.g. a learning platform). Remembered for the browser tab, never saved in the settings. |
+| `backLabel` | text (max. 40 characters) | Label of the back button (default: "Back" in the current language) |
 | `buffer` | number, e.g. `50` | Corridor width around the route |
 | `unit` | `kilometers`, `miles`, `meters`, `nautical-miles` | Unit of the corridor width |
 
 Examples:
 - Italian class, without real routes: `https://schlaef.github.io/migration-routes/?lang=it&hilfen=1`
 - Assessment without any help and without videos: `?hilfen=0&videos=off`
+- Linked from the Kompetenzpfad, with a button back to it:
+  `https://schlaef.github.io/migration-routes/?lang=de&back=https%3A%2F%2Fwww.kompetenzpfad.ch%2Fdashboard%2Fcompetencies%2Fmigrationsrouten&backLabel=Kompetenzpfad`
 
 ---
 
@@ -237,6 +241,7 @@ Pages must be set to **Settings → Pages → Source: GitHub Actions**. After a 
 │   ├── App.jsx                  # App shell and state (help stages, analysis)
 │   ├── i18n.js                  # Languages (de, fr, it, en) and ?lang= detection
 │   ├── config.js                # Defaults, URL parameters, saved settings
+│   ├── return-link.js           # Back button to a calling app (?back=, ?backLabel=)
 │   ├── analyzer.js              # Corridor buffer, intersection, categories, feedback
 │   ├── reference-layers.js      # Help layers, stages, IOM region filter
 │   ├── starting-points.js       # Starting point chooser

@@ -351,7 +351,9 @@
     "settings": "Settings",
     "guide": "Educational guide",
     "collapsePanel": "Collapse analysis panel",
-    "expandPanel": "Expand analysis panel"
+    "expandPanel": "Expand analysis panel",
+    "back": "Back",
+    "backTooltip": "Back to {{host}}"
   },
   "errors": {
     "title": "Analysis notice",
