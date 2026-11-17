@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verdingkinder – Zeugnisse</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site"><div class="wrap"><a href="./">Verdingkinder – Zeugnisse</a></div></header>
+  <main class="wrap">
+    <section class="intro">
+      <h1>Verdingkinder in der Schweiz</h1>
+      <p>Bis weit ins 20. Jahrhundert wurden in der Schweiz Kinder aus armen oder als „schwierig“ geltenden Familien von Behörden fremdplatziert – oft auf Bauernhöfen, wo sie als billige Arbeitskräfte dienen mussten. Viele erlebten Ausbeutung, Gewalt und Vernachlässigung.</p>
+      <p>2013 entschuldigte sich der Bundesrat offiziell bei den Betroffenen von fürsorgerischen Zwangsmassnahmen. Hier erzählen Zeuginnen und Zeugen ihre Geschichte.</p>
+    </section>
+    <h2 class="sec">Zeuginnen und Zeugen</h2>
+    <ul class="grid" id="grid"></ul>
+  </main>
+  <footer><div class="wrap">Alle Zeugnisse werden mit Einverständnis und Quellenangabe veröffentlicht.</div></footer>
+  <script src="zeugen.js"></script>
+  <script>
+    const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+    document.getElementById("grid").innerHTML = window.ZEUGEN.map(p => `
+      <li><a class="card" href="person.html?id=${encodeURIComponent(p.id)}">
+        <img src="${esc(p.bild)}" alt="Porträt von ${esc(p.name)}" loading="lazy">
+        <div class="body">
+          <h3>${esc(p.name)}</h3>
+          <span class="dates">${esc(p.lebensdaten)}</span>
+          <p>${esc(p.kurztext)}</p>
+          <span class="more">Geschichte lesen →</span>
+        </div>
+      </a></li>`).join("");
+  </script>
+</body>
+</html>

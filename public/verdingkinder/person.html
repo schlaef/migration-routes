@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zeugnis – Verdingkinder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site"><div class="wrap"><a href="./">← Alle Zeuginnen und Zeugen</a></div></header>
+  <main class="wrap" id="main"></main>
+  <footer><div class="wrap">Verdingkinder – Zeugnisse</div></footer>
+  <script src="zeugen.js"></script>
+  <script>
+    const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+    const list = window.ZEUGEN;
+    const id = new URLSearchParams(location.search).get("id");
+    const i = list.findIndex(p => p.id === id);
+    const main = document.getElementById("main");
+
+    function youtubeEmbed(url) {
+      const m = String(url || "").match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/);
+      return m ? `https://www.youtube-nocookie.com/embed/${m[1]}` : "";
+    }
+
+    if (i < 0) {
+      main.innerHTML = `<section class="intro"><h1>Person nicht gefunden</h1><p><a href="./">Zurück zur Übersicht</a></p></section>`;
+    } else {
+      const p = list[i], prev = list[i - 1], next = list[i + 1];
+      document.title = `${p.name} – Verdingkinder`;
+      const video = youtubeEmbed(p.video);
+      main.innerHTML = `
+        <article class="person">
+          <aside>
+            <img src="${esc(p.bild)}" alt="Porträt von ${esc(p.name)}">
+            ${p.bildnachweis ? `<p class="credit">Bild: ${esc(p.bildnachweis)}</p>` : ""}
+            <dl>${(p.eckdaten || []).map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>
+          </aside>
+          <div>
+            <h1>${esc(p.name)}</h1>
+            <p class="dates">${esc(p.lebensdaten)}</p>
+            ${p.zitat ? `<blockquote>«${esc(p.zitat)}»</blockquote>` : ""}
+            ${(p.geschichte || []).map(t => `<p>${esc(t)}</p>`).join("")}
+            ${video ? `<div class="video"><iframe src="${video}" title="Video: ${esc(p.name)}" allowfullscreen></iframe></div>` : ""}
+            ${p.quellen?.length ? `<h2 class="sec">Quellen</h2><ul class="sources">${p.quellen.map(q =>
+              typeof q === "string" ? `<li>${esc(q)}</li>` : `<li><a href="${esc(q.url)}">${esc(q.text)}</a></li>`).join("")}</ul>` : ""}
+            <nav class="pager">
+              ${prev ? `<a href="person.html?id=${encodeURIComponent(prev.id)}">← ${esc(prev.name)}</a>` : "<span></span>"}
+              ${next ? `<a href="person.html?id=${encodeURIComponent(next.id)}">${esc(next.name)} →</a>` : ""}
+            </nav>
+          </div>
+        </article>`;
+    }
+  </script>
+</body>
+</html>

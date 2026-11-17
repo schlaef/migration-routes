@@ -1,0 +1,38 @@
+:root{--bg:#f6f1e8;--surface:#fffdf8;--text:#2b2620;--muted:#6b6257;--accent:#8a3b22;--line:#e3d9c8;--shadow:0 1px 3px rgba(0,0,0,.08)}
+@media (prefers-color-scheme:dark){:root{--bg:#1c1915;--surface:#26221d;--text:#ece5d8;--muted:#a89e90;--accent:#e08a66;--line:#3a342c;--shadow:none}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.65 Georgia,"Times New Roman",serif}
+a{color:var(--accent)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header.site{border-bottom:1px solid var(--line);padding:18px 0}
+header.site a{color:var(--text);text-decoration:none;font-weight:bold;letter-spacing:.02em}
+.intro{padding:56px 0 32px;max-width:720px}
+.intro h1{font-size:clamp(2rem,5vw,3rem);line-height:1.15;margin:0 0 16px}
+.intro p{color:var(--muted);margin:0 0 12px}
+h2.sec{font-size:1.4rem;margin:24px 0 16px}
+.grid{list-style:none;padding:0;margin:0 0 64px;display:grid;gap:24px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;height:100%;text-decoration:none;color:inherit;transition:transform .15s}
+.card:hover,.card:focus-visible{transform:translateY(-3px)}
+.card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;filter:grayscale(.3) sepia(.15)}
+.card .body{padding:14px 16px 18px;display:flex;flex-direction:column;gap:4px;flex:1}
+.card h3{margin:0;font-size:1.15rem}
+.card .dates{color:var(--muted);font-size:.9rem}
+.card p{margin:6px 0 10px;font-size:.95rem}
+.card .more{margin-top:auto;color:var(--accent);font-weight:bold;font-size:.95rem}
+/* Personenseite */
+.person{display:grid;gap:40px;grid-template-columns:280px 1fr;padding:40px 0 64px}
+@media (max-width:760px){.person{grid-template-columns:1fr}.person aside{max-width:320px}}
+.person aside img{width:100%;border-radius:6px;filter:grayscale(.3) sepia(.15)}
+.credit{font-size:.8rem;color:var(--muted);margin:6px 0 20px}
+dl{margin:0;border-top:1px solid var(--line)}
+dl div{padding:8px 0;border-bottom:1px solid var(--line)}
+dt{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+dd{margin:0}
+.person h1{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.15;margin:0 0 4px}
+.person .dates{color:var(--muted);margin:0 0 24px}
+blockquote{margin:0 0 28px;padding:4px 0 4px 20px;border-left:3px solid var(--accent);font-size:1.25rem;font-style:italic}
+.video{position:relative;aspect-ratio:16/9;margin:28px 0}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:6px}
+.sources{font-size:.9rem;color:var(--muted)}
+nav.pager{display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);padding-top:20px;margin-top:40px;flex-wrap:wrap}
+footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:.85rem}
