@@ -57,6 +57,7 @@ categories are listed in [section F](#f-data-sources-for-new-obstacle-categories
 | E2 | Low | Teacher "scenario" mode: fixed start and destination via URL parameters, with a set task. |
 | E3 | Low | Data-quality check at startup (all weights equal, empty descriptions, missing names) with a notice in the settings dialog, for teachers who bring their own WebMap. |
 | E4 | Low | Category notes pointing to matching scenes in the works, e.g. "This danger is also shown in *Io Capitano* (station Sahara)" with a link to the "Film & literature" tab, without embedding the video twice. |
+| E5 | Medium | **Works per language in the "Film & literature" tab:** a mapping from each supported locale (`de`, `fr`, `it`, `en`) to the works shown in the tab. When students switch to Italian, Italian films and literature appear (e.g. *Io Capitano*, *Nel mare ci sono i coccodrilli*); in French, French works; in German, German-language works. Supports foreign-language classes working with works in the target language. Implementation idea: a `languages` list per work in `src/work-routes.js` (or a separate locale → work IDs mapping), filtered by the active language, with a fallback when a language has no works yet (show all works, or the English selection). Optionally `?werke=<id>,<id>` lets teachers choose the works explicitly. The works per language should be chosen by the language teachers; each needs stations, coordinates, texts in all four languages and optionally a trailer. |
 
 ## E. The mobile phone as a resource
 
