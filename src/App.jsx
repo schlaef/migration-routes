@@ -4,6 +4,7 @@ import MapContainer from "./components/MapContainer.jsx";
 import AnalysisPanel from "./components/AnalysisPanel.jsx";
 import SettingsModal from "./components/SettingsModal.jsx";
 import GuideModal from "./components/GuideModal.jsx";
+import LegalModal from "./components/LegalModal.jsx";
 import { useTranslation } from "react-i18next";
 import { getConfig } from "./config.js";
 import { getReturnLink } from "./return-link.js";
@@ -29,6 +30,7 @@ export default function App() {
   const [panelOpen, setPanelOpen] = useState(true);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
+  const [legalOpen, setLegalOpen] = useState(false);
   const [referenceLayers, setReferenceLayers] = useState(INITIAL_REFERENCE_LAYERS);
   const [referenceLayerAvailability, setReferenceLayerAvailability] = useState(null);
   const [usedHelp, setUsedHelp] = useState({});
@@ -123,6 +125,7 @@ export default function App() {
         onClear={handleClear}
         onOpenSettings={() => setSettingsOpen(true)}
         onOpenGuide={() => setGuideOpen(true)}
+        onOpenLegal={() => setLegalOpen(true)}
         panelOpen={panelOpen}
         onTogglePanel={() => {
           handleObstacleHover(null);
@@ -198,7 +201,13 @@ export default function App() {
         onClose={() => setSettingsOpen(false)}
       />
 
+      <LegalModal open={legalOpen} onClose={() => setLegalOpen(false)} imprint={config.imprint} />
+
       <GuideModal
+        onOpenLegal={() => {
+          setGuideOpen(false);
+          setLegalOpen(true);
+        }}
         open={guideOpen}
         onClose={() => setGuideOpen(false)}
       />

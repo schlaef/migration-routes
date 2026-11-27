@@ -139,7 +139,7 @@ and by **URL parameters** (highest priority).
 
 | Content | Where | How |
 |---------|-------|-----|
-| Images per category | `src/assets/categories/<category>/` + `manifest.json` | See [`src/assets/categories/README.md`](src/assets/categories/README.md). Use the page describing the image as source and check the licence. |
+| Images per category | `src/assets/categories/manifest.json` | Images are only linked (https address at the source, e.g. Wikimedia Commons), never copied. Each entry needs a licence notice following the TULLU rule; the app shows it below the image. See [`src/assets/categories/README.md`](src/assets/categories/README.md). |
 | Videos per category | `src/assets/categories/videos.json` | YouTube ID, optional start/end time, type (documentary, report, film, literature adaptation), guiding question, source, content warning. Only embed videos published by the rights holder. See the same README. |
 | Film & literature routes | `src/work-routes.js` (stations, coordinates, categories, videos) + `workRoutes` in `src/locales/*/translation.json` (texts) | Station coordinates are approximate; the line connects the stations directly. Each work can have videos (e.g. a trailer, shown with the work) and each station its own clips; video titles and guiding questions are in the locale files under `workRoutes.<work>.videos.<key>`. |
 | Starting points | `src/starting-points.js` + `startingPoints` in the locale files | |
@@ -286,4 +286,11 @@ Open points are tracked in [`BACKLOG.md`](BACKLOG.md). The most relevant ones:
 
 ## 📜 License
 
-Apache-2.0
+- **Educational content** (texts, questions, translations, didactic concept, documentation):
+  [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.de), see [`LICENSE-CONTENT.md`](LICENSE-CONTENT.md).
+- **Source code:** Apache License 2.0, see [`LICENSE`](LICENSE).
+- **Not covered:** embedded videos, linked images, maps and geodata and software libraries; their own terms apply.
+
+The app lists all sources and licences, the privacy notice and (once provided) the imprint in the window
+**«Licences & sources»** (licence icon in the header, also linked from the educational guide). Sources are
+maintained in `src/legal.js`; the imprint text goes into `imprint` in `src/config.js`.

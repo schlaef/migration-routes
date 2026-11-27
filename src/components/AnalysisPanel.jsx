@@ -3,19 +3,14 @@ import { Trans, useTranslation } from "react-i18next";
 import categoryImages from "../assets/categories/manifest.json";
 import { getCategoryImages } from "../category-images.js";
 import categoryVideos from "../assets/categories/videos.json";
-import { getCategoryVideos } from "../category-videos.js";
+import { getCategoryVideos, localizeText } from "../category-videos.js";
+import LicenceNotice from "./LicenceNotice.jsx";
 import CategoryVideo from "./CategoryVideo.jsx";
 import WorkRoutes from "./WorkRoutes.jsx";
 import PhoneNote from "./PhoneNote.jsx";
 import { getWorkRoute } from "../work-routes.js";
 import RouteHelp from "./RouteHelp.jsx";
 import { HELP_STAGES, getHighestHelpStage } from "../reference-layers.js";
-
-const categoryImageUrls = import.meta.glob("../assets/categories/*/*.{jpg,jpeg,png,webp,avif,gif}", {
-  eager: true,
-  query: "?url",
-  import: "default"
-});
 
 export default function AnalysisPanel({
   analysis,
@@ -441,21 +436,20 @@ export default function AnalysisPanel({
                       {t(cat.descriptionKey)}
                     </p>
                     <PhoneNote descriptionKey={cat.descriptionKey} />
-                    {getCategoryImages(cat.descriptionKey, categoryImages, categoryImageUrls).map((image) => (
-                        <figure key={image.filename} style={{ margin: "0.75rem 0" }}>
+                    {getCategoryImages(cat.descriptionKey, categoryImages).map((image) => (
+                        <figure key={image.url} style={{ margin: "0.75rem 0" }}>
                           <img
                             src={image.url}
-                            alt=""
+                            alt={localizeText(image.alt || image.caption, i18n.resolvedLanguage)}
                             loading="lazy"
+                            referrerPolicy="no-referrer"
                             style={{ display: "block", width: "100%", maxHeight: "220px", objectFit: "contain" }}
                           />
                           <figcaption style={{ fontSize: "0.8rem", color: "var(--calcite-color-text-2)", marginTop: "0.25rem" }}>
-                            {image.caption}
-                            {image.sourceUrl && (
-                              <a href={image.sourceUrl} target="_blank" rel="noopener noreferrer" style={{ display: "block" }}>
-                                {t("analysis.linkToResource")}
-                              </a>
+                            {image.caption && (
+                              <span style={{ display: "block" }}>{localizeText(image.caption, i18n.resolvedLanguage)}</span>
                             )}
+                            <LicenceNotice item={image} />
                           </figcaption>
                         </figure>
                     ))}

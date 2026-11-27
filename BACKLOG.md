@@ -57,6 +57,7 @@ categories are listed in [section F](#f-data-sources-for-new-obstacle-categories
 | E2 | Low | Teacher "scenario" mode: fixed start and destination via URL parameters, with a set task. |
 | E3 | Low | Data-quality check at startup (all weights equal, empty descriptions, missing names) with a notice in the settings dialog, for teachers who bring their own WebMap. |
 | E4 | Low | Category notes pointing to matching scenes in the works, e.g. "This danger is also shown in *Io Capitano* (station Sahara)" with a link to the "Film & literature" tab, without embedding the video twice. |
+| E5 | Medium | **Works per language in the "Film & literature" tab:** a mapping from each supported locale (`de`, `fr`, `it`, `en`) to the works shown in the tab. When students switch to Italian, Italian films and literature appear (e.g. *Io Capitano*, *Nel mare ci sono i coccodrilli*); in French, French works; in German, German-language works. Supports foreign-language classes working with works in the target language. Implementation idea: a `languages` list per work in `src/work-routes.js` (or a separate locale → work IDs mapping), filtered by the active language, with a fallback when a language has no works yet (show all works, or the English selection). Optionally `?werke=<id>,<id>` lets teachers choose the works explicitly. The works per language should be chosen by the language teachers; each needs stations, coordinates, texts in all four languages and optionally a trailer. |
 
 ## E. The mobile phone as a resource
 
@@ -95,3 +96,45 @@ point datasets need to be turned into polygons (e.g. buffers) for the obstacle l
 | Exploitation / violence | [UCDP Georeferenced Event Dataset](https://ucdp.uu.se/downloads/ged/ged261.pdf) (free download), ACLED (registration and licence terms) | Geolocated conflict events, e.g. Libya, Sahel | UCDP asks for citation; licence not confirmed. Good for areas controlled by armed groups. |
 | Terrain (rivers), health / cold | HydroSHEDS (HydroRIVERS), Natural Earth, ArcGIS Living Atlas (rivers, temperature, land cover) | Border rivers (Evros, Drina, Una), winter temperatures | For the "terrain" and "health" categories, e.g. cold on the Balkan route. |
 | Mixed humanitarian data | [Humanitarian Data Exchange (HDX)](https://data.humdata.org/) | Camps, border crossings, IOM data per country | Search per country (Libya, Niger, Greece, Bosnia, …). |
+
+## G. Teachers adding their own materials
+
+Today videos, works and texts live in code files (`videos.json`, `work-routes.js`, locale files), so only
+people who can edit the repository can add material. Goal: teachers can contribute without code changes.
+
+Recommended start: **T1** (media table with a Survey123 form and approval). It is the smallest step and
+fills the still-empty category videos (K1). If it works well, follow with **T2** (film and literature
+routes in ArcGIS Online), which fits **E5** (works per language).
+
+| # | Priority | Idea | Notes |
+|---|----------|------|-------|
+| T1 | Medium | **Media table in ArcGIS Online + Survey123 form:** a hosted table "Media" (Category, Type video/link, YouTube ID or URL, Start, End, Title, Guiding question, Language, Source, Licence, Status). Teachers suggest entries with a Survey123 form; new entries are "submitted", an editor sets them to "approved", and the app loads only approved entries at runtime, next to (or instead of) `videos.json`. | No own server or login (ArcGIS Online handles access); changes appear without a new deployment. The form can ask explicitly for the rights holder and licence. |
+| T2 | Medium | **Film and literature routes in ArcGIS Online:** a point layer "Work stations" (WorkId, Order, Name, Text, Category, Language) and a table "Works" (title, author, year, kind, trailer, languages). The app draws the route from the ordered stations instead of `src/work-routes.js`. | Teachers can place stations on the map in the Map Viewer. Combine with E5 (works per language). |
+| T3 | Low | **Teacher-specific versions via `?webmap=`:** a teacher copies the WebMap (and, with T1/T2, its tables) and shares a class link with their own obstacles, media and works. | Already possible for obstacles today; needs a short guide for teachers. |
+| T4 | Low | **Content file by link:** `?content=<URL>` loads a JSON file with media and works hosted by the teacher (school server, GitHub). | Simple without ArcGIS Online, but error-prone for non-technical users; the server must allow cross-site loading (CORS). |
+| T5 | Low | **In-app editor with own backend:** teachers log in and edit content directly in the app. | Most convenient, but needs hosting, accounts, data protection (Swiss DSG) and moderation. Only worth it if many schools use the app. |
+
+Rules for all options:
+- **Rights:** only videos published by the rights holder and images with a suitable licence; prefer links to sources over uploaded files.
+- **Languages:** contributions are often in one language only. Show them in their original language when no translation exists, with a note on the language.
+- **Safety:** show submitted texts as plain text (never HTML) and accept only validated YouTube IDs and http(s) links, as the video player and back button already do.
+- **No student data:** teachers add materials only; nothing about students is stored.
+
+## H. Licences and legal requirements
+
+Based on the guide «Rechtliche Grundlagen» (lernangebote.my.canva.site) and Muuss-Merholz, *Freie
+Unterrichtsmaterialien* (Beltz 2018, CC BY-SA 4.0): use freely licensed material, give licence notices
+following the TULLU rule where the material is shown, mark embedded content as not freely licensed.
+Done: content licence CC BY-SA 4.0 and code licence Apache 2.0 (`LICENSE-CONTENT.md`, `LICENSE`), window
+«Licences & sources» with all sources and the privacy notice, note under embedded videos, images only linked
+with mandatory licence notice.
+
+| # | Priority | Issue | Proposed fix |
+|---|----------|-------|--------------|
+| R1 | High | **Imprint missing.** The window «Licences & sources» has a prepared section that stays hidden until text is provided. | Decide who is responsible (name/institution, contact) and put the text into `imprint` in `src/config.js`. |
+| R2 | High | **Desert obstacles come from «World Desert»** (ArcGIS Online user `anna.kp_macmillan`), an item without credits or licence; rights unclear. | Replace the 31 `Desert` polygons with Natural Earth deserts (public domain); a script can extract them. Then update `DATA_SOURCES` in `src/legal.js`. |
+| R3 | Medium | **Credits in ArcGIS Online:** the item `MigrationRoutes` has no credits although it contains data from World Mountain Ranges (Roger Palmer, Esri; educational use only), World Desert and BVMN; the credits of `iom_routes_2026` contain a typo («(DTM)”, downloaded …)»). | Fill in «Credits (Attribution)» and the licence section on both item pages. |
+| R4 | Medium | **Trailer of *Nel mare ci sono i coccodrilli*** was uploaded by a trailer channel (MovieDigger), not by the rights holder. The guide says not to embed material that obviously infringes copyright. Kept for now by decision (2026-11-27). | Replace with an official upload, or remove it if none can be found (see K4). |
+| R5 | Low | **Removed press photos remain in the Git history** and were published on GitHub Pages earlier. | If a rights holder objects, rewrite the history (removes the files from all commits; needs a force push). |
+| R6 | Low | **Gemeinsamer Tarif 7 (ProLitteris)** covers the use of protected works in class, presumably not a publicly accessible website. | Do not rely on GT 7 for the app; check with the school or ProLitteris if needed. |
+| R7 | Low | Linked images and the border crossing layer send the viewer's IP address to third-party servers when the app loads. | Mentioned in the privacy notice; optionally load images only after a click, like videos. |

@@ -205,7 +205,8 @@
     "loadClip": "Carica lo spezzone ({{range}}) da YouTube",
     "iframeTitle": "Video incorporato",
     "source": "Fonte: {{source}}",
-    "openOnYoutube": "Apri su YouTube"
+    "openOnYoutube": "Apri su YouTube",
+    "embeddedNote": "Questo video è incorporato da YouTube e non fa parte del materiale con licenza libera."
   },
   "workRoutes": {
     "tab": "Film e letteratura",
@@ -426,6 +427,47 @@
         "helps": "Il telefono è mappa, rubrica, banca e legame con la famiglia allo stesso tempo.",
         "fails": "Batteria, credito e rete scarseggiano durante il viaggio e il dispositivo può essere perso o rubato."
       }
+    }
+  },
+  "legal": {
+    "title": "Licenze e fonti",
+    "close": "Chiudi",
+    "by": "di {{author}}",
+    "source": "Fonte",
+    "none": "nessuno",
+    "contentHeading": "Licenza di questa app",
+    "contentText": "I contenuti propri di questa app (testi, domande, traduzioni, concetto didattico) sono rilasciati con licenza CC BY-SA 4.0. Sono esclusi i video incorporati, le mappe e i geodati e il software elencati qui sotto; per questi valgono le rispettive condizioni.",
+    "codeText": "Il codice sorgente è rilasciato con licenza Apache License 2.0.",
+    "videosHeading": "Video incorporati",
+    "videosText": "I video sono incorporati da YouTube, non copiati. Non fanno parte del materiale con licenza libera; valgono le condizioni dei rispettivi titolari dei diritti e di YouTube.",
+    "dataHeading": "Mappe e geodati",
+    "dataText": "La mappa e gli ostacoli si basano su dati di terzi. Valgono le condizioni di ciascuna fonte.",
+    "softwareHeading": "Software",
+    "imprintHeading": "Note legali",
+    "licences": {
+      "esriTerms": "condizioni d'uso di Esri",
+      "educationalUse": "solo per scopi didattici («Designed for Educational Use only»)",
+      "notStated": "nessuna licenza indicata dalla fonte",
+      "providerTerms": "condizioni d'uso della fonte",
+      "embedded": "incorporato, condizioni dei titolari dei diritti e di YouTube"
+    },
+    "changes": {
+      "obstacles": "estratto, utilizzato come ostacoli",
+      "iom": "uniti e semplificati",
+      "bvmn": "raggruppati in zone per confine, senza dati personali"
+    },
+    "privacy": {
+      "heading": "Protezione dei dati",
+      "intro": "Questa app è un'offerta didattica e non raccoglie dati personali. Durante l'uso vengono però utilizzati servizi di terzi:",
+      "items": [
+        "Hosting: l'app viene distribuita tramite GitHub Pages (GitHub, Inc., USA). GitHub tratta dati tecnici come l'indirizzo IP nei log del server.",
+        "Mappe e dati: mappe, livelli e parti del programma vengono caricati da Esri (ArcGIS Online, USA), i valichi di frontiera da un server dell'UNHCR. Questi servizi ricevono dati tecnici come l'indirizzo IP.",
+        "Analisi: per l'analisi il percorso disegnato viene inviato come geometria al servizio cartografico di Esri, senza alcun legame con una persona.",
+        "Le immagini non sono salvate nell'app, ma caricate direttamente dalla loro fonte (ad esempio Wikimedia Commons). Il server della fonte riceve dati tecnici come l'indirizzo IP.",
+        "Video: i video incorporati vengono caricati da YouTube (Google) tramite youtube-nocookie.com solo dopo un clic. Solo allora YouTube riceve dati come l'indirizzo IP.",
+        "Nel browser vengono salvati solo la lingua scelta e le impostazioni (localStorage) e l'indirizzo per il pulsante «indietro», solo per questa scheda del browser (sessionStorage). Questi dati non lasciano il browser.",
+        "L'app stessa non imposta cookie, non usa servizi di analisi o tracciamento e non richiede alcun accesso. Gli allievi non inseriscono dati personali."
+      ]
     }
   }
 }
