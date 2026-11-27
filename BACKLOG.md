@@ -96,3 +96,26 @@ point datasets need to be turned into polygons (e.g. buffers) for the obstacle l
 | Exploitation / violence | [UCDP Georeferenced Event Dataset](https://ucdp.uu.se/downloads/ged/ged261.pdf) (free download), ACLED (registration and licence terms) | Geolocated conflict events, e.g. Libya, Sahel | UCDP asks for citation; licence not confirmed. Good for areas controlled by armed groups. |
 | Terrain (rivers), health / cold | HydroSHEDS (HydroRIVERS), Natural Earth, ArcGIS Living Atlas (rivers, temperature, land cover) | Border rivers (Evros, Drina, Una), winter temperatures | For the "terrain" and "health" categories, e.g. cold on the Balkan route. |
 | Mixed humanitarian data | [Humanitarian Data Exchange (HDX)](https://data.humdata.org/) | Camps, border crossings, IOM data per country | Search per country (Libya, Niger, Greece, Bosnia, …). |
+
+## G. Teachers adding their own materials
+
+Today videos, works and texts live in code files (`videos.json`, `work-routes.js`, locale files), so only
+people who can edit the repository can add material. Goal: teachers can contribute without code changes.
+
+Recommended start: **T1** (media table with a Survey123 form and approval). It is the smallest step and
+fills the still-empty category videos (K1). If it works well, follow with **T2** (film and literature
+routes in ArcGIS Online), which fits **E5** (works per language).
+
+| # | Priority | Idea | Notes |
+|---|----------|------|-------|
+| T1 | Medium | **Media table in ArcGIS Online + Survey123 form:** a hosted table "Media" (Category, Type video/link, YouTube ID or URL, Start, End, Title, Guiding question, Language, Source, Licence, Status). Teachers suggest entries with a Survey123 form; new entries are "submitted", an editor sets them to "approved", and the app loads only approved entries at runtime, next to (or instead of) `videos.json`. | No own server or login (ArcGIS Online handles access); changes appear without a new deployment. The form can ask explicitly for the rights holder and licence. |
+| T2 | Medium | **Film and literature routes in ArcGIS Online:** a point layer "Work stations" (WorkId, Order, Name, Text, Category, Language) and a table "Works" (title, author, year, kind, trailer, languages). The app draws the route from the ordered stations instead of `src/work-routes.js`. | Teachers can place stations on the map in the Map Viewer. Combine with E5 (works per language). |
+| T3 | Low | **Teacher-specific versions via `?webmap=`:** a teacher copies the WebMap (and, with T1/T2, its tables) and shares a class link with their own obstacles, media and works. | Already possible for obstacles today; needs a short guide for teachers. |
+| T4 | Low | **Content file by link:** `?content=<URL>` loads a JSON file with media and works hosted by the teacher (school server, GitHub). | Simple without ArcGIS Online, but error-prone for non-technical users; the server must allow cross-site loading (CORS). |
+| T5 | Low | **In-app editor with own backend:** teachers log in and edit content directly in the app. | Most convenient, but needs hosting, accounts, data protection (Swiss DSG) and moderation. Only worth it if many schools use the app. |
+
+Rules for all options:
+- **Rights:** only videos published by the rights holder and images with a suitable licence; prefer links to sources over uploaded files.
+- **Languages:** contributions are often in one language only. Show them in their original language when no translation exists, with a note on the language.
+- **Safety:** show submitted texts as plain text (never HTML) and accept only validated YouTube IDs and http(s) links, as the video player and back button already do.
+- **No student data:** teachers add materials only; nothing about students is stored.
