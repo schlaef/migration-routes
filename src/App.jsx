@@ -5,6 +5,8 @@ import AnalysisPanel from "./components/AnalysisPanel.jsx";
 import SettingsModal from "./components/SettingsModal.jsx";
 import GuideModal from "./components/GuideModal.jsx";
 import LegalModal from "./components/LegalModal.jsx";
+import WebGLNotice from "./components/WebGLNotice.jsx";
+import { supportsWebGL2 } from "./webgl.js";
 import { useTranslation } from "react-i18next";
 import { getConfig } from "./config.js";
 import { getReturnLink } from "./return-link.js";
@@ -21,6 +23,8 @@ export default function App() {
   const [config, setConfig] = useState(() => getConfig());
   // Optional link back to the calling app (?back=<url>&backLabel=<text>)
   const [returnLink] = useState(() => getReturnLink());
+  // The map needs WebGL2; without it, show fixes instead of an empty map.
+  const [webgl2Available] = useState(() => supportsWebGL2());
   const [routeCount, setRouteCount] = useState(0);
   const [analyzing, setAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState(null);
@@ -158,6 +162,7 @@ export default function App() {
       </calcite-shell-panel>
 
       <div style={{ position: "relative", width: "100%", height: "100%" }}>
+        {!webgl2Available && <WebGLNotice />}
         {errorMessage && (
           <div
             style={{
@@ -183,14 +188,17 @@ export default function App() {
           </div>
         )}
 
-        <MapContainer
-          ref={mapContainerRef}
-          config={config}
-          onRouteChange={handleRouteChange}
-          onStatusUpdate={(msg) => setStatusMessage(msg)}
-          referenceLayers={referenceLayers}
-          onReferenceLayerAvailabilityChange={setReferenceLayerAvailability}
-        />
+        {/* Without WebGL2 the map cannot render: skip it (avoids the SDK's own error and needless requests). */}
+        {webgl2Available && (
+          <MapContainer
+            ref={mapContainerRef}
+            config={config}
+            onRouteChange={handleRouteChange}
+            onStatusUpdate={(msg) => setStatusMessage(msg)}
+            referenceLayers={referenceLayers}
+            onReferenceLayerAvailabilityChange={setReferenceLayerAvailability}
+          />
+        )}
       </div>
 
       <SettingsModal

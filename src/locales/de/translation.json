@@ -469,5 +469,55 @@
         "Die App selbst setzt keine Cookies, verwendet keine Analyse- oder Tracking-Dienste und verlangt keine Anmeldung. Schüler:innen geben keine persönlichen Daten ein."
       ]
     }
+  },
+  "webgl": {
+    "title": "Die Karte kann in diesem Browser nicht angezeigt werden",
+    "text": "Diese App braucht WebGL2, eine Technik des Browsers zum Zeichnen von Karten. Dein Browser stellt sie gerade nicht zur Verfügung. Das liegt am Browser oder am Gerät, nicht an dir.",
+    "quickFix": "Am schnellsten hilft meist:",
+    "perBrowser": "So behebst du das Problem im Browser:",
+    "yourBrowser": "dein Browser",
+    "testText": "Ob WebGL2 funktioniert, kannst du hier testen:",
+    "general": [
+      "Einen anderen Browser verwenden, z. B. Chrome, Edge, Firefox oder Safari.",
+      "Den Browser ganz beenden und neu starten. Hilft das nicht, den Computer neu starten.",
+      "Bei Schulgeräten: die Lehrperson oder den IT-Support fragen."
+    ],
+    "browsers": {
+      "chrome": {
+        "name": "Google Chrome",
+        "steps": [
+          "Einstellungen öffnen (⋮ → Einstellungen) → System → «Grafikbeschleunigung verwenden, wenn verfügbar» einschalten und Chrome neu starten.",
+          "In der Adresszeile chrome://gpu eingeben: Bei «WebGL2» sollte «Hardware accelerated» stehen.",
+          "Die App in einem Inkognito-Fenster öffnen. Funktioniert sie dort, blockiert eine Erweiterung WebGL: Erweiterungen einzeln deaktivieren.",
+          "Chrome aktualisieren: ⋮ → Hilfe → Über Google Chrome."
+        ]
+      },
+      "edge": {
+        "name": "Microsoft Edge",
+        "steps": [
+          "Einstellungen öffnen (… → Einstellungen) → System und Leistung → «Grafikbeschleunigung verwenden, wenn verfügbar» einschalten und Edge neu starten.",
+          "In der Adresszeile edge://gpu eingeben: Bei «WebGL2» sollte «Hardware accelerated» stehen.",
+          "Die App in einem InPrivate-Fenster öffnen. Funktioniert sie dort, blockiert eine Erweiterung WebGL: Erweiterungen einzeln deaktivieren.",
+          "Edge aktualisieren: … → Hilfe und Feedback → Infos zu Microsoft Edge."
+        ]
+      },
+      "firefox": {
+        "name": "Mozilla Firefox",
+        "steps": [
+          "Einstellungen → Allgemein → Leistung: «Empfohlene Leistungseinstellungen verwenden» abwählen, «Hardwarebeschleunigung verwenden, wenn verfügbar» anwählen, Firefox ganz beenden und neu starten.",
+          "Menü → Hilfe → Fehlerbehebungsmodus. Funktioniert die Karte dort, blockiert eine Erweiterung oder eine Einstellung WebGL.",
+          "In der Adresszeile about:config eingeben und prüfen, dass webgl.disabled auf false steht. Zeigt about:support bei WebGL eine Meldung mit «ANGLE», webgl.disable-angle auf true setzen und Firefox neu starten.",
+          "Firefox aktualisieren: Menü → Hilfe → Über Firefox."
+        ]
+      },
+      "safari": {
+        "name": "Safari",
+        "steps": [
+          "macOS und Safari aktualisieren: Systemeinstellungen → Allgemein → Softwareupdate. Safari unterstützt WebGL2 ab Version 15.",
+          "Safari ganz beenden (Cmd+Q) und neu öffnen. Hilft das nicht, den Mac neu starten.",
+          "Safari → Einstellungen → Erweiterungen: Inhaltsblocker testweise deaktivieren."
+        ]
+      }
+    }
   }
 }

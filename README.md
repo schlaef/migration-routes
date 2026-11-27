@@ -63,6 +63,9 @@ The report records which help stage was used, so teachers can take it into accou
 **For teachers**
 - **Links with parameters** to prepare an assignment (see [Teaching parameters](#teaching-parameters)).
 - **Settings dialog** (gear icon) for WebMap, corridor width and obstacle fields; saved in the browser.
+- **WebGL2 check:** the map needs WebGL2. If the browser cannot provide it (e.g. hardware acceleration off,
+  a blocking extension, an outdated browser), the app shows an explanation instead of an empty map, with fixes
+  for Chrome, Edge, Firefox and Safari; the section for the current browser is opened first.
 - **Fallback data:** if the obstacle layer cannot be found, the app uses 14 built-in sample obstacles, so it
   stays usable without the WebMap.
 
@@ -242,6 +245,7 @@ Pages must be set to **Settings → Pages → Source: GitHub Actions**. After a 
 │   ├── i18n.js                  # Languages (de, fr, it, en) and ?lang= detection
 │   ├── config.js                # Defaults, URL parameters, saved settings
 │   ├── return-link.js           # Back button to a calling app (?back=, ?backLabel=)
+│   ├── webgl.js                 # WebGL2 check and browser detection for the WebGL notice
 │   ├── analyzer.js              # Corridor buffer, intersection, categories, feedback
 │   ├── reference-layers.js      # Help layers, stages, IOM region filter
 │   ├── starting-points.js       # Starting point chooser

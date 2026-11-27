@@ -469,5 +469,55 @@
         "The app itself sets no cookies, uses no analytics or tracking services and requires no login. Students do not enter any personal data."
       ]
     }
+  },
+  "webgl": {
+    "title": "The map cannot be shown in this browser",
+    "text": "This app needs WebGL2, a browser technology for drawing maps. Your browser cannot provide it right now. This is caused by the browser or the device, not by you.",
+    "quickFix": "The quickest fixes are usually:",
+    "perBrowser": "How to fix it in your browser:",
+    "yourBrowser": "your browser",
+    "testText": "You can test whether WebGL2 works here:",
+    "general": [
+      "Use another browser, e.g. Chrome, Edge, Firefox or Safari.",
+      "Quit the browser completely and restart it. If that does not help, restart the computer.",
+      "On school devices: ask your teacher or the IT support."
+    ],
+    "browsers": {
+      "chrome": {
+        "name": "Google Chrome",
+        "steps": [
+          "Open Settings (⋮ → Settings) → System → turn on \"Use graphics acceleration when available\" and restart Chrome.",
+          "Type chrome://gpu in the address bar: \"WebGL2\" should say \"Hardware accelerated\".",
+          "Open the app in an incognito window. If it works there, an extension blocks WebGL: disable extensions one by one.",
+          "Update Chrome: ⋮ → Help → About Google Chrome."
+        ]
+      },
+      "edge": {
+        "name": "Microsoft Edge",
+        "steps": [
+          "Open Settings (… → Settings) → System and performance → turn on \"Use graphics acceleration when available\" and restart Edge.",
+          "Type edge://gpu in the address bar: \"WebGL2\" should say \"Hardware accelerated\".",
+          "Open the app in an InPrivate window. If it works there, an extension blocks WebGL: disable extensions one by one.",
+          "Update Edge: … → Help and feedback → About Microsoft Edge."
+        ]
+      },
+      "firefox": {
+        "name": "Mozilla Firefox",
+        "steps": [
+          "Settings → General → Performance: untick \"Use recommended performance settings\", tick \"Use hardware acceleration when available\", quit Firefox completely and restart it.",
+          "Menu → Help → Troubleshoot Mode. If the map works there, an extension or a setting blocks WebGL.",
+          "Type about:config in the address bar and check that webgl.disabled is false. If about:support shows a WebGL message mentioning \"ANGLE\", set webgl.disable-angle to true and restart Firefox.",
+          "Update Firefox: Menu → Help → About Firefox."
+        ]
+      },
+      "safari": {
+        "name": "Safari",
+        "steps": [
+          "Update macOS and Safari: System Settings → General → Software Update. Safari supports WebGL2 from version 15.",
+          "Quit Safari completely (Cmd+Q) and reopen it. If that does not help, restart the Mac.",
+          "Safari → Settings → Extensions: disable content blockers as a test."
+        ]
+      }
+    }
   }
 }

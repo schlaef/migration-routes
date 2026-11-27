@@ -469,5 +469,55 @@
         "L'app stessa non imposta cookie, non usa servizi di analisi o tracciamento e non richiede alcun accesso. Gli allievi non inseriscono dati personali."
       ]
     }
+  },
+  "webgl": {
+    "title": "La mappa non può essere visualizzata in questo browser",
+    "text": "Questa app ha bisogno di WebGL2, una tecnologia del browser per disegnare le mappe. Al momento il tuo browser non la mette a disposizione. Dipende dal browser o dal dispositivo, non da te.",
+    "quickFix": "Di solito la soluzione più rapida è:",
+    "perBrowser": "Come risolvere il problema nel browser:",
+    "yourBrowser": "il tuo browser",
+    "testText": "Qui puoi verificare se WebGL2 funziona:",
+    "general": [
+      "Usare un altro browser, ad esempio Chrome, Edge, Firefox o Safari.",
+      "Chiudere completamente il browser e riaprirlo. Se non basta, riavviare il computer.",
+      "Sui dispositivi della scuola: chiedere al docente o al supporto informatico."
+    ],
+    "browsers": {
+      "chrome": {
+        "name": "Google Chrome",
+        "steps": [
+          "Aprire Impostazioni (⋮ → Impostazioni) → Sistema → attivare «Usa accelerazione grafica se disponibile» e riavviare Chrome.",
+          "Digitare chrome://gpu nella barra degli indirizzi: alla voce «WebGL2» dovrebbe comparire «Hardware accelerated».",
+          "Aprire l'app in una finestra di navigazione in incognito. Se lì funziona, un'estensione blocca WebGL: disattivare le estensioni una alla volta.",
+          "Aggiornare Chrome: ⋮ → Guida → Informazioni su Google Chrome."
+        ]
+      },
+      "edge": {
+        "name": "Microsoft Edge",
+        "steps": [
+          "Aprire Impostazioni (… → Impostazioni) → Sistema e prestazioni → attivare «Usa accelerazione grafica se disponibile» e riavviare Edge.",
+          "Digitare edge://gpu nella barra degli indirizzi: alla voce «WebGL2» dovrebbe comparire «Hardware accelerated».",
+          "Aprire l'app in una finestra InPrivate. Se lì funziona, un'estensione blocca WebGL: disattivare le estensioni una alla volta.",
+          "Aggiornare Edge: … → Guida e feedback → Informazioni su Microsoft Edge."
+        ]
+      },
+      "firefox": {
+        "name": "Mozilla Firefox",
+        "steps": [
+          "Impostazioni → Generale → Prestazioni: deselezionare «Utilizza le impostazioni consigliate», selezionare «Utilizza l'accelerazione hardware quando disponibile», chiudere completamente Firefox e riaprirlo.",
+          "Menu → Aiuto → Modalità risoluzione problemi. Se lì la mappa funziona, un'estensione o un'impostazione blocca WebGL.",
+          "Digitare about:config nella barra degli indirizzi e verificare che webgl.disabled sia false. Se about:support mostra un messaggio WebGL con «ANGLE», impostare webgl.disable-angle su true e riavviare Firefox.",
+          "Aggiornare Firefox: Menu → Aiuto → Informazioni su Firefox."
+        ]
+      },
+      "safari": {
+        "name": "Safari",
+        "steps": [
+          "Aggiornare macOS e Safari: Impostazioni di Sistema → Generali → Aggiornamento Software. Safari supporta WebGL2 dalla versione 15.",
+          "Chiudere completamente Safari (Cmd+Q) e riaprirlo. Se non basta, riavviare il Mac.",
+          "Safari → Impostazioni → Estensioni: disattivare per prova i blocchi dei contenuti."
+        ]
+      }
+    }
   }
 }
