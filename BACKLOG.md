@@ -119,3 +119,22 @@ Rules for all options:
 - **Languages:** contributions are often in one language only. Show them in their original language when no translation exists, with a note on the language.
 - **Safety:** show submitted texts as plain text (never HTML) and accept only validated YouTube IDs and http(s) links, as the video player and back button already do.
 - **No student data:** teachers add materials only; nothing about students is stored.
+
+## H. Licences and legal requirements
+
+Based on the guide «Rechtliche Grundlagen» (lernangebote.my.canva.site) and Muuss-Merholz, *Freie
+Unterrichtsmaterialien* (Beltz 2018, CC BY-SA 4.0): use freely licensed material, give licence notices
+following the TULLU rule where the material is shown, mark embedded content as not freely licensed.
+Done: content licence CC BY-SA 4.0 and code licence Apache 2.0 (`LICENSE-CONTENT.md`, `LICENSE`), window
+«Licences & sources» with all sources and the privacy notice, note under embedded videos, images only linked
+with mandatory licence notice.
+
+| # | Priority | Issue | Proposed fix |
+|---|----------|-------|--------------|
+| R1 | High | **Imprint missing.** The window «Licences & sources» has a prepared section that stays hidden until text is provided. | Decide who is responsible (name/institution, contact) and put the text into `imprint` in `src/config.js`. |
+| R2 | High | **Desert obstacles come from «World Desert»** (ArcGIS Online user `anna.kp_macmillan`), an item without credits or licence; rights unclear. | Replace the 31 `Desert` polygons with Natural Earth deserts (public domain); a script can extract them. Then update `DATA_SOURCES` in `src/legal.js`. |
+| R3 | Medium | **Credits in ArcGIS Online:** the item `MigrationRoutes` has no credits although it contains data from World Mountain Ranges (Roger Palmer, Esri; educational use only), World Desert and BVMN; the credits of `iom_routes_2026` contain a typo («(DTM)”, downloaded …)»). | Fill in «Credits (Attribution)» and the licence section on both item pages. |
+| R4 | Medium | **Trailer of *Nel mare ci sono i coccodrilli*** was uploaded by a trailer channel (MovieDigger), not by the rights holder. The guide says not to embed material that obviously infringes copyright. Kept for now by decision (2026-11-27). | Replace with an official upload, or remove it if none can be found (see K4). |
+| R5 | Low | **Removed press photos remain in the Git history** and were published on GitHub Pages earlier. | If a rights holder objects, rewrite the history (removes the files from all commits; needs a force push). |
+| R6 | Low | **Gemeinsamer Tarif 7 (ProLitteris)** covers the use of protected works in class, presumably not a publicly accessible website. | Do not rely on GT 7 for the app; check with the school or ProLitteris if needed. |
+| R7 | Low | Linked images and the border crossing layer send the viewer's IP address to third-party servers when the app loads. | Mentioned in the privacy notice; optionally load images only after a click, like videos. |

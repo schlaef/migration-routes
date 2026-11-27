@@ -39,6 +39,10 @@ export const DEFAULT_CONFIG = {
   // 0 = no help layers, 1 = orientation (border crossings, EU), 2 = also real IOM routes
   helpLevel: 2,
 
+  // Imprint shown in the window «Licences & sources» (plain text, line breaks allowed).
+  // Empty: no imprint section. Not configurable via URL parameters.
+  imprint: "",
+
   // Offer the comparison with routes from film and literature after the analysis
   showWorkRoutes: true,
 

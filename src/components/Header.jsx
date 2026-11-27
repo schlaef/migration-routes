@@ -9,6 +9,7 @@ export default function Header({
   onClear,
   onOpenSettings,
   onOpenGuide,
+  onOpenLegal,
   panelOpen,
   onTogglePanel
 }) {
@@ -79,6 +80,14 @@ export default function Header({
           text-enabled={false}
           onClick={onOpenGuide}
           title={t("header.guide")}
+        />
+
+        <calcite-action
+          text={t("legal.title")}
+          icon="license"
+          text-enabled={false}
+          onClick={onOpenLegal}
+          title={t("legal.title")}
         />
 
         <calcite-action

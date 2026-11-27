@@ -205,7 +205,8 @@
     "loadClip": "Load clip ({{range}}) from YouTube",
     "iframeTitle": "Embedded video",
     "source": "Source: {{source}}",
-    "openOnYoutube": "Open on YouTube"
+    "openOnYoutube": "Open on YouTube",
+    "embeddedNote": "This video is embedded from YouTube and is not part of the freely licensed material."
   },
   "workRoutes": {
     "tab": "Film & literature",
@@ -426,6 +427,47 @@
         "helps": "The phone is map, address book, bank and link to the family all at once.",
         "fails": "Battery, credit and network are scarce on the way, and the device can be lost or stolen."
       }
+    }
+  },
+  "legal": {
+    "title": "Licences & sources",
+    "close": "Close",
+    "by": "by {{author}}",
+    "source": "Source",
+    "none": "none",
+    "contentHeading": "Licence of this app",
+    "contentText": "The app's own content (texts, questions, translations, didactic concept) is licensed under CC BY-SA 4.0. Excluded are the embedded videos, maps and geodata and the software listed below; their own terms apply.",
+    "codeText": "The source code is licensed under the Apache License 2.0.",
+    "videosHeading": "Embedded videos",
+    "videosText": "The videos are embedded from YouTube, not copied. They are not part of the freely licensed material; the terms of the respective rights holders and of YouTube apply.",
+    "dataHeading": "Maps and geodata",
+    "dataText": "The map and the obstacles are based on third-party data. The terms of each source apply.",
+    "softwareHeading": "Software",
+    "imprintHeading": "Imprint",
+    "licences": {
+      "esriTerms": "Esri terms of use",
+      "educationalUse": "educational use only (\"Designed for Educational Use only\")",
+      "notStated": "no licence stated by the source",
+      "providerTerms": "terms of use of the source",
+      "embedded": "embedded, terms of the rights holders and of YouTube"
+    },
+    "changes": {
+      "obstacles": "excerpt, used as obstacles",
+      "iom": "merged and simplified",
+      "bvmn": "aggregated into zones per border, without personal data"
+    },
+    "privacy": {
+      "heading": "Privacy",
+      "intro": "This app is an educational offer and does not collect personal data itself. However, it uses third-party services:",
+      "items": [
+        "Hosting: the app is served via GitHub Pages (GitHub, Inc., USA). GitHub processes technical data such as the IP address in server logs.",
+        "Maps and data: maps, map layers and program parts are loaded from Esri (ArcGIS Online, USA), the border crossings from a UNHCR server. These services receive technical data such as the IP address.",
+        "Analysis: for the analysis, the drawn route is sent as a geometry to Esri's map service, without any link to a person.",
+        "Images are not stored in the app but loaded directly from their source (e.g. Wikimedia Commons). The respective server receives technical data such as the IP address.",
+        "Videos: embedded videos are only loaded from YouTube (Google) via youtube-nocookie.com after a click. Only then does YouTube receive data such as the IP address.",
+        "Stored in the browser are only the chosen language and the settings (localStorage) and the address for the back button, for this browser tab only (sessionStorage). This information does not leave the browser.",
+        "The app itself sets no cookies, uses no analytics or tracking services and requires no login. Students do not enter any personal data."
+      ]
     }
   }
 }

@@ -78,6 +78,7 @@ export default function CategoryVideo({ video }) {
       <figcaption style={{ fontSize: "0.8rem", color: "var(--calcite-color-text-2)", marginTop: "0.25rem" }}>
         {caption && <span style={{ display: "block" }}>{caption}</span>}
         {source && <span style={{ display: "block" }}>{t("videos.source", { source })}</span>}
+        <span style={{ display: "block", fontStyle: "italic" }}>{t("videos.embeddedNote")}</span>
         <a href={buildWatchUrl(video)} target="_blank" rel="noopener noreferrer" style={{ display: "block" }}>
           {t("videos.openOnYoutube")}
         </a>

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-export default function GuideModal({ open, onClose }) {
+export default function GuideModal({ open, onClose, onOpenLegal }) {
   const modalRef = useRef(null);
   const { t } = useTranslation();
 
@@ -103,6 +103,13 @@ export default function GuideModal({ open, onClose }) {
         </div>
       </div>
 
+      {onOpenLegal && (
+        <div slot="footer-start">
+          <calcite-button appearance="transparent" kind="neutral" icon-start="license" onClick={onOpenLegal}>
+            {t("legal.title")}
+          </calcite-button>
+        </div>
+      )}
       <div slot="footer-end">
         <calcite-button kind="brand" onClick={onClose}>
           {t("guideModal.close")}

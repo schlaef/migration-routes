@@ -205,7 +205,8 @@
     "loadClip": "Ausschnitt ({{range}}) von YouTube laden",
     "iframeTitle": "Eingebettetes Video",
     "source": "Quelle: {{source}}",
-    "openOnYoutube": "Auf YouTube öffnen"
+    "openOnYoutube": "Auf YouTube öffnen",
+    "embeddedNote": "Dieses Video ist von YouTube eingebunden und nicht Teil des frei lizenzierten Materials."
   },
   "workRoutes": {
     "tab": "Film & Literatur",
@@ -426,6 +427,47 @@
         "helps": "Das Handy ist Landkarte, Telefonbuch, Bank und Verbindung zur Familie zugleich.",
         "fails": "Akku, Guthaben und Netz sind unterwegs knapp, und das Gerät kann verloren gehen oder gestohlen werden."
       }
+    }
+  },
+  "legal": {
+    "title": "Lizenzen & Quellen",
+    "close": "Schliessen",
+    "by": "von {{author}}",
+    "source": "Quelle",
+    "none": "keine",
+    "contentHeading": "Lizenz dieser App",
+    "contentText": "Die eigenen Inhalte dieser App (Texte, Fragen, Übersetzungen, didaktisches Konzept) stehen unter der Lizenz CC BY-SA 4.0. Ausgenommen sind die unten aufgeführten eingebundenen Videos, Karten und Geodaten sowie die Software; dafür gelten deren eigene Bedingungen.",
+    "codeText": "Der Quellcode steht unter der Apache License 2.0.",
+    "videosHeading": "Eingebundene Videos",
+    "videosText": "Die Videos werden von YouTube eingebunden, nicht kopiert. Sie sind nicht Teil des frei lizenzierten Materials; es gelten die Bedingungen der jeweiligen Rechteinhaber:innen und von YouTube.",
+    "dataHeading": "Karten und Geodaten",
+    "dataText": "Die Karte und die Hindernisse beruhen auf Daten Dritter. Es gelten die Bedingungen der jeweiligen Quelle.",
+    "softwareHeading": "Software",
+    "imprintHeading": "Impressum",
+    "licences": {
+      "esriTerms": "Esri-Nutzungsbedingungen",
+      "educationalUse": "nur für Bildungszwecke («Designed for Educational Use only»)",
+      "notStated": "keine Lizenzangabe der Quelle",
+      "providerTerms": "Nutzungsbedingungen der Quelle",
+      "embedded": "eingebettet, Bedingungen der Rechteinhaber:innen und von YouTube"
+    },
+    "changes": {
+      "obstacles": "Auszug, als Hindernisse übernommen",
+      "iom": "zusammengeführt und vereinfacht",
+      "bvmn": "zu Zonen pro Grenze zusammengefasst, ohne Personendaten"
+    },
+    "privacy": {
+      "heading": "Datenschutz",
+      "intro": "Diese App ist ein Lernangebot und erhebt selbst keine Personendaten. Beim Benutzen werden aber Dienste Dritter verwendet:",
+      "items": [
+        "Hosting: Die App wird über GitHub Pages (GitHub, Inc., USA) ausgeliefert. GitHub verarbeitet dabei technische Daten wie die IP-Adresse in Server-Protokollen.",
+        "Karten und Daten: Karten, Kartenebenen und Programmteile werden von Esri (ArcGIS Online, USA) geladen, die Grenzübergänge von einem Server des UNHCR. Diese Dienste erhalten dabei technische Daten wie die IP-Adresse.",
+        "Analyse: Für die Analyse wird die gezeichnete Route als Geometrie an den Kartendienst von Esri gesendet, ohne Bezug zu einer Person.",
+        "Bilder werden nicht in der App gespeichert, sondern direkt von ihrer Quelle geladen (z. B. Wikimedia Commons). Der jeweilige Server erhält dabei technische Daten wie die IP-Adresse.",
+        "Videos: Eingebundene Videos werden erst nach einem Klick über youtube-nocookie.com von YouTube (Google) geladen. Erst dann erhält YouTube Daten wie die IP-Adresse.",
+        "Im Browser gespeichert werden nur die gewählte Sprache und die Einstellungen (localStorage) sowie die Adresse für den Zurück-Knopf, nur für diesen Browser-Tab (sessionStorage). Diese Angaben verlassen den Browser nicht.",
+        "Die App selbst setzt keine Cookies, verwendet keine Analyse- oder Tracking-Dienste und verlangt keine Anmeldung. Schüler:innen geben keine persönlichen Daten ein."
+      ]
     }
   }
 }
